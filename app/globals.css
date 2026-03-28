@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --craftify-bg: #0d0b1e;
+  --craftify-bg-dark: #07060f;
+  --craftify-surface: #13112a;
+  --craftify-card: #181630;
+  --craftify-border: #2a2550;
+  --craftify-purple: #6c47ff;
+  --craftify-purple-lt: #8b6fff;
+  --craftify-muted: #8b85b0;
+  --craftify-star: #f5c842;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+  width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0f0524;
+  background-image:
+    /* TOP-CENTER: bright vivid violet-purple, bleeds downward */
+    radial-gradient(
+      ellipse 100% 100% at 50% 1%,
+      rgb(28, 14, 61),
+      transparent 40%
+    ),
+    /* BOTTOM-LEFT CORNER: medium purple, bleeds inward */
+    radial-gradient(
+        ellipse 65% 100% at 0% 90%,
+        rgb(10, 5, 21),
+        rgb(12, 6, 25),
+        transparent 55%
+      ),
+    /* BOTTOM-RIGHT CORNER: softer purple, bleeds inward */
+    radial-gradient(
+        ellipse 65% 100% at 100% 90%,
+        rgb(10, 5, 21),
+        rgb(12, 6, 25),
+        transparent 55%
+      );
+  background-blend-mode: screen, screen, screen, normal;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #ffffff;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  opacity: 0.5;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+.dot-grid {
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.07) 1px,
+    transparent 1px
+  );
+  background-size: 30px 30px;
+}
+
+.hero-glow {
+  background: radial-gradient(
+    ellipse 50% 80% at 50% -2%,
+    rgb(39, 21, 84),
+    transparent 10%
+  );
+}
+
+/* .pricing-glow {
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 10%,
+    rgba(108, 71, 255, 0.3) 0%,
+    transparent 65%
+  );
+}
+
+.cta-glow {
+  background: radial-gradient(
+    ellipse 90% 80% at 50% 50%,
+    rgba(108, 71, 255, 0.32) 0%,
+    transparent 70%
+  );
+} */
