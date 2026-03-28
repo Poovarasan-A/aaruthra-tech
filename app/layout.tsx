@@ -2,16 +2,41 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
+import localFont from "next/font/local";
+
+// const geist = localFont({
+//   src: [
+//     {
+//       path: "../public/fonts/Geist-Regular.woff2",
+//       weight: "400",
+//     },
+//     {
+//       path: "../public/fonts/Geist-Bold.woff2",
+//       weight: "700",
+//     },
+//   ],
+//   variable: "--font-geist",
+// });
 
 export const metadata: Metadata = {
-  title: "Craftify — Your site should do more than look good",
-  description: "Craftify unites marketers, designers, and developers to create, manage, and optimize impactful web experiences.",
+  title: "Aarudhra web solutions",
+  description:
+    "Unites marketers, designers, and developers to create, manage, and optimize impactful web experiences.",
+
+  icons: {
+    icon: "/techLogo3.png", // main favicon
+    shortcut: "/techLogo3.png", // browser shortcut icon
+    apple: "/techLogo3.png", // iPhone/iPad icon
+  },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={geist.variable}>
+    <html lang="en">
       <body className="antialiased bg-craftify-bg">{children}</body>
     </html>
   );
