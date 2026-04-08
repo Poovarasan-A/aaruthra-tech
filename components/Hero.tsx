@@ -91,7 +91,7 @@ export default function Hero() {
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 pt-20">
       {/* 🎥 Background Video */}
       <div
-        className={`absolute  inset-0 -z-10 top-[7rem]  overflow-hidden ${
+        className={`absolute  inset-0 -z-10 top-[4rem] md:top-[7rem]  overflow-hidden ${
           loaded && !ended ? "opacity-100" : "opacity-0"
         }`}
       >

@@ -11,17 +11,17 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50 ">
       <div className="mx-auto max-w-[1400px] flex items-center justify-between px-8 py-4">
         {/* Logo */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 md:gap-3">
           {/* <div className="w-9 h-9 rounded-xlflex items-center justify-center flex-shrink-0"> */}
           <Image
             src={"/techlogo3.png"}
-            width={40}
-            height={40}
+            width={32}
+            height={32}
             alt="logo"
-            className="w-[5rem] h-[5rem]"
+            className="w-8 h-8 md:w-[5rem] md:h-[5rem]"
           />
           {/* </div> */}
-          <span className="text-white font-bold text-lg tracking-tight">
+          <span className="text-white font-bold text-sm md:text-lg tracking-tight">
             Aarudhra Web solutions
           </span>
         </div>

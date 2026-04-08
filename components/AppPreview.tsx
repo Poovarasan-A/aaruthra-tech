@@ -2,7 +2,7 @@ export default function AppPreview() {
   return (
     <section className="relative py-24 overflow-hidden">
       <div className="dot-grid absolute inset-0 pointer-events-none opacity-60" />
-      <div className="relative z-10 max-w-[1400px] mx-auto px-8">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-8 pb-24 md:pb-28">
         {/* Blurred app mockup */}
         <div
           className="rounded-2xl border border-craftify-border/50 overflow-hidden bg-white/5 backdrop-blur-sm"
@@ -19,9 +19,9 @@ export default function AppPreview() {
             <div className="ml-auto w-4 h-4 text-gray-300">✦</div>
           </div>
 
-          <div className="flex min-h-[480px]">
+          <div className="flex flex-col md:flex-row min-h-[480px]">
             {/* Left sidebar */}
-            <div className="w-1/2 border-r border-gray-200/20 p-6 bg-white/85">
+            <div className="w-full md:w-1/2 border-r border-gray-200/20 p-6 bg-white/85 md:border-b-0 border-b">
               <div className="mb-5">
                 <div className="text-xs text-gray-400 mb-1">Query Pattern</div>
                 <div className="bg-gray-100/60 rounded px-3 py-2 text-xs text-gray-400">
@@ -60,7 +60,7 @@ export default function AppPreview() {
             </div>
 
             {/* Right panel */}
-            <div className="w-1/2 p-6 bg-white/80">
+            <div className="w-full md:w-1/2 p-6 bg-white/80">
               <div className="flex gap-4 mb-4 text-xs font-medium border-b border-gray-200/50 pb-3">
                 {["CloseD", "Chat", "ML test", "Items"].map((t, i) => (
                   <span
@@ -108,20 +108,23 @@ export default function AppPreview() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="z-40  w-full flex items-center justify-center  absolute bottom-5 h-20">
-          <div className="flex flex-row w-4/5 items-center justify-between ">
-            <div className="flex flex-col gap-1 text-gray-600">
-              <div className="flex flex-row gap-2 justify-start items-center">
-                {" "}
-                <div className="w-2.5 h-2.5 rounded-full bg-red-400 " />
-                <h1>Live preview mode</h1>
+          <div className="border-t border-gray-200/30 bg-white/80 px-4 py-4 md:px-6 md:py-5">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl bg-white/50 px-4 py-4 shadow-lg backdrop-blur-sm">
+              <div className="flex flex-col gap-1 text-gray-200 text-center sm:text-left">
+                <div className="flex flex-row gap-2 justify-center sm:justify-start items-center">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                  <div className="text-xs sm:text-sm font-semibold text-white">
+                    Live preview mode
+                  </div>
+                </div>
+                <div className="text-xs sm:text-sm text-craftify-muted">
+                  The Luminescent Void Editor
+                </div>
               </div>
-              <h1>The Luminescent Void Editor</h1>
+              <button className="w-full sm:w-auto bg-craftify-purple hover:bg-craftify-purpleLt text-white border border-transparent px-4 md:px-5 rounded-lg py-2 text-xs font-medium whitespace-nowrap">
+                Explore Dashboard
+              </button>
             </div>
-            <button className=" bg-white border px-5 border-gray-300/60 hover:border-0 hover:text-white hover:bg-craftify-purpleLt rounded-lg py-2.5 text-xs font-medium text-gray-600">
-              Explore Dashboard
-            </button>
           </div>
         </div>
       </div>
