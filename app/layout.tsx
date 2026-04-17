@@ -1,22 +1,12 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
 import "./globals.css";
+import { Poppins } from "next/font/google";
 
-import localFont from "next/font/local";
-
-// const geist = localFont({
-//   src: [
-//     {
-//       path: "../public/fonts/Geist-Regular.woff2",
-//       weight: "400",
-//     },
-//     {
-//       path: "../public/fonts/Geist-Bold.woff2",
-//       weight: "700",
-//     },
-//   ],
-//   variable: "--font-geist",
-// });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Aarudhra web solutions",
@@ -36,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={poppins.className}>
       <body className="antialiased bg-craftify-bg">{children}</body>
     </html>
   );
