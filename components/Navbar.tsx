@@ -14,11 +14,11 @@ export default function Navbar() {
         <div className="flex items-center gap-2 md:gap-3">
           {/* <div className="w-9 h-9 rounded-xlflex items-center justify-center flex-shrink-0"> */}
           <Image
-            src={"/techlogo3.png"}
-            width={32}
-            height={32}
+            src={"/tech2.png"}
+            width={64}
+            height={64}
             alt="logo"
-            className="w-8 h-8 md:w-[5rem] md:h-[5rem]"
+            className="w-8 h-8 md:w-[7rem] md:h-[7rem]"
           />
           {/* </div> */}
           <span className="text-white font-bold text-sm md:text-lg tracking-tight">
