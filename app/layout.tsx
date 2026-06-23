@@ -40,8 +40,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${outfit.variable}`}>
-      <body className={`antialiased bg-craftify-bg ${spaceGrotesk.className}`}>{children}</body>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${outfit.variable}`}
+    >
+      <body className={`antialiased bg-craftify-bg ${spaceGrotesk.className}`}>
+        {children}
+      </body>
     </html>
   );
 }
