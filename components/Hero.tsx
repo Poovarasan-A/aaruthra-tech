@@ -340,7 +340,7 @@ export default function Hero() {
 
       {/* ─── Central Radial Glow ─── */}
       <motion.div
-        style={{ y: glowY }}
+        // style={{  }}
         className="absolute pointer-events-none"
         style={{
           top: "50%",
@@ -351,6 +351,7 @@ export default function Hero() {
           background:
             "radial-gradient(ellipse at center, rgba(124,58,237,0.12) 0%, rgba(6,182,212,0.06) 40%, transparent 70%)",
           pointerEvents: "none",
+          y: glowY,
         }}
       />
       {/* Secondary smaller accent glow */}
