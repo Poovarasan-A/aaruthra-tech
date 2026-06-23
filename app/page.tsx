@@ -1,9 +1,10 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Logos from "@/components/Logos";
-import Features from "@/components/Features";
-import AppPreview from "@/components/AppPreview";
-import Pricing from "@/components/Pricing";
+import Services from "@/components/Services";
+import Ecosystem from "@/components/Ecosystem";
+import WorkspacePreview from "@/components/WorkspacePreview";
+import EngagementModels from "@/components/EngagementModels";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
@@ -13,9 +14,10 @@ export default function HomePage() {
       <Navbar />
       <Hero />
       <Logos />
-      <Features />
-      <AppPreview />
-      <Pricing />
+      <Services />
+      <Ecosystem />
+      <WorkspacePreview />
+      <EngagementModels />
       <CTA />
       <Footer />
     </main>

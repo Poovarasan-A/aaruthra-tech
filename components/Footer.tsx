@@ -1,30 +1,63 @@
+"use client";
+
+import Image from "next/image";
+
 const footerLinks = {
-  Product: ["Features", "Solutions", "Pricing"],
-  Community: ["Showcase", "Documentation", "Status"],
-  Company: ["Privacy Policy", "Terms of Service", "Contact"],
+  Services: [
+    { label: "Engineering", href: "#services" },
+    { label: "Growth Marketing", href: "#services" },
+    { label: "Talent Squads", href: "#services" },
+  ],
+  Ecosystem: [
+    { label: "Synergy Cycle", href: "#ecosystem" },
+    { label: "Dashboard Workspace", href: "#workspace" },
+    { label: "Telemetry & QA", href: "#workspace" },
+  ],
+  Engagement: [
+    { label: "Project Sprints", href: "#pricing" },
+    { label: "Retainers", href: "#pricing" },
+    { label: "Post a RFP", href: "#cta" },
+  ],
 };
 
 export default function Footer() {
   return (
-    <footer className="bg-craftify-bgDark border-t border-craftify-border/30">
-      <div className="max-w-[1400px] mx-auto px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className="bg-[#050212] border-t border-white/[0.03] relative overflow-hidden">
+      <div className="max-w-[1200px] mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
           {/* Brand */}
-          <div className="md:col-span-1">
-            <div className="text-white font-bold text-xl mb-4">Craftify</div>
-            <p className="text-craftify-muted text-sm leading-relaxed">
-              Defining the next generation of web design through depth, light, and performance.
+          <div className="md:col-span-2 space-y-4">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/tech2.png"
+                width={32}
+                height={32}
+                alt="Aarudhra Logo"
+                className="w-8 h-8 object-contain"
+              />
+              <span className="text-white font-extrabold text-sm tracking-tight">
+                Aarudhra Web Solutions
+              </span>
+            </div>
+            <p className="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm">
+              Custom software engineering, performance growth marketing, and vetted 
+              talent brokered through automated testing pipelines and expert code auditors.
             </p>
           </div>
 
           {/* Links */}
           {Object.entries(footerLinks).map(([group, links]) => (
-            <div key={group}>
-              <div className="text-white font-bold text-sm mb-5">{group}</div>
-              <ul className="space-y-4">
+            <div key={group} className="space-y-4">
+              <div className="text-white font-bold text-xs uppercase tracking-widest">{group}</div>
+              <ul className="space-y-3">
                 {links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="text-craftify-muted text-sm hover:text-white transition-colors">{link}</a>
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-slate-400 text-xs sm:text-sm hover:text-white transition-colors"
+                    >
+                      {link.label}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -33,28 +66,23 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-craftify-border/30 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-craftify-muted/60 text-xs">
-            © 2024 Craftify Inc. Built for the Luminescent Void.
+        <div className="mt-16 pt-8 border-t border-white/[0.03] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-slate-500 text-xs">
+            © {new Date().getFullYear()} Aarudhra Web Solutions. All rights reserved. Vetted Talent Network.
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             {/* Globe */}
-            <a href="#" className="text-craftify-muted/50 hover:text-craftify-muted transition-colors">
+            <a href="#" className="text-slate-500 hover:text-slate-300 transition-colors" aria-label="Website">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                <circle cx="12" cy="12" r="10" />
+                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
               </svg>
             </a>
-            {/* Chat */}
-            <a href="#" className="text-craftify-muted/50 hover:text-craftify-muted transition-colors">
+            {/* Email Contact */}
+            <a href="mailto:info@aarudhra.com" className="text-slate-500 hover:text-slate-300 transition-colors" aria-label="Email">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-              </svg>
-            </a>
-            {/* Share */}
-            <a href="#" className="text-craftify-muted/50 hover:text-craftify-muted transition-colors">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-                <path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/>
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
               </svg>
             </a>
           </div>
