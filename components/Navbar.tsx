@@ -30,7 +30,9 @@ export default function Navbar() {
     } else if (pathname === "/") {
       const handleHashChange = () => {
         const hash = typeof window !== "undefined" ? window.location.hash : "";
-        const found = navLinks.find((l) => l.href.endsWith(hash) && hash !== "");
+        const found = navLinks.find(
+          (l) => l.href.endsWith(hash) && hash !== "",
+        );
         if (found) {
           setActive(found.name);
         } else if (typeof window !== "undefined" && window.scrollY < 200) {
@@ -42,7 +44,9 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-2.5" : "py-4"}`}
+    >
       <div className="mx-auto max-w-[1200px] px-4">
         <motion.div
           initial={{ y: -20, opacity: 0 }}
@@ -50,12 +54,15 @@ export default function Navbar() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className={`flex items-center justify-between px-6 py-2 rounded-full border transition-all duration-300 ${
             scrolled
-              ? "bg-white/95 border-slate-200/80 shadow-[0_12px_30px_rgba(15,23,42,0.08)] backdrop-blur-xl"
-              : "bg-white/80 border-slate-200/50 backdrop-blur-md shadow-[0_4px_20px_rgba(15,23,42,0.04)]"
+              ? "bg-white/95 border-brand-purple/20 shadow-[0_16px_36px_-12px_rgba(124,58,237,0.16),0_4px_16px_rgba(6,182,212,0.04)] backdrop-blur-md"
+              : "bg-slate-100/80 border-slate-200/80 shadow-[0_10px_30px_rgba(15,23,42,0.06)] backdrop-blur-xl"
           }`}
         >
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3.5 py-1.5 flex-shrink-0">
+          <a
+            href="#"
+            className="flex items-center gap-3.5 py-1.5 flex-shrink-0"
+          >
             <Image
               src="/tech2.png"
               width={64}
@@ -77,8 +84,8 @@ export default function Navbar() {
                 onClick={() => setActive(l.name)}
                 className={`relative text-[13px] px-4 py-2 rounded-full transition-all duration-200 ${
                   active === l.name
-                    ? "text-brand-purple font-semibold"
-                    : "text-slate-600 hover:text-slate-900"
+                    ? "text-brand-purple font-semibold font-outfit"
+                    : "text-slate-700 hover:text-slate-950 font-medium font-outfit"
                 }`}
               >
                 {l.name}
@@ -147,7 +154,7 @@ export default function Navbar() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="md:hidden mx-auto max-w-[1200px] px-4 overflow-hidden mt-2"
           >
-            <div className="bg-white/95 backdrop-blur-xl border border-brand-purple/15 rounded-2xl p-4 flex flex-col gap-1.5 shadow-xl">
+            <div className="bg-[#fafbfc]/98 border border-brand-purple/20 rounded-2xl p-4 flex flex-col gap-1.5 shadow-[0_20px_50px_rgba(15,23,42,0.15)] backdrop-blur-xl">
               {navLinks.map((l) => (
                 <a
                   key={l.name}
@@ -159,7 +166,7 @@ export default function Navbar() {
                   className={`text-left text-sm px-4 py-2.5 rounded-xl transition-all duration-200 ${
                     active === l.name
                       ? "bg-brand-purple/10 text-brand-purple font-medium border border-brand-purple/20"
-                      : "text-slate-600 hover:bg-slate-900/5 hover:text-slate-900"
+                      : "text-slate-700 hover:bg-slate-900/5 hover:text-slate-950 font-medium"
                   }`}
                 >
                   {l.name}
