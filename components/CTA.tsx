@@ -23,17 +23,19 @@ export default function CTA() {
   };
 
   return (
-    <section id="cta" className="relative py-28 overflow-hidden bg-[#f8fafc] border-t border-slate-200/80">
+    <section id="cta" className="relative py-28 overflow-hidden bg-[#EFEEE9] border-t border-black/5">
       <div className="dot-grid absolute inset-0 pointer-events-none opacity-40" />
 
       {/* Radiant Glowing Background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-purple/5 rounded-full blur-[180px] pointer-events-none -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#6366F1]/5 rounded-full blur-[180px] pointer-events-none -z-10" />
 
       <div className="relative z-10 max-w-[1200px] mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16 max-w-2xl mx-auto">
-          <p className="mono-label text-brand-purple mb-4">// engage</p>
-          <h2 className="font-outfit font-black text-3xl md:text-5xl tracking-tight text-slate-900 mb-6">
+          <span className="font-mono uppercase tracking-widest text-xs text-[#6366F1] font-semibold mb-3 block">
+            // engage
+          </span>
+          <h2 className="font-outfit font-bold text-3xl md:text-5xl text-[#1A1A2E] tracking-tight mb-5">
             Ready to{" "}
             <span className="gradient-text">accelerate your velocity?</span>
           </h2>
@@ -47,20 +49,20 @@ export default function CTA() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[1050px] mx-auto items-stretch">
           {/* Client Request Form */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="glow-card rounded-3xl p-8 bg-white flex flex-col justify-between"
+            transition={{ duration: 0.5 }}
+            className="rounded-2xl p-8 bg-white border border-black/[0.06] shadow-sm flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center gap-3.5 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-brand-purple/10 border border-brand-purple/20 flex items-center justify-center">
-                  <Briefcase className="w-5 h-5 text-brand-purpleLt" />
+                <div className="w-10 h-10 rounded-xl bg-[#6366F1]/10 border border-[#6366F1]/20 flex items-center justify-center">
+                  <Briefcase className="w-5 h-5 text-[#6366F1]" />
                 </div>
                 <div>
-                  <h3 className="text-slate-900 font-extrabold text-lg">Procure Core Solutions</h3>
-                  <p className="text-[11px] text-slate-500 font-semibold uppercase">For Clients &amp; Companies</p>
+                  <h3 className="text-[#1A1A2E] font-bold text-lg leading-tight">Procure Core Solutions</h3>
+                  <p className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">For Clients &amp; Companies</p>
                 </div>
               </div>
 
@@ -68,10 +70,10 @@ export default function CTA() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="bg-brand-purple/5 border border-brand-purple/20 rounded-2xl p-6 text-center my-12"
+                  className="bg-[#6366F1]/5 border border-[#6366F1]/25 rounded-2xl p-6 text-center my-12"
                 >
-                  <Sparkles className="w-8 h-8 text-brand-purpleLt mx-auto mb-3 animate-pulse" />
-                  <h4 className="text-slate-900 font-extrabold text-sm mb-1.5">Request Received Successfully</h4>
+                  <Sparkles className="w-8 h-8 text-[#6366F1] mx-auto mb-3 animate-pulse" />
+                  <h4 className="text-[#1A1A2E] font-bold text-sm mb-1.5">Request Received Successfully</h4>
                   <p className="text-xs text-slate-600">Our architecture board will review your requirements and reach out within 1 business day.</p>
                 </motion.div>
               ) : (
@@ -84,7 +86,7 @@ export default function CTA() {
                       required
                       value={clientForm.name}
                       onChange={(e) => setClientForm({ ...clientForm, name: e.target.value })}
-                      className="w-full bg-white border border-slate-200/80 text-slate-900 placeholder-slate-400 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-purple/40 focus:ring-4 focus:ring-brand-purple/5 transition-all duration-300"
+                      className="w-full bg-[#F8F7F4] border border-black/5 text-[#1A1A2E] placeholder-slate-400 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-[#6366F1]/40 focus:ring-4 focus:ring-[#6366F1]/5 transition-all duration-300"
                     />
                   </div>
 
@@ -96,7 +98,7 @@ export default function CTA() {
                       required
                       value={clientForm.email}
                       onChange={(e) => setClientForm({ ...clientForm, email: e.target.value })}
-                      className="w-full bg-white border border-slate-200/80 text-slate-900 placeholder-slate-400 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-purple/40 focus:ring-4 focus:ring-brand-purple/5 transition-all duration-300"
+                      className="w-full bg-[#F8F7F4] border border-black/5 text-[#1A1A2E] placeholder-slate-400 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-[#6366F1]/40 focus:ring-4 focus:ring-[#6366F1]/5 transition-all duration-300"
                     />
                   </div>
 
@@ -105,7 +107,7 @@ export default function CTA() {
                     <select
                       value={clientForm.service}
                       onChange={(e) => setClientForm({ ...clientForm, service: e.target.value })}
-                      className="w-full bg-white border border-slate-200/80 text-slate-900 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-purple/40 focus:ring-4 focus:ring-brand-purple/5 transition-all duration-300"
+                      className="w-full bg-[#F8F7F4] border border-black/5 text-[#1A1A2E] rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-[#6366F1]/40 focus:ring-4 focus:ring-[#6366F1]/5 transition-all duration-300"
                     >
                       <option value="development">Web &amp; Software Engineering</option>
                       <option value="marketing">Performance Marketing &amp; SEO</option>
@@ -120,13 +122,13 @@ export default function CTA() {
                       placeholder="Summarize your target milestones and features..."
                       value={clientForm.message}
                       onChange={(e) => setClientForm({ ...clientForm, message: e.target.value })}
-                      className="w-full bg-white border border-slate-200/80 text-slate-900 placeholder-slate-400 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-purple/40 focus:ring-4 focus:ring-brand-purple/5 transition-all duration-300 resize-none"
+                      className="w-full bg-[#F8F7F4] border border-black/5 text-[#1A1A2E] placeholder-slate-400 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-[#6366F1]/40 focus:ring-4 focus:ring-[#6366F1]/5 transition-all duration-300 resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-brand-purple to-violet-700 hover:brightness-110 text-white text-xs font-bold uppercase tracking-wider py-3.5 rounded-xl shadow-lg shadow-brand-purple/10 flex items-center justify-center gap-2 transition-all mt-4"
+                    className="w-full bg-[#6366F1] hover:bg-[#4f46e5] text-white text-xs font-bold uppercase tracking-wider py-3.5 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all mt-4 shimmer-sweep"
                   >
                     Request Project Scope
                     <Send className="w-4 h-4" />
@@ -138,20 +140,20 @@ export default function CTA() {
 
           {/* Partner Application Form */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="glow-card rounded-3xl p-8 bg-white flex flex-col justify-between"
+            transition={{ duration: 0.5 }}
+            className="rounded-2xl p-8 bg-white border border-black/[0.06] shadow-sm flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center gap-3.5 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center">
-                  <UserPlus className="w-5 h-5 text-brand-cyan" />
+                <div className="w-10 h-10 rounded-xl bg-[#06B6D4]/10 border border-[#06B6D4]/20 flex items-center justify-center">
+                  <UserPlus className="w-5 h-5 text-[#06B6D4]" />
                 </div>
                 <div>
-                  <h3 className="text-slate-900 font-extrabold text-lg">Apply as Network Partner</h3>
-                  <p className="text-[11px] text-slate-500 font-semibold uppercase">For Developers &amp; Marketers</p>
+                  <h3 className="text-[#1A1A2E] font-bold text-lg leading-tight">Apply as Network Partner</h3>
+                  <p className="text-[10px] text-slate-500 font-semibold uppercase tracking-wider">For Developers &amp; Marketers</p>
                 </div>
               </div>
 
@@ -159,10 +161,10 @@ export default function CTA() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="bg-brand-cyan/5 border border-brand-cyan/20 rounded-2xl p-6 text-center my-12"
+                  className="bg-[#06B6D4]/5 border border-[#06B6D4]/25 rounded-2xl p-6 text-center my-12"
                 >
-                  <Sparkles className="w-8 h-8 text-brand-cyan mx-auto mb-3 animate-pulse" />
-                  <h4 className="text-slate-900 font-extrabold text-sm mb-1.5">Application Submitted</h4>
+                  <Sparkles className="w-8 h-8 text-[#06B6D4] mx-auto mb-3 animate-pulse" />
+                  <h4 className="text-[#1A1A2E] font-bold text-sm mb-1.5">Application Submitted</h4>
                   <p className="text-xs text-slate-600">Our vetting leads will review your portfolio and reach out regarding onboarding coding/marketing audits.</p>
                 </motion.div>
               ) : (
@@ -175,7 +177,7 @@ export default function CTA() {
                       required
                       value={partnerForm.name}
                       onChange={(e) => setPartnerForm({ ...partnerForm, name: e.target.value })}
-                      className="w-full bg-white border border-slate-200/80 text-slate-900 placeholder-slate-400 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-cyan/40 focus:ring-4 focus:ring-brand-cyan/5 transition-all duration-300"
+                      className="w-full bg-[#F8F7F4] border border-black/5 text-[#1A1A2E] placeholder-slate-400 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-[#06B6D4]/40 focus:ring-4 focus:ring-[#06B6D4]/5 transition-all duration-300"
                     />
                   </div>
 
@@ -187,7 +189,7 @@ export default function CTA() {
                       required
                       value={partnerForm.email}
                       onChange={(e) => setPartnerForm({ ...partnerForm, email: e.target.value })}
-                      className="w-full bg-white border border-slate-200/80 text-slate-900 placeholder-slate-400 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-cyan/40 focus:ring-4 focus:ring-brand-cyan/5 transition-all duration-300"
+                      className="w-full bg-[#F8F7F4] border border-black/5 text-[#1A1A2E] placeholder-slate-400 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-[#06B6D4]/40 focus:ring-4 focus:ring-[#06B6D4]/5 transition-all duration-300"
                     />
                   </div>
 
@@ -196,7 +198,7 @@ export default function CTA() {
                     <select
                       value={partnerForm.skill}
                       onChange={(e) => setPartnerForm({ ...partnerForm, skill: e.target.value })}
-                      className="w-full bg-white border border-slate-200/80 text-slate-900 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-cyan/40 focus:ring-4 focus:ring-brand-cyan/5 transition-all duration-300"
+                      className="w-full bg-[#F8F7F4] border border-black/5 text-[#1A1A2E] rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-[#06B6D4]/40 focus:ring-4 focus:ring-[#06B6D4]/5 transition-all duration-300"
                     >
                       <option value="frontend">Frontend React / Next.js Specialist</option>
                       <option value="backend">Backend Node.js &amp; Database Engineer</option>
@@ -212,13 +214,13 @@ export default function CTA() {
                       placeholder="https://github.com/johnsmith"
                       value={partnerForm.portfolio}
                       onChange={(e) => setPartnerForm({ ...partnerForm, portfolio: e.target.value })}
-                      className="w-full bg-white border border-slate-200/80 text-slate-900 placeholder-slate-400 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-cyan/40 focus:ring-4 focus:ring-brand-cyan/5 transition-all duration-300"
+                      className="w-full bg-[#F8F7F4] border border-black/5 text-[#1A1A2E] placeholder-slate-400 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-[#06B6D4]/40 focus:ring-4 focus:ring-[#06B6D4]/5 transition-all duration-300"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-brand-cyan to-teal-600 hover:brightness-110 text-white text-xs font-bold uppercase tracking-wider py-3.5 rounded-xl shadow-lg shadow-brand-cyan/10 flex items-center justify-center gap-2 transition-all mt-4"
+                    className="w-full bg-[#06B6D4] hover:bg-[#0891b2] text-white text-xs font-bold uppercase tracking-wider py-3.5 rounded-xl shadow-md flex items-center justify-center gap-2 transition-all mt-4 shimmer-sweep"
                   >
                     Submit Application
                     <UserPlus className="w-4 h-4" />

@@ -21,12 +21,21 @@ const config: Config = {
           star: "var(--craftify-star)",
         },
         brand: {
-          purple: "#7c3aed",
-          purpleLt: "#6d28d9",
-          cyan: "#0891b2",
-          cyanLt: "#06b6d4",
+          purple: "#6366F1", // Indigo Accent
+          purpleLt: "#4f46e5",
+          cyan: "#06B6D4", // Cyan Accent
+          cyanLt: "#0891b2",
           emerald: "#059669",
           emeraldLt: "#10b981",
+          talentPurple: "#A855F7", // Talent Section Purple Accent
+        },
+        warm: {
+          bg: "#F8F7F4",
+          alt: "#EFEEE9",
+          card: "#FFFFFF",
+          text: "#1A1A2E",
+          indigo: "#6366F1",
+          cyan: "#06B6D4",
         },
       },
       fontFamily: {

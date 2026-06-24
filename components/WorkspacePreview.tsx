@@ -20,7 +20,7 @@ export default function WorkspacePreview() {
   return (
     <section
       id="workspace"
-      className="relative py-28 overflow-hidden bg-white"
+      className="relative py-28 overflow-hidden bg-[#F8F7F4]"
     >
       <div className="dot-grid absolute inset-0 pointer-events-none opacity-50" />
 
@@ -47,29 +47,29 @@ export default function WorkspacePreview() {
         </div>
 
         {/* Dashboard Frame Container */}
-        <div className="relative mx-auto max-w-[1000px] rounded-2xl border border-slate-200/80 bg-white/95 backdrop-blur-xl shadow-[0_30px_70px_-15px_rgba(15,23,42,0.08),0_0_0_1px_rgba(15,23,42,0.01)] overflow-hidden">
+        <div className="relative mx-auto max-w-[1000px] rounded-2xl border border-black/[0.06] bg-white shadow-[0_24px_50px_rgba(0,0,0,0.06)] overflow-hidden transition-all duration-500 ease-out md:rotate-[-2deg] hover:rotate-0">
           {/* Header Bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4.5 border-b border-slate-200 bg-slate-50/80">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-b border-slate-200 bg-[#EFEEE9]/50">
             <div className="flex items-center gap-3">
               {/* Dot indicators */}
               <div className="flex gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                <span className="w-3 h-3 rounded-full bg-green-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
               </div>
               <div className="h-4 w-px bg-slate-200 mx-1 hidden sm:block" />
               <div className="flex items-center gap-2">
-                <Terminal className="w-4 h-4 text-brand-cyan" />
-                <span className="font-mono text-xs text-slate-600">
-                  workspace://aarudhra-delta-prod
+                <Terminal className="w-3.5 h-3.5 text-[#6366F1]" />
+                <span className="font-mono text-xs text-slate-500">
+                  workspace://aarudhra
                 </span>
               </div>
             </div>
 
             {/* Simulated environment state pill */}
-            <div className="flex items-center gap-2 bg-brand-emerald/10 border border-brand-emerald/30 rounded-full px-4 py-1 text-xs font-medium text-brand-emerald">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-emerald animate-pulse" />
-              QA Engine Active
+            <div className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 rounded-full px-3 py-1 text-xs font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              ● Live
             </div>
           </div>
 

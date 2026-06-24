@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Poppins, JetBrains_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 
-const poppins = Poppins({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-space",
   display: "swap",
 });
@@ -16,9 +16,9 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const poppinsHeading = Poppins({
+const plusJakartaHeading = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-outfit",
   display: "swap",
 });
@@ -42,9 +42,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${jetbrainsMono.variable} ${poppinsHeading.variable}`}
+      className={`${plusJakarta.variable} ${jetbrainsMono.variable} ${plusJakartaHeading.variable}`}
     >
-      <body className={`antialiased bg-craftify-bg ${poppins.className}`}>
+      <body className={`antialiased bg-[#F8F7F4] text-[#1A1A2E] ${plusJakarta.className}`}>
         {children}
       </body>
     </html>

@@ -45,7 +45,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-2.5" : "py-4"}`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}
     >
       <div className="mx-auto max-w-[1200px] px-4">
         <motion.div
@@ -54,8 +54,8 @@ export default function Navbar() {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className={`flex items-center justify-between px-6 py-2 rounded-full border transition-all duration-300 ${
             scrolled
-              ? "bg-white/95 border-brand-purple/20 shadow-[0_16px_36px_-12px_rgba(124,58,237,0.16),0_4px_16px_rgba(6,182,212,0.04)] backdrop-blur-md"
-              : "bg-slate-100/80 border-slate-200/80 shadow-[0_10px_30px_rgba(15,23,42,0.06)] backdrop-blur-xl"
+              ? "bg-[#F8F7F4]/88 border-black/5 shadow-[0_8px_30px_rgba(0,0,0,0.03)] backdrop-blur-[14px]"
+              : "bg-transparent border-transparent"
           }`}
         >
           {/* Logo */}
@@ -68,9 +68,9 @@ export default function Navbar() {
               width={64}
               height={64}
               alt="Aarudhra Logo"
-              className="w-8 h-8 object-contain"
+              className="w-16 h-16 object-contain"
             />
-            <span className="text-slate-900 font-extrabold text-sm tracking-tight whitespace-nowrap bg-clip-text bg-gradient-to-r from-slate-950 via-slate-800 to-brand-purple">
+            <span className="text-[#1A1A2E] font-bold text-sm tracking-tight whitespace-nowrap bg-clip-text bg-gradient-to-r from-[#1A1A2E] to-[#6366F1]">
               Aarudhra Web Solutions
             </span>
           </a>
@@ -84,15 +84,15 @@ export default function Navbar() {
                 onClick={() => setActive(l.name)}
                 className={`relative text-[13px] px-4 py-2 rounded-full transition-all duration-200 ${
                   active === l.name
-                    ? "text-brand-purple font-semibold font-outfit"
-                    : "text-slate-700 hover:text-slate-950 font-medium font-outfit"
+                    ? "text-[#6366F1] font-semibold font-outfit"
+                    : "text-slate-700 hover:text-[#1A1A2E] font-medium font-outfit"
                 }`}
               >
                 {l.name}
                 {active === l.name && (
                   <motion.span
                     layoutId="activeNavIndicator"
-                    className="absolute inset-0 bg-brand-purple/[0.06] border border-brand-purple/10 rounded-full -z-10"
+                    className="absolute inset-0 bg-[#6366F1]/[0.08] border border-[#6366F1]/10 rounded-full -z-10"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -104,7 +104,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-3 flex-shrink-0">
             <a
               href="#cta"
-              className="flex items-center gap-2 bg-gradient-to-br from-brand-purple to-[#581c87] hover:brightness-110 text-white text-[13px] font-semibold px-5 py-2.5 rounded-full shadow-[0_2px_20px_rgba(139,92,246,0.3)] hover:shadow-[0_4px_24px_rgba(139,92,246,0.45)] hover:-translate-y-px active:translate-y-0 transition-all duration-200"
+              className="flex items-center gap-2 bg-[#6366F1] hover:bg-[#4f46e5] text-white text-[13px] font-semibold px-5 py-2.5 rounded-full shadow-sm hover:scale-[1.03] transition-all duration-200 shimmer-sweep"
             >
               Procure Solutions
               <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
@@ -126,17 +126,17 @@ export default function Navbar() {
             aria-label="Toggle menu"
           >
             <span
-              className={`block h-[1.5px] bg-slate-800 rounded-full transition-all duration-300 ${
+              className={`block h-[1.5px] bg-[#1A1A2E] rounded-full transition-all duration-300 ${
                 open ? "w-[20px] rotate-45 translate-y-[6.5px]" : "w-[20px]"
               }`}
             />
             <span
-              className={`block h-[1.5px] bg-slate-800 rounded-full transition-all duration-300 ${
+              className={`block h-[1.5px] bg-[#1A1A2E] rounded-full transition-all duration-300 ${
                 open ? "w-4 opacity-0 scale-x-0" : "w-[20px]"
               }`}
             />
             <span
-              className={`block h-[1.5px] bg-slate-800 rounded-full transition-all duration-300 ${
+              className={`block h-[1.5px] bg-[#1A1A2E] rounded-full transition-all duration-300 ${
                 open ? "w-[20px] -rotate-45 -translate-y-[6.5px]" : "w-[20px]"
               }`}
             />
@@ -154,7 +154,7 @@ export default function Navbar() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="md:hidden mx-auto max-w-[1200px] px-4 overflow-hidden mt-2"
           >
-            <div className="bg-[#fafbfc]/98 border border-brand-purple/20 rounded-2xl p-4 flex flex-col gap-1.5 shadow-[0_20px_50px_rgba(15,23,42,0.15)] backdrop-blur-xl">
+            <div className="bg-[#F8F7F4]/98 backdrop-blur-xl border border-black/5 rounded-2xl p-4 flex flex-col gap-1.5 shadow-xl">
               {navLinks.map((l) => (
                 <a
                   key={l.name}
@@ -165,8 +165,8 @@ export default function Navbar() {
                   }}
                   className={`text-left text-sm px-4 py-2.5 rounded-xl transition-all duration-200 ${
                     active === l.name
-                      ? "bg-brand-purple/10 text-brand-purple font-medium border border-brand-purple/20"
-                      : "text-slate-700 hover:bg-slate-900/5 hover:text-slate-950 font-medium"
+                      ? "bg-[#6366F1]/10 text-[#6366F1] font-medium border border-[#6366F1]/20"
+                      : "text-slate-700 hover:bg-[#1A1A2E]/5 hover:text-[#1A1A2E] font-medium"
                   }`}
                 >
                   {l.name}
@@ -176,7 +176,7 @@ export default function Navbar() {
               <a
                 href="#cta"
                 onClick={() => setOpen(false)}
-                className="mt-1 bg-gradient-to-br from-brand-purple to-[#581c87] text-white text-sm font-semibold py-3 rounded-xl shadow-[0_2px_16px_rgba(139,92,246,0.2)] text-center block"
+                className="mt-1 bg-[#6366F1] hover:bg-[#4f46e5] text-white text-sm font-semibold py-3 rounded-xl shadow-[0_2px_16px_rgba(99,102,241,0.2)] text-center block shimmer-sweep"
               >
                 Procure Solutions
               </a>
