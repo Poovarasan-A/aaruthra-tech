@@ -20,7 +20,7 @@ const services = [
     iconColor: "text-brand-purple",
     barColor:  "bg-brand-purple",
     accentBg:  "bg-brand-purple/10",
-    borderHover: "hover:border-brand-purple/40",
+    borderHover: "hover:border-brand-purple/40 hover:shadow-[0_30px_60px_-15px_rgba(124,58,237,0.08)]",
   },
   {
     icon: Megaphone,
@@ -37,7 +37,7 @@ const services = [
     iconColor: "text-brand-cyan",
     barColor:  "bg-brand-cyan",
     accentBg:  "bg-brand-cyan/10",
-    borderHover: "hover:border-brand-cyan/40",
+    borderHover: "hover:border-brand-cyan/40 hover:shadow-[0_30px_60px_-15px_rgba(8,145,178,0.08)]",
   },
   {
     icon: Users2,
@@ -54,7 +54,7 @@ const services = [
     iconColor: "text-brand-emerald",
     barColor:  "bg-brand-emerald",
     accentBg:  "bg-brand-emerald/10",
-    borderHover: "hover:border-brand-emerald/40",
+    borderHover: "hover:border-brand-emerald/40 hover:shadow-[0_30px_60px_-15px_rgba(5,150,105,0.08)]",
   },
 ];
 
@@ -64,7 +64,7 @@ export default function Services() {
   const bgY = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
-    <section id="services" ref={sectionRef} className="relative py-28 overflow-hidden">
+    <section id="services" ref={sectionRef} className="relative py-28 overflow-hidden bg-white">
       {/* Parallax ambient glow */}
       <motion.div
         style={{ y: bgY }}
@@ -89,7 +89,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-outfit font-black text-3xl md:text-5xl tracking-tight text-white mb-6"
+            className="font-outfit font-black text-3xl md:text-5xl tracking-tight text-slate-900 mb-6"
           >
             Core pillars for{" "}
             <span className="gradient-text">digital dominance</span>
@@ -99,7 +99,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-slate-400 text-base md:text-lg max-w-xl mx-auto leading-relaxed"
+            className="text-slate-600 text-base md:text-lg max-w-xl mx-auto leading-relaxed"
           >
             We don&apos;t just consult. We assemble the squad, engineer the code,
             run the campaigns, and ensure bulletproof deployment.
@@ -117,7 +117,7 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.65, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                className={`group glow-card rounded-3xl p-8 flex flex-col justify-between h-full border border-white/4 ${svc.borderHover} transition-all duration-350`}
+                className={`group glow-card rounded-3xl p-8 flex flex-col justify-between h-full border border-slate-200/60 ${svc.borderHover} transition-all duration-350`}
               >
                 <div>
                   {/* Icon + tagline row */}
@@ -130,10 +130,10 @@ export default function Services() {
                     </span>
                   </div>
 
-                  <h3 className="font-outfit font-black text-xl text-white mb-3 group-hover:text-white transition-colors">
+                  <h3 className="font-outfit font-black text-xl text-slate-900 mb-3 transition-colors">
                     {svc.title}
                   </h3>
-                  <p className="text-slate-400 text-sm leading-relaxed mb-7">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-7">
                     {svc.desc}
                   </p>
 
@@ -142,10 +142,10 @@ export default function Services() {
                     {svc.bullets.map((b, bi) => (
                       <li key={b.label}>
                         <div className="flex justify-between items-center mb-1">
-                          <span className="text-[11px] font-medium text-slate-300">{b.label}</span>
+                          <span className="text-[11px] font-medium text-slate-700">{b.label}</span>
                           <span className="mono-label text-slate-500">{b.pct}%</span>
                         </div>
-                        <div className="h-1 rounded-full bg-white/5 overflow-hidden">
+                        <div className="h-1 rounded-full bg-slate-200/80 overflow-hidden">
                           <motion.div
                             className={`h-full rounded-full ${svc.barColor}`}
                             initial={{ width: 0 }}
@@ -161,10 +161,12 @@ export default function Services() {
 
                 <a
                   href="#cta"
-                  className={`flex items-center gap-2 text-xs font-semibold ${svc.iconColor} group-hover:gap-3 transition-all mt-auto pt-5 border-t border-white/4`}
+                  className={`flex items-center text-xs font-semibold ${svc.iconColor} mt-auto pt-5 border-t border-slate-200/60 w-full`}
                 >
-                  Explore Solution
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span className="flex items-center gap-1.5 hover:gap-2.5 transition-all duration-300">
+                    Explore Solution
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
                 </a>
               </motion.div>
             );

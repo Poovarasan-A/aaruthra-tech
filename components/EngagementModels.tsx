@@ -128,7 +128,7 @@ export default function EngagementModels() {
                 <ul className="space-y-4 mb-10 pt-6 border-t border-white/[0.03]">
                   {model.features.map((feat) => (
                     <li key={feat} className="flex items-start gap-3">
-                      <div className="w-4.5 h-4.5 rounded-full bg-brand-purple/10 border border-brand-purple/20 flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <div className="w-4 h-4 rounded-full bg-brand-purple/10 border border-brand-purple/20 flex items-center justify-center mt-0.5 flex-shrink-0">
                         <Check className="w-3 h-3 text-brand-purpleLt" />
                       </div>
                       <span className="text-slate-300 text-xs sm:text-sm font-medium">

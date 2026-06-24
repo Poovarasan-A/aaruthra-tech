@@ -58,7 +58,7 @@ export default function Ecosystem() {
     <section
       id="ecosystem"
       ref={sectionRef}
-      className="relative py-28 overflow-hidden border-y border-white/[0.025]"
+      className="relative py-28 overflow-hidden border-y border-slate-200/60 bg-[#f8fafc]"
     >
       <div className="dot-grid absolute inset-0 pointer-events-none opacity-35" />
 
@@ -87,7 +87,7 @@ export default function Ecosystem() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.1 }}
-            className="font-outfit font-black text-3xl md:text-5xl tracking-tight text-white mb-5"
+            className="font-outfit font-black text-3xl md:text-5xl tracking-tight text-slate-900 mb-5"
           >
             The Managed{" "}
             <span className="gradient-text">Synergy Engine</span>
@@ -97,7 +97,7 @@ export default function Ecosystem() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-slate-400 text-base md:text-lg max-w-lg mx-auto leading-relaxed"
+            className="text-slate-600 text-base md:text-lg max-w-lg mx-auto leading-relaxed"
           >
             We handle the friction. Clients get elite code and high conversion;
             freelancers focus on doing their best work.
@@ -109,7 +109,7 @@ export default function Ecosystem() {
           {/* Icon row */}
           <div className="relative grid grid-cols-4">
             {/* Static track rail */}
-            <div className="absolute top-[22px] left-[12.5%] right-[12.5%] h-[1px] bg-white/8" />
+            <div className="absolute top-[22px] left-[12.5%] right-[12.5%] h-[1px] bg-slate-200" />
 
             {/* Animated beam travelling over the rail */}
             <div className="absolute top-[22px] left-[12.5%] right-[12.5%] h-[1px] overflow-hidden">
@@ -129,7 +129,7 @@ export default function Ecosystem() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.12 }}
                     whileHover={{ scale: 1.15 }}
-                    className={`w-11 h-11 rounded-full flex items-center justify-center border ${step.bg} ${step.border} bg-[#030014] cursor-pointer transition-all duration-300`}
+                    className={`w-11 h-11 rounded-full flex items-center justify-center border ${step.bg} ${step.border} bg-white cursor-pointer transition-all duration-300`}
                     style={{ boxShadow: `0 0 0 0 ${step.glow}` }}
                   >
                     <Icon className={`w-5 h-5 ${step.color}`} />
@@ -152,10 +152,10 @@ export default function Ecosystem() {
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ y: -4 }}
-                className={`group glow-card rounded-2xl p-6 flex flex-col border ${step.border}/40 hover:${step.border} overflow-hidden relative bg-[#050212]/60`}
+                 className={`group glow-card rounded-2xl p-6 flex flex-col border border-slate-200/60 ${step.border}/20 hover:${step.border} overflow-hidden relative bg-white`}
               >
                 {/* Watermark number */}
-                <span className={`absolute right-3 bottom-1 font-outfit font-black text-7xl select-none pointer-events-none opacity-4 group-hover:opacity-8 transition-opacity duration-300 ${step.color}`}>
+                <span className={`absolute right-3 bottom-1 font-outfit font-black text-7xl select-none pointer-events-none opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-300 ${step.color}`}>
                   {step.phase}
                 </span>
 
@@ -165,10 +165,10 @@ export default function Ecosystem() {
                 </div>
 
                 <p className={`mono-label ${step.color} mb-2`}>Phase {step.phase}</p>
-                <h3 className="font-outfit font-bold text-sm text-white mb-3 leading-tight group-hover:text-white transition-colors">
+                <h3 className="font-outfit font-bold text-sm text-slate-900 mb-3 leading-tight transition-colors">
                   {step.title}
                 </h3>
-                <p className="text-slate-400 text-xs leading-relaxed">
+                <p className="text-slate-600 text-xs leading-relaxed">
                   {step.desc}
                 </p>
 

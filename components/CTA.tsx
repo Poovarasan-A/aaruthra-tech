@@ -23,7 +23,7 @@ export default function CTA() {
   };
 
   return (
-    <section id="cta" className="relative py-28 overflow-hidden bg-[#030014]/50 border-t border-brand-purple/10">
+    <section id="cta" className="relative py-28 overflow-hidden bg-[#f8fafc] border-t border-slate-200/80">
       <div className="dot-grid absolute inset-0 pointer-events-none opacity-40" />
 
       {/* Radiant Glowing Background */}
@@ -33,11 +33,11 @@ export default function CTA() {
         {/* Header */}
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <p className="mono-label text-brand-purple mb-4">// engage</p>
-          <h2 className="font-outfit font-black text-3xl md:text-5xl tracking-tight text-white mb-6">
+          <h2 className="font-outfit font-black text-3xl md:text-5xl tracking-tight text-slate-900 mb-6">
             Ready to{" "}
             <span className="gradient-text">accelerate your velocity?</span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
             Whether you are looking to outsource engineering and marketing execution,
             or you are an elite freelancer seeking vetted projects, we have a workspace for you.
           </p>
@@ -51,7 +51,7 @@ export default function CTA() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="glow-card rounded-3xl p-8 bg-[#0c0721]/30 flex flex-col justify-between"
+            className="glow-card rounded-3xl p-8 bg-white flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center gap-3.5 mb-6">
@@ -59,8 +59,8 @@ export default function CTA() {
                   <Briefcase className="w-5 h-5 text-brand-purpleLt" />
                 </div>
                 <div>
-                  <h3 className="text-white font-extrabold text-lg">Procure Core Solutions</h3>
-                  <p className="text-[11px] text-slate-400 font-semibold uppercase">For Clients &amp; Companies</p>
+                  <h3 className="text-slate-900 font-extrabold text-lg">Procure Core Solutions</h3>
+                  <p className="text-[11px] text-slate-500 font-semibold uppercase">For Clients &amp; Companies</p>
                 </div>
               </div>
 
@@ -68,44 +68,44 @@ export default function CTA() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="bg-brand-purple/15 border border-brand-purple/30 rounded-2xl p-6 text-center my-12"
+                  className="bg-brand-purple/5 border border-brand-purple/20 rounded-2xl p-6 text-center my-12"
                 >
                   <Sparkles className="w-8 h-8 text-brand-purpleLt mx-auto mb-3 animate-pulse" />
-                  <h4 className="text-white font-extrabold text-sm mb-1.5">Request Received Successfully</h4>
-                  <p className="text-xs text-slate-400">Our architecture board will review your requirements and reach out within 1 business day.</p>
+                  <h4 className="text-slate-900 font-extrabold text-sm mb-1.5">Request Received Successfully</h4>
+                  <p className="text-xs text-slate-600">Our architecture board will review your requirements and reach out within 1 business day.</p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleClientSubmit} className="space-y-4">
                   <div>
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Name</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Name</label>
                     <input
                       type="text"
                       placeholder="Jane Doe"
                       required
                       value={clientForm.name}
                       onChange={(e) => setClientForm({ ...clientForm, name: e.target.value })}
-                      className="w-full bg-[#050212] border border-white/5 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-brand-purple/50 backdrop-blur-sm transition-colors"
+                      className="w-full bg-white border border-slate-200/80 text-slate-900 placeholder-slate-400 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-purple/40 focus:ring-4 focus:ring-brand-purple/5 transition-all duration-300"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Work Email</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Work Email</label>
                     <input
                       type="email"
                       placeholder="jane@company.com"
                       required
                       value={clientForm.email}
                       onChange={(e) => setClientForm({ ...clientForm, email: e.target.value })}
-                      className="w-full bg-[#050212] border border-white/5 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-brand-purple/50 backdrop-blur-sm transition-colors"
+                      className="w-full bg-white border border-slate-200/80 text-slate-900 placeholder-slate-400 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-purple/40 focus:ring-4 focus:ring-brand-purple/5 transition-all duration-300"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Service Required</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Service Required</label>
                     <select
                       value={clientForm.service}
                       onChange={(e) => setClientForm({ ...clientForm, service: e.target.value })}
-                      className="w-full bg-[#050212] border border-white/5 text-white rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-brand-purple/50 backdrop-blur-sm transition-colors"
+                      className="w-full bg-white border border-slate-200/80 text-slate-900 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-purple/40 focus:ring-4 focus:ring-brand-purple/5 transition-all duration-300"
                     >
                       <option value="development">Web &amp; Software Engineering</option>
                       <option value="marketing">Performance Marketing &amp; SEO</option>
@@ -114,13 +114,13 @@ export default function CTA() {
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Project Scope Summary</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Project Scope Summary</label>
                     <textarea
                       rows={3}
                       placeholder="Summarize your target milestones and features..."
                       value={clientForm.message}
                       onChange={(e) => setClientForm({ ...clientForm, message: e.target.value })}
-                      className="w-full bg-[#050212] border border-white/5 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-brand-purple/50 backdrop-blur-sm transition-colors resize-none"
+                      className="w-full bg-white border border-slate-200/80 text-slate-900 placeholder-slate-400 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-purple/40 focus:ring-4 focus:ring-brand-purple/5 transition-all duration-300 resize-none"
                     />
                   </div>
 
@@ -142,7 +142,7 @@ export default function CTA() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="glow-card rounded-3xl p-8 bg-[#0c0721]/30 flex flex-col justify-between"
+            className="glow-card rounded-3xl p-8 bg-white flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center gap-3.5 mb-6">
@@ -150,8 +150,8 @@ export default function CTA() {
                   <UserPlus className="w-5 h-5 text-brand-cyan" />
                 </div>
                 <div>
-                  <h3 className="text-white font-extrabold text-lg">Apply as Network Partner</h3>
-                  <p className="text-[11px] text-slate-400 font-semibold uppercase">For Developers &amp; Marketers</p>
+                  <h3 className="text-slate-900 font-extrabold text-lg">Apply as Network Partner</h3>
+                  <p className="text-[11px] text-slate-500 font-semibold uppercase">For Developers &amp; Marketers</p>
                 </div>
               </div>
 
@@ -159,44 +159,44 @@ export default function CTA() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="bg-brand-cyan/15 border border-brand-cyan/30 rounded-2xl p-6 text-center my-12"
+                  className="bg-brand-cyan/5 border border-brand-cyan/20 rounded-2xl p-6 text-center my-12"
                 >
                   <Sparkles className="w-8 h-8 text-brand-cyan mx-auto mb-3 animate-pulse" />
-                  <h4 className="text-white font-extrabold text-sm mb-1.5">Application Submitted</h4>
-                  <p className="text-xs text-slate-400">Our vetting leads will review your portfolio and reach out regarding onboarding coding/marketing audits.</p>
+                  <h4 className="text-slate-900 font-extrabold text-sm mb-1.5">Application Submitted</h4>
+                  <p className="text-xs text-slate-600">Our vetting leads will review your portfolio and reach out regarding onboarding coding/marketing audits.</p>
                 </motion.div>
               ) : (
                 <form onSubmit={handlePartnerSubmit} className="space-y-4">
                   <div>
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Full Name</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Full Name</label>
                     <input
                       type="text"
                       placeholder="John Smith"
                       required
                       value={partnerForm.name}
                       onChange={(e) => setPartnerForm({ ...partnerForm, name: e.target.value })}
-                      className="w-full bg-[#050212] border border-white/5 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-brand-cyan/50 backdrop-blur-sm transition-colors"
+                      className="w-full bg-white border border-slate-200/80 text-slate-900 placeholder-slate-400 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-cyan/40 focus:ring-4 focus:ring-brand-cyan/5 transition-all duration-300"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Email Address</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Email Address</label>
                     <input
                       type="email"
                       placeholder="john@smith.com"
                       required
                       value={partnerForm.email}
                       onChange={(e) => setPartnerForm({ ...partnerForm, email: e.target.value })}
-                      className="w-full bg-[#050212] border border-white/5 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-brand-cyan/50 backdrop-blur-sm transition-colors"
+                      className="w-full bg-white border border-slate-200/80 text-slate-900 placeholder-slate-400 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-cyan/40 focus:ring-4 focus:ring-brand-cyan/5 transition-all duration-300"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Primary Vetted Capability</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Primary Vetted Capability</label>
                     <select
                       value={partnerForm.skill}
                       onChange={(e) => setPartnerForm({ ...partnerForm, skill: e.target.value })}
-                      className="w-full bg-[#050212] border border-white/5 text-white rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-brand-cyan/50 backdrop-blur-sm transition-colors"
+                      className="w-full bg-white border border-slate-200/80 text-slate-900 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-cyan/40 focus:ring-4 focus:ring-brand-cyan/5 transition-all duration-300"
                     >
                       <option value="frontend">Frontend React / Next.js Specialist</option>
                       <option value="backend">Backend Node.js &amp; Database Engineer</option>
@@ -206,13 +206,13 @@ export default function CTA() {
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">Portfolio / GitHub Link</label>
+                    <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1.5">Portfolio / GitHub Link</label>
                     <input
                       type="url"
                       placeholder="https://github.com/johnsmith"
                       value={partnerForm.portfolio}
                       onChange={(e) => setPartnerForm({ ...partnerForm, portfolio: e.target.value })}
-                      className="w-full bg-[#050212] border border-white/5 text-white placeholder-slate-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none focus:border-brand-cyan/50 backdrop-blur-sm transition-colors"
+                      className="w-full bg-white border border-slate-200/80 text-slate-900 placeholder-slate-400 rounded-2xl px-4 py-3 text-xs sm:text-sm outline-none shadow-sm focus:border-brand-cyan/40 focus:ring-4 focus:ring-brand-cyan/5 transition-all duration-300"
                     />
                   </div>
 
@@ -221,7 +221,7 @@ export default function CTA() {
                     className="w-full bg-gradient-to-r from-brand-cyan to-teal-600 hover:brightness-110 text-white text-xs font-bold uppercase tracking-wider py-3.5 rounded-xl shadow-lg shadow-brand-cyan/10 flex items-center justify-center gap-2 transition-all mt-4"
                   >
                     Submit Application
-                    <UserPlus className="w-4.5 h-4.5" />
+                    <UserPlus className="w-4 h-4" />
                   </button>
                 </form>
               )}

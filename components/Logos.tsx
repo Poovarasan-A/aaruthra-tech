@@ -36,10 +36,10 @@ function TickerRow({ items, reverse = false }: { items: typeof row1; reverse?: b
           return (
             <div
               key={`${cap.name}-${i}`}
-              className="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.025] border border-white/[0.05] backdrop-blur-sm hover:border-brand-purple/30 hover:bg-white/[0.04] transition-all duration-300 flex-shrink-0"
+              className="flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white border border-slate-200/70 shadow-sm hover:border-brand-purple/20 hover:bg-slate-50 transition-all duration-300 flex-shrink-0"
             >
               <Icon className={`w-3.5 h-3.5 ${cap.color} flex-shrink-0`} />
-              <span className="mono-label text-slate-400 hover:text-slate-200 transition-colors">
+              <span className="mono-label text-slate-600 hover:text-slate-900 transition-colors">
                 {cap.name}
               </span>
             </div>
@@ -56,10 +56,10 @@ export default function Logos() {
   const bgY = useTransform(scrollYProgress, [0, 1], [-20, 20]);
 
   return (
-    <section ref={ref} className="relative py-14 overflow-hidden border-y border-white/[0.025]">
+    <section ref={ref} className="relative py-14 overflow-hidden border-y border-slate-200/60 bg-[#f8fafc]">
       {/* Fade edges */}
-      <div className="absolute inset-y-0 left-0  w-28 bg-gradient-to-r from-[#030014] to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-[#030014] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 left-0  w-28 bg-gradient-to-r from-[#fafbfc] to-transparent z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-28 bg-gradient-to-l from-[#fafbfc] to-transparent z-10 pointer-events-none" />
 
       {/* Parallax subtle glow */}
       <motion.div style={{ y: bgY }}

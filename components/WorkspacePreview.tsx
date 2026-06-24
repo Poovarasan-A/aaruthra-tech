@@ -20,7 +20,7 @@ export default function WorkspacePreview() {
   return (
     <section
       id="workspace"
-      className="relative py-28 overflow-hidden bg-[#030014]/30"
+      className="relative py-28 overflow-hidden bg-white"
     >
       <div className="dot-grid absolute inset-0 pointer-events-none opacity-50" />
 
@@ -34,20 +34,22 @@ export default function WorkspacePreview() {
           <p className="mono-label text-brand-emerald mb-4">
             // delivery workspace
           </p>
-          <h2 className="font-outfit font-black text-3xl md:text-5xl tracking-tight text-white mb-6">
+          <h2
+            className="font-outfit font-black text-3xl md:text-5xl tracking-tight text-slate-900 mb-6"
+          >
             Complete transparency{" "}
             <span className="gradient-text-emerald">in execution</span>
           </h2>
-          <p className="text-slate-400 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-slate-600 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
             Monitor commits, track ad account setup, inspect automated linting,
             and review milestone sign-offs inside your client dashboard.
           </p>
         </div>
 
         {/* Dashboard Frame Container */}
-        <div className="relative mx-auto max-w-[1000px] rounded-2xl border border-white/5 bg-[#0a071d]/65 backdrop-blur-xl shadow-[0_24px_80px_rgba(0,0,0,0.6)] overflow-hidden">
+        <div className="relative mx-auto max-w-[1000px] rounded-2xl border border-slate-200/80 bg-white/95 backdrop-blur-xl shadow-[0_30px_70px_-15px_rgba(15,23,42,0.08),0_0_0_1px_rgba(15,23,42,0.01)] overflow-hidden">
           {/* Header Bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-b border-white/[0.04] bg-white/[0.01]">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4.5 border-b border-slate-200 bg-slate-50/80">
             <div className="flex items-center gap-3">
               {/* Dot indicators */}
               <div className="flex gap-1.5">
@@ -55,10 +57,10 @@ export default function WorkspacePreview() {
                 <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
                 <span className="w-3 h-3 rounded-full bg-green-500/80" />
               </div>
-              <div className="h-4 w-px bg-white/10 mx-1 hidden sm:block" />
+              <div className="h-4 w-px bg-slate-200 mx-1 hidden sm:block" />
               <div className="flex items-center gap-2">
                 <Terminal className="w-4 h-4 text-brand-cyan" />
-                <span className="font-mono text-xs text-slate-300">
+                <span className="font-mono text-xs text-slate-600">
                   workspace://aarudhra-delta-prod
                 </span>
               </div>
@@ -73,17 +75,17 @@ export default function WorkspacePreview() {
 
           <div className="flex flex-col md:flex-row min-h-[500px]">
             {/* Dashboard Sidebar */}
-            <div className="w-full md:w-[260px] border-r border-white/[0.04] p-5 flex flex-col gap-1.5 bg-black/15">
-              <span className="mono-label text-slate-600 px-3 mb-2 block">
+            <div className="w-full md:w-[260px] border-r border-slate-200/80 p-5 flex flex-col gap-1.5 bg-[#fafbfc]">
+              <span className="mono-label text-slate-400 px-3 mb-2 block">
                 // nav
               </span>
 
               <button
                 onClick={() => setActiveTab("milestones")}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 relative ${
                   activeTab === "milestones"
-                    ? "bg-brand-purple/10 text-brand-purpleLt border border-brand-purple/20"
-                    : "text-slate-400 hover:text-white hover:bg-white/[0.02] border border-transparent"
+                    ? "bg-brand-purple/[0.06] text-brand-purpleLt border border-brand-purple/15 shadow-[0_2px_8px_rgba(124,58,237,0.03)]"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-900/[0.02] border border-transparent"
                 }`}
               >
                 <CheckCircle2 className="w-4 h-4" />
@@ -92,10 +94,10 @@ export default function WorkspacePreview() {
 
               <button
                 onClick={() => setActiveTab("squad")}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 relative ${
                   activeTab === "squad"
-                    ? "bg-brand-purple/10 text-brand-purpleLt border border-brand-purple/20"
-                    : "text-slate-400 hover:text-white hover:bg-white/[0.02] border border-transparent"
+                    ? "bg-brand-purple/[0.06] text-brand-purpleLt border border-brand-purple/15 shadow-[0_2px_8px_rgba(124,58,237,0.03)]"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-900/[0.02] border border-transparent"
                 }`}
               >
                 <Users className="w-4 h-4" />
@@ -104,22 +106,22 @@ export default function WorkspacePreview() {
 
               <button
                 onClick={() => setActiveTab("qa")}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 relative ${
                   activeTab === "qa"
-                    ? "bg-brand-purple/10 text-brand-purpleLt border border-brand-purple/20"
-                    : "text-slate-400 hover:text-white hover:bg-white/[0.02] border border-transparent"
+                    ? "bg-brand-purple/[0.06] text-brand-purpleLt border border-brand-purple/15 shadow-[0_2px_8px_rgba(124,58,237,0.03)]"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-900/[0.02] border border-transparent"
                 }`}
               >
                 <ShieldCheck className="w-4 h-4" />
                 QA Telemetry
               </button>
 
-              <div className="mt-auto pt-6 border-t border-white/[0.03] hidden md:block">
-                <div className="bg-[#050212] rounded-xl p-3.5 border border-white/[0.03]">
+              <div className="mt-auto pt-6 border-t border-slate-200 hidden md:block">
+                <div className="bg-slate-50 rounded-xl p-3.5 border border-slate-200">
                   <div className="text-[10px] font-bold text-slate-500 uppercase mb-1">
                     Procured Budget
                   </div>
-                  <div className="text-white font-extrabold text-lg">
+                  <div className="text-slate-900 font-extrabold text-lg">
                     $14,500
                   </div>
                   <div className="text-[9px] text-brand-emerald font-semibold mt-1">
@@ -130,7 +132,7 @@ export default function WorkspacePreview() {
             </div>
 
             {/* Dashboard Content Panel */}
-            <div className="flex-1 p-6 md:p-8 bg-black/[0.05]">
+            <div className="flex-1 p-6 md:p-8 bg-white">
               <AnimatePresence mode="wait">
                 {activeTab === "milestones" && (
                   <motion.div
@@ -142,10 +144,10 @@ export default function WorkspacePreview() {
                     className="space-y-4"
                   >
                     <div>
-                      <h3 className="font-outfit font-bold text-lg text-white mb-1 flex items-center gap-2">
+                      <h3 className="font-outfit font-bold text-lg text-slate-900 mb-1 flex items-center gap-2">
                         Project Roadmap &amp; Approvals
                       </h3>
-                      <p className="text-slate-400 text-xs">
+                      <p className="text-slate-600 text-xs">
                         Tracks client specification to agency sign-off.
                       </p>
                     </div>
@@ -183,7 +185,7 @@ export default function WorkspacePreview() {
                       ].map((item, idx) => (
                         <div
                           key={item.name}
-                          className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl bg-white/[0.01] border border-white/[0.03] hover:bg-white/[0.02] hover:border-white/10 transition-colors gap-3"
+                          className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl bg-[#fafbfc] border border-slate-200/60 hover:bg-white hover:border-brand-purple/25 hover:shadow-[0_8px_30px_rgba(15,23,42,0.03)] transition-all duration-300 gap-3"
                         >
                           <div className="flex items-start gap-3">
                             {item.success ? (
@@ -194,17 +196,17 @@ export default function WorkspacePreview() {
                               </div>
                             )}
                             <div>
-                              <div className="text-sm font-semibold text-white">
+                              <div className="text-sm font-semibold text-slate-900">
                                 {item.name}
                               </div>
-                              <div className="text-[11px] text-slate-400 mt-0.5">
+                              <div className="text-[11px] text-slate-500 mt-0.5">
                                 {item.signoff}
                               </div>
                             </div>
                           </div>
 
                           <div className="flex items-center gap-3 sm:text-right">
-                            <span className="text-[10px] font-semibold text-slate-400">
+                            <span className="text-[10px] font-semibold text-slate-500">
                               {item.date}
                             </span>
                             <span
@@ -233,10 +235,10 @@ export default function WorkspacePreview() {
                     className="space-y-4"
                   >
                     <div>
-                      <h3 className="font-outfit font-bold text-lg text-white mb-1">
+                      <h3 className="font-outfit font-bold text-lg text-slate-900 mb-1">
                         Dedicated Vetted Specialists
                       </h3>
-                      <p className="text-slate-400 text-xs">
+                      <p className="text-slate-600 text-xs">
                         Talent network assigned to your architectural
                         milestones.
                       </p>
@@ -283,11 +285,11 @@ export default function WorkspacePreview() {
                       ].map((member) => (
                         <div
                           key={member.name}
-                          className="p-5 rounded-xl bg-white/[0.01] border border-white/[0.03] flex flex-col justify-between"
+                          className="p-5 rounded-xl bg-slate-50/50 border border-slate-200/80 flex flex-col justify-between"
                         >
                           <div>
                             <div className="flex justify-between items-start gap-2">
-                              <span className="text-sm font-bold text-white">
+                              <span className="text-sm font-bold text-slate-900">
                                 {member.name}
                               </span>
                               <span className="text-[9px] font-semibold text-brand-purpleLt uppercase border border-brand-purple/20 px-2 py-0.5 rounded-full bg-brand-purple/5">
@@ -301,7 +303,7 @@ export default function WorkspacePreview() {
                               {member.bullets.map((b) => (
                                 <li
                                   key={b}
-                                  className="text-[11px] text-slate-400 flex items-center gap-1.5"
+                                  className="text-[11px] text-slate-600 flex items-center gap-1.5"
                                 >
                                   <span className="w-1 h-1 rounded-full bg-slate-500" />
                                   {b}
@@ -325,10 +327,10 @@ export default function WorkspacePreview() {
                     className="space-y-6"
                   >
                     <div>
-                      <h3 className="font-outfit font-bold text-lg text-white mb-1">
+                      <h3 className="font-outfit font-bold text-lg text-slate-900 mb-1">
                         Telemetry &amp; Launch Analytics
                       </h3>
-                      <p className="text-slate-400 text-xs">
+                      <p className="text-slate-600 text-xs">
                         Continuous speed and tracking audits.
                       </p>
                     </div>
@@ -359,7 +361,7 @@ export default function WorkspacePreview() {
                       ].map((gauge) => (
                         <div
                           key={gauge.label}
-                          className="p-4 rounded-xl bg-white/[0.01] border border-white/[0.03] text-center"
+                          className="p-4 rounded-xl bg-slate-50/50 border border-slate-200/80 text-center"
                         >
                           <div className="mono-label text-slate-500 mb-2">
                             {gauge.label}
@@ -367,7 +369,7 @@ export default function WorkspacePreview() {
                           <div className="font-outfit font-black text-3xl gradient-text-emerald">
                             {gauge.val}
                           </div>
-                          <div className="text-[9px] text-slate-400 mt-2 leading-tight">
+                          <div className="text-[9px] text-slate-500 mt-2 leading-tight">
                             {gauge.note}
                           </div>
                         </div>

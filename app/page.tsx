@@ -17,7 +17,7 @@ export default function HomePage() {
       <Services />
       <Ecosystem />
       <WorkspacePreview />
-      <EngagementModels />
+      {/* <EngagementModels /> */}
       <CTA />
       <Footer />
     </main>

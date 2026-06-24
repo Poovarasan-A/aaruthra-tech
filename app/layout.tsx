@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Space_Grotesk, JetBrains_Mono, Outfit } from "next/font/google";
+import { Poppins, JetBrains_Mono } from "next/font/google";
 
-const spaceGrotesk = Space_Grotesk({
+const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-space",
   display: "swap",
 });
@@ -16,7 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const outfit = Outfit({
+const poppinsHeading = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-outfit",
@@ -42,9 +42,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${outfit.variable}`}
+      className={`${poppins.variable} ${jetbrainsMono.variable} ${poppinsHeading.variable}`}
     >
-      <body className={`antialiased bg-craftify-bg ${spaceGrotesk.className}`}>
+      <body className={`antialiased bg-craftify-bg ${poppins.className}`}>
         {children}
       </body>
     </html>

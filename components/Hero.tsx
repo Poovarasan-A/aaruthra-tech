@@ -47,7 +47,6 @@ const STATS = [
 /* ════════════════════════════════════════════════════════════════════ */
 export default function Hero() {
   const [loaded, setLoaded] = useState(false);
-  const [scanDone, setScanDone] = useState(false);
   const [termLine, setTermLine] = useState(0);
   const [termPhase, setTermPhase] = useState<"typing" | "showing">("typing");
   const containerRef = useRef<HTMLDivElement>(null);
@@ -67,16 +66,9 @@ export default function Hero() {
     return () => clearTimeout(t);
   }, []);
 
-  /* Scan line → reveal */
-  useEffect(() => {
-    if (!loaded) return;
-    const t = setTimeout(() => setScanDone(true), 1600);
-    return () => clearTimeout(t);
-  }, [loaded]);
-
   /* Terminal cycling */
   useEffect(() => {
-    if (!scanDone) return;
+    if (!loaded) return;
     const cycle = () => {
       setTermPhase("typing");
       const show = setTimeout(() => setTermPhase("showing"), 1400);
@@ -91,13 +83,13 @@ export default function Hero() {
     };
     const t = setTimeout(cycle, 600);
     return () => clearTimeout(t);
-  }, [scanDone, termLine]);
+  }, [loaded, termLine]);
 
   return (
     <section
       ref={containerRef}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 pt-28 pb-20"
-      style={{ background: "#030014" }}
+      style={{ background: "linear-gradient(to bottom, #ffffff, #fafbfc)" }}
     >
       <style>{`
         /* ─ Noise texture overlay ─ */
@@ -112,32 +104,17 @@ export default function Hero() {
           z-index:1;
         }
 
-        /* ─ Scan beam ─ */
-        @keyframes scan {
-          0%   { transform:translateY(-100%); opacity:0.9; }
-          80%  { opacity:0.9; }
-          100% { transform:translateY(120vh);  opacity:0; }
-        }
-        .scan-beam {
-          position:absolute;
-          left:0; right:0;
-          height:3px;
-          background:linear-gradient(90deg, transparent 0%, #7C3AED 20%, #06B6D4 50%, #7C3AED 80%, transparent 100%);
-          box-shadow: 0 0 40px 12px rgba(124,58,237,0.35), 0 0 80px 24px rgba(6,182,212,0.15);
-          animation: scan 1.4s cubic-bezier(0.4,0,0.2,1) forwards;
-          z-index:50;
-          pointer-events:none;
-        }
+
 
         /* ─ Gradient text ─ */
         .grad-text {
-          background: linear-gradient(135deg, #a78bfa 0%, #06B6D4 55%, #10B981 100%);
+          background: linear-gradient(135deg, #7C3AED 0%, #0891B2 55%, #059669 100%);
           -webkit-background-clip:text;
           -webkit-text-fill-color:transparent;
           background-clip:text;
         }
         .grad-text-warm {
-          background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+          background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
           -webkit-background-clip:text;
           -webkit-text-fill-color:transparent;
           background-clip:text;
@@ -151,11 +128,11 @@ export default function Hero() {
         .shimmer-text {
           background: linear-gradient(
             120deg,
-            #a78bfa 0%,
-            #06B6D4 30%,
-            #ffffff 48%,
-            #10B981 65%,
-            #a78bfa 100%
+            #7c3aed 0%,
+            #0891b2 30%,
+            #6d28d9 48%,
+            #059669 65%,
+            #7c3aed 100%
           );
           background-size:250% auto;
           -webkit-background-clip:text;
@@ -174,8 +151,8 @@ export default function Hero() {
 
         /* ─ Stat card glow ─ */
         .stat-card {
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(124,58,237,0.18);
+          background: rgba(255,255,255,0.7);
+          border: 1px solid rgba(124,58,237,0.1);
           border-radius:16px;
           padding:20px 24px;
           display:flex;
@@ -184,30 +161,32 @@ export default function Hero() {
           gap:6px;
           position:relative;
           overflow:hidden;
-          transition: border-color 0.3s, background 0.3s;
+          transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+          box-shadow: 0 4px 20px -2px rgba(124,58,237,0.04);
         }
         .stat-card::before {
           content:"";
           position:absolute;
           inset:-1px;
           border-radius:16px;
-          background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(6,182,212,0.12), transparent 60%);
+          background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(6,182,212,0.08), transparent 60%);
           opacity:0;
           transition: opacity 0.3s;
           pointer-events:none;
         }
         .stat-card:hover::before { opacity:1; }
-        .stat-card:hover { border-color: rgba(124,58,237,0.45); background: rgba(255,255,255,0.05); }
+        .stat-card:hover { border-color: rgba(124,58,237,0.3); background: rgba(255,255,255,0.9); box-shadow: 0 10px 30px -4px rgba(124,58,237,0.08); }
 
         /* ─ Terminal card ─ */
         .terminal {
-          background: rgba(3,0,20,0.75);
-          border: 1px solid rgba(124,58,237,0.25);
+          background: rgba(15, 23, 42, 0.9);
+          border: 1px solid rgba(124, 58, 237, 0.25);
           border-radius: 14px;
           backdrop-filter: blur(20px);
           overflow: hidden;
           font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
           font-size: 12px;
+          box-shadow: 0 20px 50px -12px rgba(15, 23, 42, 0.15);
         }
         .terminal-bar {
           background: rgba(255,255,255,0.04);
@@ -230,12 +209,12 @@ export default function Hero() {
           gap:8px;
           padding:6px 18px;
           border-radius:100px;
-          border: 1px solid rgba(124,58,237,0.3);
-          background: rgba(124,58,237,0.08);
+          border: 1px solid rgba(124,58,237,0.15);
+          background: rgba(124,58,237,0.04);
           backdrop-filter: blur(12px);
           font-size:12px;
           letter-spacing:0.08em;
-          color:#94a3b8;
+          color:#6d28d9;
           font-family: ui-monospace, monospace;
           text-transform:uppercase;
         }
@@ -289,13 +268,13 @@ export default function Hero() {
 
         /* ─ Ghost CTA button ─ */
         .btn-ghost {
-          background: rgba(255,255,255,0.04);
-          color:#cbd5e1;
+          background: rgba(255,255,255,0.6);
+          color:#334155;
           font-weight:600;
           font-size:14px;
           padding:14px 32px;
           border-radius:100px;
-          border:1px solid rgba(255,255,255,0.1);
+          border:1px solid rgba(15,23,42,0.1);
           cursor:pointer;
           transition: all 0.2s;
           text-decoration:none;
@@ -305,7 +284,7 @@ export default function Hero() {
           white-space:nowrap;
           backdrop-filter: blur(12px);
         }
-        .btn-ghost:hover { background:rgba(255,255,255,0.08); color:#fff; transform:scale(1.03); border-color:rgba(255,255,255,0.2); }
+        .btn-ghost:hover { background:rgba(15,23,42,0.05); color:#0f172a; transform:scale(1.03); border-color:rgba(15,23,42,0.2); }
 
         /* ─ Scroll cue ─ */
         @keyframes scroll-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
@@ -330,10 +309,7 @@ export default function Hero() {
       {/* ─── Noise Texture ─── */}
       <div className="hero-noise absolute inset-0 z-[1] pointer-events-none" />
 
-      {/* ─── Scan Beam ─── */}
-      <AnimatePresence>
-        {loaded && !scanDone && <div className="scan-beam" />}
-      </AnimatePresence>
+
 
       {/* ─── Grid Lines ─── */}
       <div className="hero-grid" />
@@ -396,7 +372,7 @@ export default function Hero() {
       {/* ─── Floating Terminal Card ─── */}
       <motion.div
         initial={{ opacity: 0, y: 20, x: 20 }}
-        animate={scanDone ? { opacity: 1, y: 0, x: 0 } : {}}
+        animate={loaded ? { opacity: 1, y: 0, x: 0 } : {}}
         transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="terminal absolute bottom-[10%] right-[4%] w-[300px] z-20 hidden lg:block"
       >
@@ -473,18 +449,19 @@ export default function Hero() {
       {/* ─── Secondary floating badge — top-left ─── */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
-        animate={scanDone ? { opacity: 1, x: 0 } : {}}
+        animate={loaded ? { opacity: 1, x: 0 } : {}}
         transition={{ delay: 0.5, duration: 0.7 }}
-        className="absolute top-[20%] left-[3%] z-20 hidden xl:flex items-center gap-2.5 hidden lg:flex"
+        className="absolute top-[20%] left-[3%] z-20 hidden lg:flex items-center gap-2.5"
         style={{
-          background: "rgba(3,0,20,0.7)",
-          border: "1px solid rgba(6,182,212,0.2)",
+          background: "rgba(255, 255, 255, 0.75)",
+          border: "1px solid rgba(6,182,212,0.15)",
           borderRadius: "12px",
           padding: "10px 16px",
           backdropFilter: "blur(16px)",
           fontFamily: "ui-monospace, monospace",
           fontSize: "11px",
-          color: "#94a3b8",
+          color: "#0891b2",
+          boxShadow: "0 4px 20px -2px rgba(6,182,212,0.05)",
         }}
       >
         <span style={{ color: "#06B6D4", fontWeight: 700 }}>◈</span>
@@ -499,7 +476,7 @@ export default function Hero() {
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={scanDone ? { opacity: 1, scale: 1 } : {}}
+          animate={loaded ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="mb-10"
         >
@@ -519,7 +496,7 @@ export default function Hero() {
         {/* Heading — two-line split treatment */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
-          animate={scanDone ? { opacity: 1, y: 0 } : {}}
+          animate={loaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="mb-6"
         >
@@ -552,7 +529,7 @@ export default function Hero() {
         {/* Divider line */}
         <motion.div
           initial={{ scaleX: 0 }}
-          animate={scanDone ? { scaleX: 1 } : {}}
+          animate={loaded ? { scaleX: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
           style={{
             width: "120px",
@@ -567,10 +544,10 @@ export default function Hero() {
         {/* Subtext */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
-          animate={scanDone ? { opacity: 1, y: 0 } : {}}
+          animate={loaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.25 }}
           style={{
-            color: "#94a3b8",
+            color: "#475569",
             maxWidth: "560px",
             fontSize: "clamp(15px, 2vw, 17px)",
             lineHeight: 1.75,
@@ -585,7 +562,7 @@ export default function Hero() {
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
-          animate={scanDone ? { opacity: 1, y: 0 } : {}}
+          animate={loaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.35 }}
           style={{
             display: "flex",
@@ -627,7 +604,7 @@ export default function Hero() {
         {/* ─── Bento Stats Grid ─── */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
-          animate={scanDone ? { opacity: 1, y: 0 } : {}}
+          animate={loaded ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.55, duration: 0.8 }}
           style={{
             display: "grid",
@@ -642,7 +619,7 @@ export default function Hero() {
               key={stat.label}
               className="stat-card"
               initial={{ opacity: 0, y: 20 }}
-              animate={scanDone ? { opacity: 1, y: 0 } : {}}
+              animate={loaded ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.6 + i * 0.1, duration: 0.6 }}
             >
               {/* Top-right inner glow */}
@@ -664,7 +641,7 @@ export default function Hero() {
                   fontFamily: "'Outfit', sans-serif",
                   fontWeight: 900,
                   fontSize: "clamp(22px, 3vw, 30px)",
-                  background: "linear-gradient(135deg, #a78bfa, #06B6D4)",
+                  background: "linear-gradient(135deg, #7c3aed, #0891b2)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -693,7 +670,7 @@ export default function Hero() {
       {/* ─── Scroll Cue ─── */}
       {/* <motion.div
         initial={{ opacity: 0 }}
-        animate={scanDone ? { opacity: 1 } : {}}
+        animate={loaded ? { opacity: 1 } : {}}
         transition={{ delay: 1.1, duration: 0.8 }}
         className="absolute bottom-20 left-20 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-20"
         onClick={() =>
@@ -721,7 +698,7 @@ export default function Hero() {
         className="absolute bottom-0 left-0 right-0 pointer-events-none"
         style={{
           height: "120px",
-          background: "linear-gradient(to top, #030014, transparent)",
+          background: "linear-gradient(to top, #f8fafc, transparent)",
         }}
       />
     </section>
