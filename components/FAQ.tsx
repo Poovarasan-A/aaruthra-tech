@@ -5,28 +5,24 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const faqs = [
   {
-    q: "How does your vetting process work for developers and marketers?",
-    a: "We perform technical audits, inspect past production repositories, check conversion telemetry execution, and verify delivery consistency. Only the top 3% of developers and marketers are onboarded to our synergy squads.",
+    q: "Is this suitable for small and mid-sized businesses?",
+    a: "Yes. We primarily work with small and mid-sized businesses that want a clear and reliable digital presence. Whether you are just starting your digital journey or fixing an existing setup, our approach is practical and scalable.",
   },
   {
-    q: "What is the typical timeline for starting and delivering projects?",
-    a: "Specialists are allocated to your milestone board within 48 hours. Flat-rate sprints usually launch in 2 to 4 weeks, while dedicated squads run on continuous weekly agile delivery cycles.",
+    q: "Do I need to have everything ready before contacting you?",
+    a: "No. Most clients come to us with incomplete or unclear digital setups. We help you understand what you need, what you don't, and where to start — step by step.",
   },
   {
-    q: "What post-launch support and telemetry auditing do you provide?",
-    a: "Every launch includes 30 days of free site reliability auditing, performance checks, and validation of event tracking pipelines to ensure zero data drop-offs.",
+    q: "What services do you usually start with?",
+    a: "It depends on your current situation. For some businesses, it starts with a website or redesign. For others, it may be local visibility, ads, or social media management. We recommend only what makes sense for your business stage.",
   },
   {
-    q: "How are your pricing models structured for sprints vs squads?",
-    a: "We offer flat-rate sprints for defined deliverables (e.g., Next.js landing pages or analytics setups) and monthly retainer contracts for scaling squads.",
+    q: "How involved do I need to be in the process?",
+    a: "We keep your involvement minimal and structured. We'll need your inputs at key stages, but we handle the execution and ongoing management without daily follow-ups.",
   },
   {
-    q: "What is your NDA policy regarding client source code and data?",
-    a: "Full mutual NDAs are signed before scoping begins. All intellectual property, source files, design layouts, and ad accounts remain 100% owned by you.",
-  },
-  {
-    q: "Should I build a mobile app or a web app first?",
-    a: "We recommend web apps for initial distribution, conversion funnels, and organic SEO. Mobile apps are ideal when native push notifications, offline states, or deep mobile hardware integrations are required.",
+    q: "Do you offer long-term support after the initial work?",
+    a: "Yes. Many clients work with us on an ongoing basis for website support, visibility, and digital management. You can start small and continue based on what works for your business.",
   },
 ];
 
@@ -50,8 +46,8 @@ export default function FAQ() {
           <h2 className="font-outfit font-bold text-3xl md:text-5xl text-[#1A1A2E] tracking-tight mb-5">
             Frequently Asked <span className="gradient-text">Questions</span>
           </h2>
-          <p className="text-slate-600 text-base max-w-md mx-auto leading-relaxed">
-            Everything you need to know about our engineering squads, timelines, and pricing model.
+          <p className="text-slate-600 text-base max-w-lg mx-auto leading-relaxed">
+            Everything you need to know about our services, support, and onboarding process.
           </p>
         </div>
 

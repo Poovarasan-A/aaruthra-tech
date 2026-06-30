@@ -11,23 +11,23 @@ import {
 
 const TERMINAL_LINES = [
   {
-    cmd: "npm run build:prod",
-    out: "✓ Built in 1.8s  •  99/100 Lighthouse",
-  },
-  {
     cmd: "git push origin main",
-    out: "✓ Deployed to edge  •  148ms TTFB",
+    out: "✓ Deployed to Netlify  •  120ms TTFB",
   },
   {
-    cmd: "run roi-report --q3",
-    out: "✓ ROI +148% MoM  •  48/48 QA passed",
+    cmd: "run seo-audit --local",
+    out: "✓ Local SEO Score 98%  •  Rank #1 in Tamil Nadu",
+  },
+  {
+    cmd: "npm run build:prod",
+    out: "✓ 100/100 Mobile Speed  •  0.4s LCP",
   },
 ];
 
 const STATS = [
-  { val: "140+", label: "Projects Shipped", icon: "🚀" },
-  { val: "99", label: "Lighthouse Score", icon: "⚡" },
-  { val: "48h", label: "Squad Onboarded", icon: "🛡️" },
+  { val: "100+", label: "Business Websites Delivered", icon: "🚀" },
+  { val: "5+", label: "Years in Services", icon: "📅" },
+  { val: "Ongoing", label: "Website & Consultant Support", icon: "🛡️" },
 ];
 
 function CountUp({
@@ -37,6 +37,10 @@ function CountUp({
   value: string;
   duration?: number;
 }) {
+  const hasDigits = /\d/.test(value);
+  if (!hasDigits) {
+    return <span>{value}</span>;
+  }
   const numericPart = parseInt(value.replace(/\D/g, ""), 10);
   const suffix = value.replace(/\d/g, "");
   const [count, setCount] = useState(0);
@@ -47,7 +51,7 @@ function CountUp({
     if (!isInView) return;
     let start = 0;
     const end = numericPart;
-    if (start === end) return;
+    if (isNaN(end) || start === end) return;
 
     let startTime: number | null = null;
     const animate = (timestamp: number) => {
@@ -176,7 +180,8 @@ export default function Hero() {
         >
           <div className="inline-flex items-center gap-2.5 px-5 py-1.5 rounded-full border border-black/5 bg-white/70 backdrop-blur-md text-[11px] font-mono tracking-widest text-[#6366F1] uppercase shadow-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-[#6366F1] animate-ping" />
-            Custom Engineering &amp; Performance Marketing
+            Website Development &amp; Digital Marketing Agency for Growing
+            Businesses
           </div>
         </motion.div>
 
@@ -201,11 +206,12 @@ export default function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-slate-600 max-w-2xl text-base sm:text-lg leading-relaxed mb-10"
+          className="text-slate-600 max-w-3xl text-base sm:text-lg leading-relaxed mb-10"
         >
-          Aarudhra bridges premium enterprises with vetted developer squads and
-          growth marketers. We orchestrate milestones, secure the source, and
-          ship pixel-perfect digital solutions at speed.
+          We help small and mid-sized businesses in Tamil Nadu build a strong
+          digital presence through reliable websites, local SEO, targeted
+          advertising, and structured social media management that generates
+          visibility, enquiries, and long-term growth.
         </motion.p>
 
         {/* Actions */}
@@ -213,29 +219,49 @@ export default function Hero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex flex-wrap gap-4 justify-center mb-16"
+          className="flex flex-wrap gap-4 justify-center mb-10"
         >
           <a
-            href="#cta"
-            className="flex items-center gap-2 bg-[#6366F1] hover:bg-[#4f46e5] text-white font-semibold text-sm px-7 py-3.5 rounded-full shadow-md hover:scale-[1.03] transition-all duration-200 shimmer-sweep"
+            href="https://wa.me/919944100940?text=Hello%20Aarudhra%20Web%20Solutions%2C%20I%27d%20like%20to%20discuss%20our%20website%20development%20or%20digital%20marketing%20requirement."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2.5 bg-[#128C7E] hover:bg-[#075E54] text-white font-semibold text-sm px-7 py-3.5 rounded-full shadow-md hover:scale-[1.03] transition-all duration-200 shimmer-sweep"
           >
-            Procure Solutions
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M3 8h10M9 4l4 4-4 4"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+            Chat with Us on WhatsApp
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.035-4.408c1.662.986 3.302 1.492 5.922 1.493 5.465 0 9.91-4.444 9.913-9.91.002-2.647-1.03-5.136-2.902-7.01-1.874-1.874-4.366-2.903-7.015-2.904-5.463 0-9.903 4.443-9.907 9.91-.001 2.15.561 4.254 1.627 6.095l-1.071 3.91 4.024-1.057zm11.233-5.32c-.3-.149-1.772-.874-2.046-.973-.274-.1-.474-.149-.674.15-.2.299-.774.973-.949 1.172-.175.199-.35.224-.65.075-.3-.149-1.267-.467-2.413-1.489-.892-.796-1.494-1.779-1.669-2.079-.175-.299-.019-.461.13-.61.135-.134.3-.349.45-.524.15-.175.2-.299.3-.499.1-.2.05-.374-.025-.524-.075-.15-.674-1.622-.924-2.221-.244-.588-.492-.51-.674-.519-.175-.008-.375-.01-.575-.01-.2 0-.525.075-.8.374-.275.299-1.05 1.024-1.05 2.5 0 1.472 1.071 2.891 1.221 3.091.15.199 2.107 3.216 5.105 4.51.713.308 1.27.492 1.704.631.716.227 1.368.195 1.883.118.574-.085 1.772-.724 2.022-1.422.25-.699.25-1.297.175-1.422-.075-.125-.275-.199-.575-.349z" />
             </svg>
           </a>
           <a
             href="#cta"
             className="flex items-center gap-2 bg-white/70 hover:bg-white/95 text-slate-800 font-semibold text-sm px-7 py-3.5 rounded-full border border-black/[0.06] hover:scale-[1.03] transition-all duration-200 backdrop-blur-md"
           >
-            Join as Partner
+            Schedule a Discussion
           </a>
+        </motion.div>
+
+        {/* Highlights Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.35 }}
+          className="flex flex-wrap gap-3 justify-center max-w-2xl mb-14"
+        >
+          {[
+            { text: "New Business Websites", icon: "🌐" },
+            { text: "Website Redesign", icon: "🔄" },
+            { text: "Local SEO Visibility", icon: "📍" },
+            { text: "Online Review Management", icon: "⭐" },
+            { text: "Customer Trust & Leads", icon: "📈" },
+          ].map((item) => (
+            <div
+              key={item.text}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-black/5 bg-white/50 backdrop-blur-sm text-xs font-semibold text-slate-700 shadow-sm"
+            >
+              <span>{item.icon}</span>
+              <span>{item.text}</span>
+            </div>
+          ))}
         </motion.div>
 
         {/* Stat counters grid */}
@@ -243,18 +269,18 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.45, duration: 0.7 }}
-          className="grid grid-cols-3 divide-x divide-black/10 w-full max-w-[650px] bg-white/60 backdrop-blur-md rounded-3xl border border-black/[0.06] p-8 shadow-sm"
+          className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-black/10 w-full max-w-[750px] bg-white/60 backdrop-blur-md rounded-3xl border border-black/[0.06] p-8 shadow-sm"
         >
           {STATS.map((stat) => (
             <div
               key={stat.label}
-              className="flex flex-col items-center justify-center px-4 text-center"
+              className="flex flex-col items-center justify-center px-4 py-4 sm:py-0 text-center"
             >
               <span className="text-3xl mb-3">{stat.icon}</span>
-              <span className="font-outfit font-bold text-3xl sm:text-5xl text-[#1A1A2E] leading-tight mb-2">
+              <span className="font-outfit font-bold text-3xl sm:text-4xl text-[#1A1A2E] leading-tight mb-2">
                 <CountUp value={stat.val} />
               </span>
-              <span className="font-mono text-[9px] sm:text-xs font-semibold tracking-wider text-slate-500 uppercase">
+              <span className="font-mono text-[9px] sm:text-[10px] font-semibold tracking-wider text-slate-500 uppercase leading-snug">
                 {stat.label}
               </span>
             </div>

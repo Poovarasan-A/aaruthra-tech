@@ -16,35 +16,35 @@ import {
 const COMPANY_PILLARS = [
   {
     icon: Target,
-    title: "Milestone-Driven Execution",
-    desc: "We align all code delivery with business outcomes. Every sprint concludes with clear, demonstrable value to minimize project delays.",
+    title: "Business-Focused Approach",
+    desc: "We design and manage digital assets with your business objectives in mind — customer enquiries, visibility, and long-term growth — not just visuals.",
     color: "from-[#6366F1]/20 to-indigo-500/5",
     iconColor: "text-[#6366F1]",
     glow: "rgba(99, 102, 241, 0.04)",
   },
   {
     icon: Code,
-    title: "Uncompromising Quality",
-    desc: "Our vetting audit ensures only developers who write clean, performant, and secure architectures manage your repositories.",
+    title: "Simple & Clear Process",
+    desc: "We keep communication straightforward and explain every step clearly, so you always know what is being done and why.",
     color: "from-[#06B6D4]/20 to-cyan-500/5",
     iconColor: "text-[#06B6D4]",
     glow: "rgba(6, 182, 212, 0.04)",
   },
   {
-    icon: Sparkles,
-    title: "ROI-Focused Growth",
-    desc: "We unify custom product engineering with target acquisition strategies, ensuring SEO, paid marketing, and design convert visits to sales.",
-    color: "from-amber-500/20 to-yellow-500/5",
-    iconColor: "text-amber-500",
-    glow: "rgba(245, 158, 11, 0.04)",
-  },
-  {
     icon: Users,
-    title: "Agile Virtual Office Squads",
-    desc: "We scale dedicated development teams and marketing boards in under 48 hours to secure immediate velocity for enterprise projects.",
+    title: "Dedicated Support",
+    desc: "You work directly with a consistent team that understands your business and is available when you need guidance or updates.",
     color: "from-emerald-500/20 to-teal-500/5",
     iconColor: "text-emerald-500",
     glow: "rgba(16, 185, 129, 0.04)",
+  },
+  {
+    icon: Sparkles,
+    title: "Long-Term Growth",
+    desc: "Our websites and digital strategies are built to evolve as your business grows, helping you stay relevant instead of starting over every few years.",
+    color: "from-amber-500/20 to-yellow-500/5",
+    iconColor: "text-amber-500",
+    glow: "rgba(245, 158, 11, 0.04)",
   },
 ];
 
@@ -77,20 +77,26 @@ export default function AboutPage() {
           className="font-outfit font-bold text-4xl sm:text-6xl tracking-tight text-[#1A1A2E] mb-6 leading-[1.05]"
           style={{ letterSpacing: "-0.03em" }}
         >
-          We build digital weapons.
+          About Aarudhra Web Solutions
           <br />
-          <span className="gradient-text">You dominate the market.</span>
+          <span className="gradient-text text-xl sm:text-3xl font-medium mt-3 block tracking-wider">
+            A practical digital marketing and website development agency for
+            small and mid-sized businesses
+          </span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed"
+          className="text-slate-600 text-sm sm:text-base max-w-3xl mx-auto leading-relaxed"
         >
-          Aarudhra orchestrates elite, pre-vetted squads of developers and
-          high-growth marketers to scale digital products. We bridge the gap
-          between complex code systems and performance acquisitions.
+          We work with small and mid-sized businesses across Tamil Nadu that
+          want a reliable digital presence they can actually use to grow.
+          Whether you are launching a new website, redesigning an outdated one,
+          or trying to improve your visibility online, we focus on doing the
+          fundamentals right — clear messaging, structured design, and digital
+          strategies that support real business goals.
         </motion.p>
       </section>
 
@@ -98,7 +104,7 @@ export default function AboutPage() {
       <section className="py-12 px-6 max-w-[1200px] mx-auto">
         <div className="text-center mb-16">
           <p className="font-mono text-xs uppercase tracking-widest text-[#6366F1] font-semibold mb-3">
-            // corporate execution
+            // core value propositions
           </p>
           <h2 className="font-outfit font-bold text-2xl sm:text-4xl text-[#1A1A2E] tracking-tight">
             Our Core Principles
@@ -170,13 +176,14 @@ export default function AboutPage() {
               {/* Founder Avatar Column */}
               <div className="flex flex-col items-center flex-shrink-0">
                 <div className="relative w-48 h-48 rounded-full overflow-hidden border border-black/5 bg-gradient-to-tr from-[#6366F1]/10 to-[#06B6D4]/10 flex items-center justify-center shadow-inner group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#6366F1] via-[#4f46e5] to-[#06B6D4] opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+                  {/* <div className="absolute inset-0 bg-gradient-to-br from-[#6366F1] via-[#4f46e5] to-[#06B6D4] opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
                   <span className="relative z-10 text-white font-bold text-5xl tracking-tighter select-none font-outfit">
-                    S
+                    P
                   </span>
-                  {/* Decorative inner rotating rings */}
+
                   <div className="absolute inset-2 border border-white/20 rounded-full animate-[spin_10s_linear_infinite]" />
-                  <div className="absolute inset-4 border border-white/10 border-dashed rounded-full animate-[spin_6s_linear_infinite_reverse]" />
+                  <div className="absolute inset-4 border border-white/10 border-dashed rounded-full animate-[spin_6s_linear_infinite_reverse]" /> */}
+                  <img src="/founder.jpeg" alt="Founder" />
                 </div>
 
                 <h4 className="text-[#1A1A2E] font-bold text-lg mt-5 text-center font-outfit">
@@ -240,15 +247,15 @@ export default function AboutPage() {
                   </div>
 
                   <h3 className="font-outfit font-bold text-xl sm:text-2xl text-[#1A1A2E] leading-tight">
-                    Vaporizing Technical Complexity for High-Growth Brands
+                    Vaporizing Technical Complexity for Growing Brands
                   </h3>
 
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-                    Poovarasan A founded Aarudhra Web Solutions to address a
-                    recurring industry challenge: the mismatch between core
-                    enterprise business objectives and developer sprint outputs.
-                    As a full-stack engineer and digital systems architect, he
-                    works with team directors to vet elite talent, optimize
+                    Sharan founded Aarudhra Web Solutions to address a recurring
+                    industry challenge: the mismatch between core enterprise
+                    business objectives and developer sprint outputs. As a
+                    full-stack engineer and digital systems architect, he works
+                    with team directors to vet elite talent, optimize
                     engineering velocity, and oversee roadmap deliveries.
                   </p>
 
@@ -278,17 +285,17 @@ export default function AboutPage() {
       {/* Next Step CTA Bridge */}
       <section className="py-20 px-6 text-center max-w-[1200px] mx-auto">
         <h3 className="font-outfit font-bold text-2xl sm:text-3xl text-[#1A1A2E] mb-4">
-          Ready to kickstart your next sprint?
+          Ready to kickstart your next project?
         </h3>
         <p className="text-slate-600 text-xs sm:text-sm max-w-lg mx-auto mb-8">
-          Request a project roadmap assessment, or learn how to join our network
-          of pre-vetted builders.
+          Request a project roadmap assessment, or share a few details about
+          what you're looking to improve.
         </p>
         <a
           href="/#cta"
           className="inline-flex items-center gap-2 bg-[#6366F1] hover:bg-[#4f46e5] hover:scale-[1.03] text-white text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-full shadow-sm transition-all shimmer-sweep"
         >
-          Procure Core Solutions
+          Get Started
           <ArrowRight className="w-4 h-4" />
         </a>
       </section>

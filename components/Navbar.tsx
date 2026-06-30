@@ -5,17 +5,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { name: "Start", href: "/" },
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/about" },
   { name: "Services", href: "/#services" },
-  { name: "Ecosystem", href: "/#ecosystem" },
-  { name: "Workspace", href: "/#workspace" },
-  { name: "About", href: "/about" },
+  { name: "FAQs", href: "/#faq" },
+  { name: "Contact", href: "/#cta" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState("Start");
+  const [active, setActive] = useState("Home");
   const pathname = usePathname();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (pathname === "/about") {
-      setActive("About");
+      setActive("About Us");
     } else if (pathname === "/") {
       const handleHashChange = () => {
         const hash = typeof window !== "undefined" ? window.location.hash : "";
@@ -36,7 +36,7 @@ export default function Navbar() {
         if (found) {
           setActive(found.name);
         } else if (typeof window !== "undefined" && window.scrollY < 200) {
-          setActive("Start");
+          setActive("Home");
         }
       };
       handleHashChange();
@@ -106,7 +106,7 @@ export default function Navbar() {
               href="#cta"
               className="flex items-center gap-2 bg-[#6366F1] hover:bg-[#4f46e5] text-white text-[13px] font-semibold px-5 py-2.5 rounded-full shadow-sm hover:scale-[1.03] transition-all duration-200 shimmer-sweep"
             >
-              Procure Solutions
+              Get Started
               <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
                 <path
                   d="M3 8h10M9 4l4 4-4 4"
@@ -178,7 +178,7 @@ export default function Navbar() {
                 onClick={() => setOpen(false)}
                 className="mt-1 bg-[#6366F1] hover:bg-[#4f46e5] text-white text-sm font-semibold py-3 rounded-xl shadow-[0_2px_16px_rgba(99,102,241,0.2)] text-center block shimmer-sweep"
               >
-                Procure Solutions
+                Get Started
               </a>
             </div>
           </motion.div>

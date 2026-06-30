@@ -7,6 +7,7 @@ import Testimonials from "@/components/Testimonials";
 import MobileAppShowcase from "@/components/MobileAppShowcase";
 import DigitalMarketingStats from "@/components/DigitalMarketingStats";
 import Ecosystem from "@/components/Ecosystem";
+import MidPageCTA from "@/components/MidPageCTA";
 import WorkspacePreview from "@/components/WorkspacePreview";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
@@ -24,6 +25,7 @@ export default function HomePage() {
       <MobileAppShowcase />
       <DigitalMarketingStats />
       <Ecosystem />
+      <MidPageCTA />
       <WorkspacePreview />
       <FAQ />
       <CTA />

@@ -2,19 +2,19 @@
 
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Code2, Megaphone, Users, ArrowRight } from "lucide-react";
+import { Laptop, RotateCw, MapPin, Megaphone, Share2, ShieldCheck, ArrowRight } from "lucide-react";
 
 const services = [
   {
-    icon: Code2,
-    title: "Web & Software Engineering",
-    tagline: "High-Performance Codebases",
-    desc: "From sleek Next.js SaaS apps to robust API integrations. We write clean, accessible, ultra-performant code optimised for conversion.",
+    icon: Laptop,
+    title: "Website Development",
+    tagline: "Custom Business Sites",
+    desc: "Professional business websites that clearly explain your services, build credibility, and support customer enquiries. (Mobile Friendly)",
     bullets: [
-      { label: "Next.js & React Architectures", pct: 98 },
-      { label: "Secure API Integrations",        pct: 95 },
-      { label: "Database & Backend Design",      pct: 92 },
-      { label: "95+ PageSpeed Performance",      pct: 99 },
+      { label: "React & Next.js Architectures", pct: 98 },
+      { label: "Mobile-First Design", pct: 99 },
+      { label: "Fast Page Loading Speed", pct: 95 },
+      { label: "Enquiry Form Integrations", pct: 92 },
     ],
     leftAccent: "border-l-[3px] border-l-[#6366F1]",
     iconColor: "text-[#6366F1]",
@@ -22,15 +22,15 @@ const services = [
     accentBg: "bg-[#6366F1]/10",
   },
   {
-    icon: Megaphone,
-    title: "Performance Marketing",
-    tagline: "ROI-Focused Scale",
-    desc: "Acquire customers through conversion-optimised funnels, targeted search campaigns, paid media, and analytics-backed SEO telemetry.",
+    icon: RotateCw,
+    title: "Website Redesign",
+    tagline: "Fix Outdated Sites",
+    desc: "Fixing outdated, slow, or confusing websites that are hurting your credibility with modern design and faster speeds.",
     bullets: [
-      { label: "Paid Social & Search Ads",    pct: 94 },
-      { label: "Lighthouse & SEO Strategy",   pct: 97 },
-      { label: "Funnel Conversion Audits",    pct: 91 },
-      { label: "Custom Telemetry & GA4",      pct: 96 },
+      { label: "Site Speed Audits", pct: 96 },
+      { label: "Modern UI/UX Overhauls", pct: 94 },
+      { label: "Broken Link Corrections", pct: 91 },
+      { label: "Content Structuring", pct: 93 },
     ],
     leftAccent: "border-l-[3px] border-l-[#06B6D4]",
     iconColor: "text-[#06B6D4]",
@@ -38,20 +38,68 @@ const services = [
     accentBg: "bg-[#06B6D4]/10",
   },
   {
-    icon: Users,
-    title: "Managed Talent Squads",
-    tagline: "On-Demand Resource Scaling",
-    desc: "We align highly specialised, vetted freelancers with your technical specifications. Aarudhra handles contracts, code reviews, and QA.",
+    icon: MapPin,
+    title: "Local SEO & Visibility",
+    tagline: "Get Found Nearby",
+    desc: "Helping your business appear in local search results and Google maps so nearby customers can easily find and trust your services.",
     bullets: [
-      { label: "Vetted Software Engineers",    pct: 100 },
-      { label: "QA & Peer Review Pipelines",   pct: 95 },
-      { label: "Milestone Tracking & PMs",     pct: 93 },
-      { label: "SaaS & Marketing Specialists", pct: 90 },
+      { label: "Google Business Optimization", pct: 97 },
+      { label: "Local Keywords Targeting", pct: 94 },
+      { label: "Map Directory Citations", pct: 90 },
+      { label: "On-Page SEO Audit", pct: 92 },
     ],
     leftAccent: "border-l-[3px] border-l-[#A855F7]",
     iconColor: "text-[#A855F7]",
     barColor: "bg-[#A855F7]",
     accentBg: "bg-[#A855F7]/10",
+  },
+  {
+    icon: Megaphone,
+    title: "Google & Meta Advertising",
+    tagline: "Targeted Leads",
+    desc: "Targeted advertising campaigns focused on relevant traffic, enquiries, and controlled spending.",
+    bullets: [
+      { label: "Google Search Ads", pct: 95 },
+      { label: "Meta (FB / IG) Campaigns", pct: 93 },
+      { label: "Lead Funnel Optimization", pct: 92 },
+      { label: "Ad Spend Tracking & ROI", pct: 94 },
+    ],
+    leftAccent: "border-l-[3px] border-l-[#F59E0B]",
+    iconColor: "text-[#F59E0B]",
+    barColor: "bg-[#F59E0B]",
+    accentBg: "bg-[#F59E0B]/10",
+  },
+  {
+    icon: Share2,
+    title: "Social Media Management",
+    tagline: "Engaging Content",
+    desc: "Managing your social profiles with consistent content and messaging aligned to your business goals.",
+    bullets: [
+      { label: "Content Calendars Planning", pct: 91 },
+      { label: "Graphics & Carousel Design", pct: 95 },
+      { label: "Profile Bio & Branding Setup", pct: 93 },
+      { label: "Community Interactions", pct: 88 },
+    ],
+    leftAccent: "border-l-[3px] border-l-[#10B981]",
+    iconColor: "text-[#10B981]",
+    barColor: "bg-[#10B981]",
+    accentBg: "bg-[#10B981]/10",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Reputation Management",
+    tagline: "Build Trust Online",
+    desc: "Monitoring and improving customer reviews and online feedback so your business builds trust before customers contact you.",
+    bullets: [
+      { label: "Review Acquisition Strategy", pct: 92 },
+      { label: "Negative Feedback Auditing", pct: 90 },
+      { label: "Customer Trust Signals", pct: 95 },
+      { label: "Brand Mentions Monitoring", pct: 89 },
+    ],
+    leftAccent: "border-l-[3px] border-l-[#F43F5E]",
+    iconColor: "text-[#F43F5E]",
+    barColor: "bg-[#F43F5E]",
+    accentBg: "bg-[#F43F5E]/10",
   },
 ];
 
@@ -68,17 +116,15 @@ export default function Services() {
             // capabilities
           </span>
           <h2 className="font-outfit font-bold text-3xl md:text-5xl text-[#1A1A2E] tracking-tight mb-5">
-            Core pillars for{" "}
-            <span className="gradient-text">digital dominance</span>
+            Our <span className="gradient-text">Services</span>
           </h2>
-          <p className="text-slate-600 text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-            We don&apos;t just consult. We assemble the squad, engineer the code,
-            run the campaigns, and ensure bulletproof deployment.
+          <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+            Practical digital services designed for small and mid-sized businesses that want visibility, enquiries, and long-term support.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((svc, i) => {
             const Icon = svc.icon;
             return (
@@ -135,7 +181,7 @@ export default function Services() {
                   className={`flex items-center text-xs font-bold ${svc.iconColor} mt-auto pt-5 border-t border-black/[0.04] w-full`}
                 >
                   <span className="flex items-center gap-1.5 hover:gap-2.5 transition-all duration-300">
-                    Explore Solution
+                    Get in Touch
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </a>
