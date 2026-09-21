@@ -1,32 +1,35 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-  variable: "--font-space",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-heading",
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-mono",
-  display: "swap",
-});
-
-const plusJakartaHeading = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-outfit",
+  variable: "--font-sans",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Aarudhra Web Solutions — Custom Engineering & Performance Marketing",
+  title: "Aarudhra Web Solutions — Digital Technology & Growth Partner",
   description:
-    "Aarudhra orchestrates elite vetted developers and growth marketers to build, launch and scale your digital products. Custom web engineering, SEO, paid media.",
+    "We design and build high-performing websites, digital experiences, local SEO, and growth systems that help growing businesses get discovered, build trust, and generate customer enquiries.",
+  keywords: [
+    "Website Development",
+    "Website Redesign",
+    "Local SEO",
+    "Tamil Nadu Web Agency",
+    "Chennai Web Development",
+    "Digital Marketing Partner",
+    "Small Business Websites",
+    "Aarudhra Web Solutions",
+  ],
   icons: {
     icon: "/techLogo3.png",
     shortcut: "/techLogo3.png",
@@ -42,11 +45,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${jetbrainsMono.variable} ${plusJakartaHeading.variable}`}
+      className={`${plusJakarta.variable} ${inter.variable}`}
     >
-      <body className={`antialiased bg-[#F8F7F4] text-[#1A1A2E] ${plusJakarta.className}`}>
+      <body className={`antialiased bg-[#F8F9FC] text-[#0F172A] ${inter.className}`}>
         {children}
       </body>
     </html>
   );
 }
+
+

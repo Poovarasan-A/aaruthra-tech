@@ -1,189 +1,151 @@
 "use client";
 
-import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Laptop, RotateCw, MapPin, Megaphone, Share2, ShieldCheck, ArrowRight } from "lucide-react";
+import {
+  Globe,
+  RotateCcw,
+  MapPin,
+  Megaphone,
+  Share2,
+  ShieldCheck,
+  Smartphone,
+  ArrowRight,
+} from "lucide-react";
 
-const services = [
+const SERVICES = [
   {
-    icon: Laptop,
+    num: "01",
+    icon: Globe,
     title: "Website Development",
-    tagline: "Custom Business Sites",
-    desc: "Professional business websites that clearly explain your services, build credibility, and support customer enquiries. (Mobile Friendly)",
-    bullets: [
-      { label: "React & Next.js Architectures", pct: 98 },
-      { label: "Mobile-First Design", pct: 99 },
-      { label: "Fast Page Loading Speed", pct: 95 },
-      { label: "Enquiry Form Integrations", pct: 92 },
-    ],
-    leftAccent: "border-l-[3px] border-l-[#6366F1]",
-    iconColor: "text-[#6366F1]",
-    barColor: "bg-[#6366F1]",
-    accentBg: "bg-[#6366F1]/10",
+    desc: "Custom business websites engineered for speed, mobile usability, and customer conversion. Built to communicate credibility and generate enquiries.",
+    tags: ["Custom Design", "Mobile-First", "Fast Loading", "Enquiry Forms"],
   },
   {
-    icon: RotateCw,
+    num: "02",
+    icon: RotateCcw,
     title: "Website Redesign",
-    tagline: "Fix Outdated Sites",
-    desc: "Fixing outdated, slow, or confusing websites that are hurting your credibility with modern design and faster speeds.",
-    bullets: [
-      { label: "Site Speed Audits", pct: 96 },
-      { label: "Modern UI/UX Overhauls", pct: 94 },
-      { label: "Broken Link Corrections", pct: 91 },
-      { label: "Content Structuring", pct: 93 },
-    ],
-    leftAccent: "border-l-[3px] border-l-[#06B6D4]",
-    iconColor: "text-[#06B6D4]",
-    barColor: "bg-[#06B6D4]",
-    accentBg: "bg-[#06B6D4]/10",
+    desc: "Modernizing outdated, slow, or cluttered websites that no longer represent your brand or fail to convert visitors into phone calls and enquiries.",
+    tags: ["UX Revamp", "Speed Optimization", "Mobile Friendly", "Content Refresh"],
   },
   {
+    num: "03",
     icon: MapPin,
     title: "Local SEO & Visibility",
-    tagline: "Get Found Nearby",
-    desc: "Helping your business appear in local search results and Google maps so nearby customers can easily find and trust your services.",
-    bullets: [
-      { label: "Google Business Optimization", pct: 97 },
-      { label: "Local Keywords Targeting", pct: 94 },
-      { label: "Map Directory Citations", pct: 90 },
-      { label: "On-Page SEO Audit", pct: 92 },
-    ],
-    leftAccent: "border-l-[3px] border-l-[#A855F7]",
-    iconColor: "text-[#A855F7]",
-    barColor: "bg-[#A855F7]",
-    accentBg: "bg-[#A855F7]/10",
+    desc: "Helping your business rank higher on Google Search and Google Maps so nearby customers find you first when searching for your services.",
+    tags: ["Google Business Profile", "Local Citations", "Map Rankings", "On-Page SEO"],
   },
   {
+    num: "04",
     icon: Megaphone,
     title: "Google & Meta Advertising",
-    tagline: "Targeted Leads",
-    desc: "Targeted advertising campaigns focused on relevant traffic, enquiries, and controlled spending.",
-    bullets: [
-      { label: "Google Search Ads", pct: 95 },
-      { label: "Meta (FB / IG) Campaigns", pct: 93 },
-      { label: "Lead Funnel Optimization", pct: 92 },
-      { label: "Ad Spend Tracking & ROI", pct: 94 },
-    ],
-    leftAccent: "border-l-[3px] border-l-[#F59E0B]",
-    iconColor: "text-[#F59E0B]",
-    barColor: "bg-[#F59E0B]",
-    accentBg: "bg-[#F59E0B]/10",
+    desc: "Targeted search and social media ad campaigns designed to bring in qualified leads while maintaining complete control over your advertising budget.",
+    tags: ["Google Search Ads", "Meta (FB & IG)", "Lead Generation", "Budget Control"],
   },
   {
+    num: "05",
     icon: Share2,
     title: "Social Media Management",
-    tagline: "Engaging Content",
-    desc: "Managing your social profiles with consistent content and messaging aligned to your business goals.",
-    bullets: [
-      { label: "Content Calendars Planning", pct: 91 },
-      { label: "Graphics & Carousel Design", pct: 95 },
-      { label: "Profile Bio & Branding Setup", pct: 93 },
-      { label: "Community Interactions", pct: 88 },
-    ],
-    leftAccent: "border-l-[3px] border-l-[#10B981]",
-    iconColor: "text-[#10B981]",
-    barColor: "bg-[#10B981]",
-    accentBg: "bg-[#10B981]/10",
+    desc: "Consistent, professional content creation and publishing that keeps your business top of mind and reinforces credibility with prospective clients.",
+    tags: ["Content Calendar", "Creative Design", "Brand Voice", "Consistency"],
   },
   {
+    num: "06",
     icon: ShieldCheck,
     title: "Reputation Management",
-    tagline: "Build Trust Online",
-    desc: "Monitoring and improving customer reviews and online feedback so your business builds trust before customers contact you.",
-    bullets: [
-      { label: "Review Acquisition Strategy", pct: 92 },
-      { label: "Negative Feedback Auditing", pct: 90 },
-      { label: "Customer Trust Signals", pct: 95 },
-      { label: "Brand Mentions Monitoring", pct: 89 },
-    ],
-    leftAccent: "border-l-[3px] border-l-[#F43F5E]",
-    iconColor: "text-[#F43F5E]",
-    barColor: "bg-[#F43F5E]",
-    accentBg: "bg-[#F43F5E]/10",
+    desc: "Systematic review gathering and online profile auditing so prospective customers see proof of your quality before they even contact you.",
+    tags: ["Review Generation", "Customer Trust", "Feedback Audits", "Brand Credibility"],
+  },
+  {
+    num: "07",
+    icon: Smartphone,
+    title: "Cross-Platform Mobile Apps",
+    desc: "Clean, responsive mobile applications for iOS and Android built to streamline customer interactions, bookings, or internal operations.",
+    tags: ["iOS & Android", "Smooth UX", "Data Sync", "Business Workflows"],
   },
 ];
 
 export default function Services() {
   return (
-    <section id="services" className="relative py-28 overflow-hidden bg-[#F8F7F4]">
-      {/* Decorative Warm Radial Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#6366F1]/5 rounded-full blur-[140px] pointer-events-none -z-10" />
+    <section id="services" className="py-24 md:py-32 bg-white relative overflow-hidden">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
+        {/* Section Header */}
+        <div className="max-w-3xl mb-16 sm:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-indigo" />
+            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-700">
+              Core Capabilities
+            </span>
+          </div>
 
-      <div className="relative z-10 max-w-[1200px] mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-20">
-          <span className="font-mono uppercase tracking-widest text-xs text-[#6366F1] font-semibold mb-3 block">
-            // capabilities
-          </span>
-          <h2 className="font-outfit font-bold text-3xl md:text-5xl text-[#1A1A2E] tracking-tight mb-5">
-            Our <span className="gradient-text">Services</span>
+          <h2 className="font-heading font-extrabold text-3xl sm:text-5xl text-slate-900 tracking-tight leading-[1.1] mb-5">
+            Everything you need to build your digital presence.
           </h2>
-          <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Practical digital services designed for small and mid-sized businesses that want visibility, enquiries, and long-term support.
+
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+            From your first website to ongoing growth, we help businesses build, improve and manage their digital presence with transparent delivery and dedicated support.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((svc, i) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {SERVICES.map((svc, idx) => {
             const Icon = svc.icon;
+            const isFeatured = idx === 6; // 7th service spans or highlights cleanly
+
             return (
               <motion.div
                 key={svc.title}
-                initial={{ opacity: 0, y: 25 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease: "easeOut" }}
-                className={`group bg-white rounded-2xl p-8 flex flex-col justify-between h-full border border-[#6366F1]/12 ${svc.leftAccent} hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(99,102,241,0.10)] transition-all duration-300`}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                className={`group relative p-7 sm:p-8 rounded-2xl glass-card border border-slate-200/80 flex flex-col justify-between ${
+                  isFeatured ? "md:col-span-2 lg:col-span-1" : ""
+                }`}
               >
+                {/* Accent line indicator on top of card */}
+                <div className="absolute top-0 left-8 right-8 h-[2px] bg-brand-indigo scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+
                 <div>
-                  {/* Icon & tagline */}
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-slate-50 border border-black/5 group-hover:scale-105 transition-transform duration-300">
-                      <Icon className={`w-5 h-5 ${svc.iconColor}`} />
-                    </div>
-                    <span className={`font-mono text-[9px] uppercase tracking-wider ${svc.iconColor} ${svc.accentBg} px-2.5 py-1 rounded-md border border-current/10 font-bold`}>
-                      {svc.tagline}
+                  {/* Top Row: Number & Icon */}
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="font-mono text-xs font-bold text-brand-indigo tracking-wider bg-brand-indigo/5 px-2.5 py-1 rounded-md border border-brand-indigo/10 shadow-subtle">
+                      {svc.num}
                     </span>
+                    <div className="w-10 h-10 rounded-xl bg-slate-50/80 border border-slate-200/80 flex items-center justify-center text-slate-700 group-hover:text-brand-indigo group-hover:scale-105 transition-all duration-200 shadow-subtle">
+                      <Icon className="w-5 h-5" />
+                    </div>
                   </div>
 
-                  <h3 className="font-outfit font-bold text-xl text-[#1A1A2E] mb-3">
+                  {/* Title & Description */}
+                  <h3 className="font-heading font-bold text-xl text-slate-900 mb-3 group-hover:text-brand-indigo transition-colors">
                     {svc.title}
                   </h3>
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6">
+
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
                     {svc.desc}
                   </p>
 
-                  {/* Bullet progress tracks */}
-                  <ul className="space-y-4 mb-8">
-                    {svc.bullets.map((b, bi) => (
-                      <li key={b.label}>
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="text-[11px] font-medium text-slate-700">{b.label}</span>
-                          <span className="font-mono text-[10px] font-bold text-slate-500">{b.pct}%</span>
-                        </div>
-                        <div className="h-1 rounded-full bg-slate-100 overflow-hidden">
-                          <motion.div
-                            className={`h-full rounded-full ${svc.barColor}`}
-                            initial={{ width: 0 }}
-                            whileInView={{ width: `${b.pct}%` }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.9, delay: 0.2 + bi * 0.08, ease: "easeOut" }}
-                          />
-                        </div>
-                      </li>
+                  {/* Capability Tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-8">
+                    {svc.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[11px] font-medium text-slate-600 bg-slate-50 border border-slate-200/60 rounded-md px-2 py-0.5"
+                      >
+                        {tag}
+                      </span>
                     ))}
-                  </ul>
+                  </div>
                 </div>
 
+                {/* Bottom CTA Link */}
                 <a
-                  href="#cta"
-                  className={`flex items-center text-xs font-bold ${svc.iconColor} mt-auto pt-5 border-t border-black/[0.04] w-full`}
+                  href="#contact"
+                  className="pt-4 border-t border-slate-200/60 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-700 group-hover:text-brand-indigo transition-colors"
                 >
-                  <span className="flex items-center gap-1.5 hover:gap-2.5 transition-all duration-300">
-                    Get in Touch
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
+                  <span>Discuss Requirement</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
                 </a>
               </motion.div>
             );
