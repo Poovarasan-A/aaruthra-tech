@@ -1,39 +1,30 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Plus_Jakarta_Sans, Inter } from "next/font/google";
-
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-  variable: "--font-heading",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-sans",
-  display: "swap",
-});
+import "./refinements.css";
 
 export const metadata: Metadata = {
-  title: "Aarudhra Web Solutions — Digital Technology & Growth Partner",
+  metadataBase: new URL("https://aaruthra-tech.netlify.app"),
+  title: "Aarudhra Web Solutions — Technology & Digital Growth Solutions",
   description:
-    "We design and build high-performing websites, digital experiences, local SEO, and growth systems that help growing businesses get discovered, build trust, and generate customer enquiries.",
+    "Aarudhra helps businesses build, grow and evolve through websites, applications, digital marketing, automation and AI solutions.",
   keywords: [
     "Website Development",
-    "Website Redesign",
-    "Local SEO",
-    "Tamil Nadu Web Agency",
-    "Chennai Web Development",
-    "Digital Marketing Partner",
-    "Small Business Websites",
+    "Web Applications",
+    "Mobile Application Development",
+    "Custom Software Solutions",
+    "AI Solutions",
+    "Digital Marketing",
     "Aarudhra Web Solutions",
   ],
   icons: {
     icon: "/techLogo3.png",
     shortcut: "/techLogo3.png",
     apple: "/techLogo3.png",
+  },
+  openGraph: {
+    title: "Aarudhra Web Solutions",
+    description: "Professional websites, local visibility and digital marketing for growing businesses.",
+    images: ["/agency-hero.png"],
   },
 };
 
@@ -43,11 +34,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${plusJakarta.variable} ${inter.variable}`}
-    >
-      <body className={`antialiased bg-[#F8F9FC] text-[#0F172A] ${inter.className}`}>
+    <html lang="en">
+      <body className="antialiased bg-[#F8F9FC] text-[#0F172A]">
         {children}
       </body>
     </html>
