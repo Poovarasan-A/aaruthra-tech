@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import "./refinements.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aaruthra-tech.netlify.app"),
@@ -34,8 +41,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="antialiased bg-[#F8F9FC] text-[#0F172A]">
+    <html lang="en" className={inter.variable}>
+      <body className={`${inter.className} antialiased bg-[#0B0F19] text-[#F1F5F9] selection:bg-indigo-500 selection:text-white`}>
         {children}
       </body>
     </html>
