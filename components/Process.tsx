@@ -1,102 +1,220 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Search, Compass, Code2, TrendingUp } from "lucide-react";
+import {
+  Compass,
+  FileCode2,
+  Cpu,
+  Rocket,
+  TrendingUp,
+  CheckCircle2,
+  Clock,
+  ArrowRight,
+} from "lucide-react";
 
-const STEPS = [
+const PROCESS_STEPS = [
   {
-    num: "01",
-    title: "Understand",
-    desc: "We learn about your business, audience, and goals.",
-    detail: "We identify your target customers, what challenges your current digital setup faces, and what specific outcomes matter most.",
-    icon: Search,
-  },
-  {
-    num: "02",
-    title: "Plan",
-    desc: "We define the structure, content, and digital strategy.",
-    detail: "We map out the sitemap, clear section messaging, conversion flow, and required integrations so there are no surprises.",
+    step: "01",
+    name: "Discover",
+    title: "Understanding Business & Opportunity",
+    duration: "Week 01",
     icon: Compass,
+    color: "from-blue-500 to-indigo-600",
+    description:
+      "We begin with a deep exploration into your business model, customer touchpoints, competitive landscape, and specific technical requirements. We identify what will truly move the needle.",
+    deliverables: [
+      "Discovery consultation & stakeholder interviews",
+      "Competitive benchmarking & tech assessment",
+      "Scope prioritization & success metrics alignment",
+    ],
   },
   {
-    num: "03",
-    title: "Build",
-    desc: "We design and develop the solution with performance and usability in mind.",
-    detail: "Clean visual design, mobile responsiveness, fast load speeds, and straightforward enquiry options are engineered together.",
-    icon: Code2,
+    step: "02",
+    name: "Strategize",
+    title: "Architecture & User Experience",
+    duration: "Week 01 - 02",
+    icon: FileCode2,
+    color: "from-indigo-500 to-violet-600",
+    description:
+      "We define the technical blueprint, database schema, API integration pathways, and intuitive wireframes. You see exactly how the platform will look and behave before development starts.",
+    deliverables: [
+      "System architecture & data schema blueprint",
+      "Interactive UI/UX prototypes & user flow maps",
+      "Transparent project timeline & milestone agreement",
+    ],
   },
   {
-    num: "04",
-    title: "Grow",
-    desc: "We support visibility, improvements, and long-term digital growth.",
-    detail: "Once live, we help ensure your website gets discovered via local SEO, search advertising, and ongoing technical support.",
+    step: "03",
+    name: "Build",
+    title: "Agile Engineering & Development",
+    duration: "Week 02 - 04+",
+    icon: Cpu,
+    color: "from-violet-500 to-purple-600",
+    description:
+      "Our engineering team develops the application in focused sprints using clean Next.js, TypeScript, and modern backend stacks. You receive regular interactive preview links to test progress.",
+    deliverables: [
+      "Production-grade frontend & backend engineering",
+      "Rigorous unit testing & security validation",
+      "Bi-weekly interactive staging demo check-ins",
+    ],
+  },
+  {
+    step: "04",
+    name: "Launch",
+    title: "Performance QA & Deployment",
+    duration: "Launch Week",
+    icon: Rocket,
+    color: "from-purple-500 to-pink-600",
+    description:
+      "We run end-to-end performance audits, Core Web Vitals checks, mobile stress tests, and automated backups before executing a seamless, zero-downtime production deployment.",
+    deliverables: [
+      "Comprehensive cross-browser & mobile stress testing",
+      "Sub-second Core Web Vitals & technical SEO setup",
+      "Live production deployment & full code IP transfer",
+    ],
+  },
+  {
+    step: "05",
+    name: "Grow",
+    title: "Optimization & Continuous Scale",
+    duration: "Ongoing",
     icon: TrendingUp,
+    color: "from-pink-500 to-cyan-400",
+    description:
+      "Launch is just the beginning. We review user analytics, optimize conversion funnels, ensure platform stability, and support your evolution with AI integrations and feature iterations.",
+    deliverables: [
+      "Conversion tracking & analytics event monitoring",
+      "Proactive maintenance, security patches, & updates",
+      "Roadmap expansion into AI automation & mobile apps",
+    ],
   },
 ];
 
 export default function Process() {
+  const [activeStep, setActiveStep] = useState(0);
+
   return (
-    <section id="process" className="py-24 md:py-32 bg-white relative overflow-hidden">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
+    <section id="process" className="relative py-24 md:py-32 bg-[#080C14] text-white overflow-hidden">
+      {/* Ambient background glow */}
+      <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-indigo-600/5 rounded-full blur-[180px] pointer-events-none -z-10" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-indigo" />
-            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-700">
-              Simple &amp; Transparent
-            </span>
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-4">
+            <Compass className="w-3.5 h-3.5" />
+            <span>Our Process</span>
           </div>
-
-          <h2 className="font-heading font-extrabold text-3xl sm:text-5xl text-slate-900 tracking-tight leading-[1.1] mb-5">
-            From idea to launch, without the complexity.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            Discover. Strategize. Build. Launch.{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-cyan-400 to-indigo-300">
+              Grow.
+            </span>
           </h2>
-
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            We guide you through a predictable four-step process designed to keep projects on schedule and focused on real business results.
+          <p className="mt-4 text-slate-300 text-base sm:text-lg leading-relaxed">
+            A transparent, disciplined engineering process designed to eliminate confusion, prevent budget overruns, and deliver dependable software on time.
           </p>
         </div>
 
-        {/* Timeline Desktop Grid & Mobile Stack */}
-        <div className="relative">
-          {/* Connecting line on desktop */}
-          <div className="hidden lg:block absolute top-[28px] left-[6%] right-[6%] h-[2px] bg-slate-200 z-0" />
+        {/* 5-Step Process Timeline Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 relative mb-12">
+          {PROCESS_STEPS.map((step, idx) => {
+            const Icon = step.icon;
+            const isCurrent = activeStep === idx;
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-            {STEPS.map((step, idx) => {
-              const Icon = step.icon;
-              return (
-                <motion.div
-                  key={step.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="flex flex-col items-start bg-[#F8F7F4] lg:bg-transparent p-6 lg:p-0 rounded-2xl lg:rounded-none border border-slate-200/80 lg:border-none"
-                >
-                  {/* Step circle node */}
-                  <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 shadow-subtle flex items-center justify-center text-brand-indigo mb-6 relative group">
-                    <Icon className="w-6 h-6" />
-                    <span className="absolute -top-2 -right-2 bg-brand-indigo text-white text-[10px] font-bold font-mono px-2 py-0.5 rounded-full shadow-sm">
-                      {step.num}
+            return (
+              <div
+                key={step.step}
+                onClick={() => setActiveStep(idx)}
+                className={`cursor-pointer rounded-2xl p-5 bg-[#0C1222] border transition-all duration-300 flex flex-col justify-between group ${
+                  isCurrent
+                    ? "border-indigo-400/60 bg-[#10172B] shadow-lg shadow-indigo-500/10 ring-1 ring-indigo-400/30"
+                    : "border-white/10 hover:border-white/20 hover:bg-[#0E1528]"
+                }`}
+              >
+                <div>
+                  {/* Step Top Bar */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="font-mono text-xs font-bold text-slate-400">
+                      STEP {step.step}
                     </span>
+                    <div
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center bg-gradient-to-br ${step.color} text-white shadow-md`}
+                    >
+                      <Icon className="w-4 h-4" />
+                    </div>
                   </div>
 
-                  <h3 className="font-heading font-bold text-xl text-slate-900 mb-2">
-                    {step.title}
+                  {/* Step Name & Title */}
+                  <h3 className="text-lg font-bold text-white mb-1 group-hover:text-indigo-300 transition-colors">
+                    {step.name}
                   </h3>
-
-                  <p className="text-sm font-semibold text-brand-indigo mb-2 leading-snug">
-                    {step.desc}
+                  <p className="text-xs text-indigo-400 font-medium mb-3">
+                    {step.title}
                   </p>
 
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {step.detail}
+                  <p className="text-slate-300 text-xs leading-relaxed line-clamp-3">
+                    {step.description}
                   </p>
-                </motion.div>
-              );
-            })}
-          </div>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-white/5 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3 text-slate-500" />
+                    {step.duration}
+                  </span>
+                  <span className="text-indigo-400 font-semibold">Inspect</span>
+                </div>
+              </div>
+            );
+          })}
         </div>
+
+        {/* Active Step Highlight Drawer */}
+        <motion.div
+          key={activeStep}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="rounded-2xl p-6 sm:p-8 bg-[#0C1222] border border-white/10 shadow-xl max-w-4xl mx-auto"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-white/10">
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-mono font-bold px-2.5 py-1 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
+                STEP {PROCESS_STEPS[activeStep].step}
+              </span>
+              <h4 className="text-xl font-bold text-white">
+                {PROCESS_STEPS[activeStep].name}: {PROCESS_STEPS[activeStep].title}
+              </h4>
+            </div>
+            <span className="text-xs font-mono text-slate-400 flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-indigo-400" />
+              Typical Timeline: {PROCESS_STEPS[activeStep].duration}
+            </span>
+          </div>
+
+          <p className="text-sm sm:text-base text-slate-200 leading-relaxed mb-6">
+            {PROCESS_STEPS[activeStep].description}
+          </p>
+
+          <div>
+            <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-400 block mb-3">
+              Key Deliverables for this Phase:
+            </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {PROCESS_STEPS[activeStep].deliverables.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="p-3 rounded-xl bg-white/[0.03] border border-white/5 flex items-start gap-2 text-xs text-slate-200"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
