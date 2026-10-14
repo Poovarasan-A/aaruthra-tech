@@ -1,123 +1,194 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Menu, X, Sparkles, ChevronRight } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 
-const NAV_LINKS = [
-  { name: "Services", href: "#services" },
-  { name: "Journey", href: "#journey" },
-  { name: "Work", href: "#work" },
-  { name: "Why Us", href: "#why-us" },
-  { name: "Process", href: "#process" },
-  { name: "Innovation", href: "#innovation" },
-  { name: "Team", href: "#team" },
-  { name: "Insights", href: "#insights" },
+const navLinks = [
+  { name: "Home", href: "/#home", sectionId: "home" },
+  { name: "About", href: "/about", sectionId: "about" },
+  { name: "Services", href: "/#services", sectionId: "services" },
+  { name: "Work", href: "/#work", sectionId: "work" },
+  { name: "Why Us", href: "/#why-us", sectionId: "why-us" },
+  { name: "FAQ", href: "/#faq", sectionId: "faq" },
+  { name: "Contact", href: "/#contact", sectionId: "contact" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [active, setActive] = useState<string>("Home");
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-
-      // Section spy
-      const sections = NAV_LINKS.map((link) => link.href.substring(1));
-      const scrollPos = window.scrollY + 120;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el && el.offsetTop <= scrollPos) {
-          setActiveSection(sections[i]);
-          return;
-        }
-      }
-      if (window.scrollY < 200) {
-        setActiveSection("");
-      }
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (pathname === "/about") {
+      setActive("About");
+      return;
+    }
+
+    if (pathname === "/") {
+      // Check initial hash on mount
+      if (typeof window !== "undefined") {
+        const hash = window.location.hash.replace("#", "");
+        if (hash) {
+          const match = navLinks.find((l) => l.sectionId === hash);
+          if (match) setActive(match.name);
+        } else if (window.scrollY < 250) {
+          setActive("Home");
+        }
+      }
+
+      // Observe section intersections for automatic scroll highlighting
+      const sectionIds = [
+        "home",
+        "services",
+        "work",
+        "why-us",
+        "faq",
+        "contact",
+      ];
+      const elements = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter((el): el is HTMLElement => el !== null);
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const match = navLinks.find(
+                (l) => l.sectionId === entry.target.id,
+              );
+              if (match) {
+                setActive(match.name);
+              }
+            }
+          });
+        },
+        {
+          rootMargin: "-25% 0px -55% 0px",
+          threshold: 0.1,
+        },
+      );
+
+      elements.forEach((el) => observer.observe(el));
+
+      const handleHashChange = () => {
+        const hash = window.location.hash.replace("#", "");
+        if (hash) {
+          const match = navLinks.find((l) => l.sectionId === hash);
+          if (match) setActive(match.name);
+        } else if (window.scrollY < 200) {
+          setActive("Home");
+        }
+      };
+
+      window.addEventListener("hashchange", handleHashChange);
+
+      return () => {
+        elements.forEach((el) => observer.unobserve(el));
+        window.removeEventListener("hashchange", handleHashChange);
+      };
+    }
+  }, [pathname]);
+
+  const handleNavClick = (link: (typeof navLinks)[0]) => {
+    setActive(link.name);
+    setIsOpen(false);
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-[#080C14]/85 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-3"
-          : "bg-transparent py-5"
+        isScrolled ? "py-3" : "py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+      <div className="mx-auto max-w-[1240px] px-4 sm:px-6">
+        <div
+          className={`flex items-center justify-between px-5 py-2.5 rounded-2xl border transition-all duration-300 ${
+            isScrolled
+              ? "bg-white/80 backdrop-blur-xl border-slate-200/80 shadow-[0_8px_30px_rgba(15,23,42,0.06)]"
+              : "bg-white/65 backdrop-blur-md border-slate-200/60 shadow-[0_2px_12px_rgba(15,23,42,0.02)]"
+          }`}
+        >
           {/* Brand Logo */}
           <Link
-            href="/"
-            className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-lg p-1"
+            href="/#home"
+            onClick={() => setActive("Home")}
+            className="flex items-center gap-3 group flex-shrink-0"
           >
-            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 via-indigo-600 to-indigo-800 text-white font-bold text-lg shadow-lg shadow-indigo-500/20 border border-indigo-400/30 group-hover:scale-105 transition-transform duration-300">
-              <span>A</span>
-              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse border-2 border-[#080C14]" />
+            <div className="relative w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center overflow-hidden shadow-sm group-hover:scale-105 transition-transform duration-200">
+              <Image
+                src="/techLogo3.png"
+                alt="Aarudhra Logo"
+                width={28}
+                height={28}
+                className="w-7 h-7 object-contain"
+                priority
+              />
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-white text-base tracking-tight group-hover:text-indigo-300 transition-colors">
+              <span className="font-heading font-bold text-slate-900 text-sm tracking-tight leading-tight">
                 Aarudhra
               </span>
-              <span className="text-[10px] font-semibold tracking-wider text-slate-400 uppercase">
+              <span className="text-[10px] font-medium text-slate-500 tracking-wider uppercase leading-none">
                 Web Solutions
               </span>
             </div>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 bg-white/[0.03] border border-white/[0.08] px-3 py-1.5 rounded-full backdrop-blur-md shadow-inner">
-            {NAV_LINKS.map((link) => {
-              const isActive = activeSection === link.href.substring(1);
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-1 lg:gap-1.5">
+            {navLinks.map((link) => {
+              const isActive = active === link.name;
+
               return (
-                <a
+                <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-xs font-medium px-3 py-1.5 rounded-full transition-all duration-200 ${
+                  onClick={() => handleNavClick(link)}
+                  className={`relative text-[13px] px-3.5 py-1.5 rounded-xl transition-all duration-200 font-medium ${
                     isActive
-                      ? "text-white bg-indigo-500/20 border border-indigo-500/30 font-semibold"
-                      : "text-slate-300 hover:text-white hover:bg-white/[0.06]"
+                      ? "text-brand-indigo font-bold bg-brand-indigo/10 border border-brand-indigo/20 shadow-xs"
+                      : "text-slate-600 hover:text-slate-950 hover:bg-slate-100/70 border border-transparent"
                   }`}
                 >
                   {link.name}
-                </a>
+                </Link>
               );
             })}
           </nav>
 
-          {/* Right Action CTA & Mobile Trigger */}
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-              <span>Accepting Projects</span>
-            </div>
-
+          {/* Right Action / CTA */}
+          <div className="hidden md:flex items-center gap-3">
             <a
-              href="#contact"
-              className="relative inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 shadow-md shadow-indigo-500/25 transition-all duration-200 hover:-translate-y-0.5 border border-indigo-400/30 shimmer-sweep"
+              href="/#contact"
+              onClick={() => setActive("Contact")}
+              className="inline-flex items-center gap-1.5 bg-brand-indigo hover:bg-brand-indigoDark text-white text-[13px] font-semibold px-6 py-2 rounded-xl shadow-sm transition-all duration-200 hover:shadow-md shimmer-sweep"
             >
-              <span>Start a Project</span>
+              Let&apos;s Talk
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
-
-            {/* Mobile Hamburger */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden p-2 rounded-xl bg-white/[0.05] border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
-              aria-label="Toggle navigation menu"
-            >
-              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
           </div>
+
+          {/* Mobile Hamburger Toggle */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors"
+            aria-label="Toggle navigation menu"
+          >
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </div>
 
@@ -125,45 +196,43 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="lg:hidden bg-[#0A0E1A]/95 backdrop-blur-2xl border-b border-white/10 px-4 pt-3 pb-6 shadow-2xl"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden mx-auto max-w-[1240px] px-4 pt-2"
           >
-            <div className="grid grid-cols-2 gap-2 mb-4 pt-2">
-              {NAV_LINKS.map((link) => (
+            <div className="bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 shadow-xl flex flex-col gap-1">
+              {navLinks.map((link) => {
+                const isActive = active === link.name;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => handleNavClick(link)}
+                    className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                      isActive
+                        ? "text-brand-indigo font-bold bg-brand-indigo/10 border border-brand-indigo/20"
+                        : "text-slate-700 hover:text-brand-indigo hover:bg-slate-50"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+              <div className="pt-2 mt-1 border-t border-slate-100">
                 <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-xs font-medium text-slate-200 hover:text-white hover:bg-indigo-500/10 hover:border-indigo-500/30 transition-all"
+                  href="/#contact"
+                  onClick={() => {
+                    setActive("Contact");
+                    setIsOpen(false);
+                  }}
+                  className="flex items-center justify-center gap-2 w-full bg-brand-indigo text-white text-sm font-semibold py-3 px-4 rounded-xl shadow-sm text-center"
                 >
-                  <span>{link.name}</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+                  Let&apos;s Talk
+                  <ArrowUpRight className="w-4 h-4" />
                 </a>
-              ))}
-            </div>
-
-            <div className="pt-2 border-t border-white/10 flex flex-col gap-2">
-              <a
-                href="#contact"
-                onClick={() => setIsOpen(false)}
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-indigo-500 to-indigo-600 shadow-lg shadow-indigo-500/25"
-              >
-                <span>Start a Project</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
-
-              <a
-                href="https://wa.me/919944100940?text=Hello%20Aarudhra%20Web%20Solutions%2C%20I%27d%20like%20to%20discuss%20a%20project."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
-              >
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Chat on WhatsApp: +91 99441 00940</span>
-              </a>
+              </div>
             </div>
           </motion.div>
         )}

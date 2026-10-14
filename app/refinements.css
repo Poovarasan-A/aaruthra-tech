@@ -1,6 +1,423 @@
-/* Additional refinement classes for smooth transitions */
-.smooth-gpu {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
+/* ============================================================
+   Aarudhra Web Solutions — Animation & Smoothness Refinements
+   ============================================================ */
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f3ee;
+}
+::-webkit-scrollbar-thumb {
+  background: #c7cbd3;
+  border-radius: 6px;
+  border: 2px solid #f5f3ee;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3276e8;
+}
+
+/* Scroll progress indicator */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3276e8 0%, #49c5b6 50%, #91baff 100%);
+  transform-origin: 0%;
+  z-index: 100;
+  box-shadow: 0 0 10px rgba(50, 118, 232, 0.4);
+}
+
+/* Scrolled header state with refined glassmorphism */
+.site-header {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.site-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 30px rgba(16, 27, 45, 0.08);
+  border-bottom-color: rgba(217, 216, 210, 0.85);
+}
+
+/* Nav links active & hover underline transitions */
+.site-header nav a {
+  position: relative;
+  transition: color 0.22s ease;
+  padding: 6px 0;
+}
+.site-header nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--blue);
+  border-radius: 2px;
+  transition: width 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.site-header nav a:hover::after,
+.site-header nav a.active::after {
+  width: 100%;
+}
+.site-header nav a.active {
+  color: var(--blue);
+}
+
+/* Floating back to top button */
+.back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #101b2d;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 28px rgba(16, 27, 45, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  z-index: 90;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, box-shadow 0.25s ease;
+}
+.back-to-top:hover {
+  background: #3276e8;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 16px 36px rgba(50, 118, 232, 0.45);
+}
+
+/* Service cards smooth elevation & interactive shine */
+.service {
+  position: relative;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+.service::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3276e8, #49c5b6);
+  opacity: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+.service:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 45px -20px rgba(16, 27, 45, 0.22);
+}
+.service:hover::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+.service a svg {
+  transition: transform 0.22s ease;
+}
+.service:hover a svg {
+  transform: translateX(4px);
+}
+.service:first-child {
+  grid-column: span 2;
+  background: #101b2d;
+  color: #fff;
+}
+.service:first-child p,
+.service:first-child a {
+  color: #d8e4f5;
+}
+.service:first-child .service-top {
+  color: #91baff;
+}
+.service:nth-child(4) {
+  background: #e9edff;
+}
+
+/* Service Groups dual pillars */
+.service-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  border-top: 1px solid var(--line);
+  padding-top: 36px;
+  margin-top: 1px;
+}
+.service-groups article {
+  padding: 0 28px 0 0;
+  transition: transform 0.25s ease;
+}
+.service-groups article:hover {
+  transform: translateX(4px);
+}
+.service-groups article + article {
+  padding-left: 28px;
+  padding-right: 0;
+  border-left: 1px solid var(--line);
+}
+.service-groups .eyebrow {
+  margin-bottom: 13px;
+}
+.service-groups h3 {
+  font-size: 24px;
+  line-height: 1.1;
+  max-width: 410px;
+}
+.service-groups > article > p:last-child {
+  margin-top: 14px;
+  color: #667085;
+  line-height: 1.65;
+  font-size: 14px;
+  max-width: 490px;
+}
+
+/* Journey section enhancements */
+.journey-section {
+  background: #111722;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.journey-section .marketing-copy > p:not(.eyebrow) {
+  color: #c3ccd8;
+}
+.journey-section .journey {
+  border-color: #3c4758;
+}
+.journey-section .journey li {
+  border-color: #3c4758;
+  transition: background-color 0.24s ease, transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.24s ease;
+  border-radius: 4px;
+}
+.journey-section .journey li:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateX(6px);
+  border-color: #49c5b6;
+}
+.journey-section .journey span {
+  color: #b9c4d1;
+}
+.journey-section .journey b {
+  color: #fff;
+}
+.journey-section .journey li::before {
+  background: #49c5b6;
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.24s ease;
+}
+.journey-section .journey li:hover::before {
+  transform: scale(1.35);
+  box-shadow: 0 0 12px #49c5b6, 0 0 20px rgba(73, 197, 182, 0.4);
+}
+.journey-section .journey svg {
+  color: #49c5b6;
+  transition: transform 0.24s ease;
+}
+.journey-section .journey li:hover svg {
+  transform: scale(1.12);
+}
+.journey-section .text-link {
+  color: #fff;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.journey-section .text-link:hover {
+  color: #91baff;
+  transform: translateX(3px);
+}
+
+/* Work Framing cards */
+.work-frame div {
+  transition: border-color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 2px;
+}
+.work-frame div:hover {
+  border-left-color: #91baff;
+  transform: translateX(5px);
+}
+
+/* Principles in About section */
+.principles span {
+  transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.principles span:hover {
+  background: #f1f2ee;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(16, 27, 45, 0.06);
+}
+
+/* Process 5-step cards */
+.steps article {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease;
+}
+.steps article:hover {
+  transform: translateY(-5px);
+}
+.steps article::before {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.steps article:hover::before {
+  transform: scale(1.4);
+  box-shadow: 0 0 10px rgba(50, 118, 232, 0.6);
+}
+
+/* Insight Cards */
+.insight-grid article {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.insight-grid article:hover {
+  transform: translateY(-6px);
+  background: #1d2129;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+}
+.insight-grid article svg {
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+.insight-grid article:hover svg {
+  transform: scale(1.15) rotate(4deg);
+  color: #b8d4ff;
+}
+
+/* FAQ Accordion Transitions */
+.faq-list article {
+  transition: background-color 0.2s ease;
+}
+.faq-list button {
+  transition: color 0.2s ease;
+}
+.faq-list button:hover {
+  color: var(--blue);
+}
+.faq-list button svg {
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hero Ecosystem Visual & Floating Elements */
+.eco-browser {
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+.eco-phone {
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+.eco-flow {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.media-note {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.media-note:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Form input focus polish */
+.site-header a:focus-visible,
+.button:focus-visible,
+.menu:focus-visible,
+.faq-list button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #4f7dff;
+  outline-offset: 3px;
+}
+.contact input:focus,
+.contact select:focus,
+.contact textarea:focus {
+  border-color: #3276e8;
+  box-shadow: 0 0 0 3px rgba(50, 118, 232, 0.15);
+}
+
+/* Interactive button micro-interaction */
+.button,
+.header-cta {
+  position: relative;
+  overflow: hidden;
+}
+.button::after,
+.header-cta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+.button:hover::after,
+.header-cta:hover::after {
+  left: 140%;
+}
+
+/* WhatsApp notice toast animation */
+.notice {
+  animation: pop-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+  .service:first-child {
+    grid-column: auto;
+  }
+  .journey-section {
+    padding-top: 75px;
+    padding-bottom: 75px;
+  }
+  .service-groups {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .service-groups article + article {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 28px 0 0;
+  }
+  .service-groups article {
+    padding: 0;
+  }
+  .back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

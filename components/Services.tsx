@@ -1,393 +1,156 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Globe,
-  Code2,
-  Smartphone,
-  Cpu,
-  Sparkles,
-  TrendingUp,
-  Target,
+  RotateCcw,
+  MapPin,
+  Megaphone,
   Share2,
-  Rocket,
+  ShieldCheck,
+  Smartphone,
   ArrowRight,
-  Check,
-  Layers,
-  Database,
-  BarChart3,
 } from "lucide-react";
 
-export type ServiceCategory = "all" | "tech" | "growth";
-
-export interface ServiceItem {
-  id: string;
-  num: string;
-  category: "tech" | "growth";
-  categoryLabel: "Technology Solution" | "Business Growth Solution";
-  icon: any;
-  title: string;
-  description: string;
-  capabilities: string[];
-  tags: string[];
-}
-
-export const SERVICES_DATA: ServiceItem[] = [
-  // Technology Solutions
+const SERVICES = [
   {
-    id: "web-development",
     num: "01",
-    category: "tech",
-    categoryLabel: "Technology Solution",
     icon: Globe,
     title: "Website Development",
-    description: "High-performing, responsive websites built with Next.js and modern frontend architectures that make a commanding first impression and turn interest into customer enquiries.",
-    capabilities: [
-      "Custom responsive design & interactive UI",
-      "Sub-second Core Web Vitals performance",
-      "SEO-first semantic structure & metadata",
-      "High-converting enquiry forms & WhatsApp triggers",
-    ],
-    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    desc: "Custom business websites engineered for speed, mobile usability, and customer conversion. Built to communicate credibility and generate enquiries.",
+    tags: ["Custom Design", "Mobile-First", "Fast Loading", "Enquiry Forms"],
   },
   {
-    id: "web-applications",
     num: "02",
-    category: "tech",
-    categoryLabel: "Technology Solution",
-    icon: Code2,
-    title: "Web Application Development",
-    description: "Purpose-built web platforms, client portals, SaaS applications, and operational dashboards engineered for scale, data security, and seamless daily utility.",
-    capabilities: [
-      "Full-stack architecture with relational databases",
-      "Role-based authentication & permissions",
-      "Real-time event subscriptions & webhooks",
-      "Enterprise API integrations & third-party connectors",
-    ],
-    tags: ["Next.js 16", "Node.js", "PostgreSQL", "Supabase", "Prisma"],
+    icon: RotateCcw,
+    title: "Website Redesign",
+    desc: "Modernizing outdated, slow, or cluttered websites that no longer represent your brand or fail to convert visitors into phone calls and enquiries.",
+    tags: ["UX Revamp", "Speed Optimization", "Mobile Friendly", "Content Refresh"],
   },
   {
-    id: "mobile-applications",
     num: "03",
-    category: "tech",
-    categoryLabel: "Technology Solution",
-    icon: Smartphone,
-    title: "Mobile Application Development",
-    description: "Fluid, native-grade iOS and Android mobile experiences engineered with React Native, giving your customers and field teams effortless access anytime, anywhere.",
-    capabilities: [
-      "Cross-platform iOS and Android codebase",
-      "Offline-first synchronization & local storage",
-      "Push notification engines & location services",
-      "App Store & Google Play launch compliance",
-    ],
-    tags: ["React Native", "Expo", "iOS", "Android", "Firebase"],
+    icon: MapPin,
+    title: "Local SEO & Visibility",
+    desc: "Helping your business rank higher on Google Search and Google Maps so nearby customers find you first when searching for your services.",
+    tags: ["Google Business Profile", "Local Citations", "Map Rankings", "On-Page SEO"],
   },
   {
-    id: "custom-software",
     num: "04",
-    category: "tech",
-    categoryLabel: "Technology Solution",
-    icon: Database,
-    title: "Custom Software Solutions",
-    description: "Tailored internal tools, database systems, inventory pipelines, and specialized backends designed specifically to eliminate bottlenecks in your unique business operations.",
-    capabilities: [
-      "Bespoke backend APIs & microservice design",
-      "Legacy system modernization & migration",
-      "Automated reporting & internal management portals",
-      "Secure cloud infrastructure & backups",
-    ],
-    tags: ["Python", "Node.js", "Docker", "REST & GraphQL", "AWS"],
+    icon: Megaphone,
+    title: "Google & Meta Advertising",
+    desc: "Targeted search and social media ad campaigns designed to bring in qualified leads while maintaining complete control over your advertising budget.",
+    tags: ["Google Search Ads", "Meta (FB & IG)", "Lead Generation", "Budget Control"],
   },
   {
-    id: "ai-solutions",
     num: "05",
-    category: "tech",
-    categoryLabel: "Technology Solution",
-    icon: Sparkles,
-    title: "AI Solutions & Integrations",
-    description: "Practical intelligence integrated into existing workflows—intelligent knowledge search, customer triage agents, document parsing, and automated decision workflows.",
-    capabilities: [
-      "Custom LLM embeddings & proprietary knowledge bots",
-      "Automated document extraction & summarization",
-      "Intelligent customer query classification",
-      "Self-hosted & API-based AI pipeline orchestration",
-    ],
-    tags: ["OpenAI", "LangChain", "Vector DBs", "Python", "Automation"],
-  },
-
-  // Business Growth Solutions
-  {
-    id: "lead-generation",
-    num: "06",
-    category: "growth",
-    categoryLabel: "Business Growth Solution",
-    icon: Target,
-    title: "Lead Generation",
-    description: "Multi-channel digital acquisition funnels that identify, attract, and qualify high-intent prospects, turning web traffic into predictable business opportunities.",
-    capabilities: [
-      "Conversion-optimized landing page funnels",
-      "Lead qualification & automated WhatsApp alerts",
-      "CRM integration & pipeline tracking",
-      "High-intent search & discovery capture",
-    ],
-    tags: ["Funnel Architecture", "Conversion Optimization", "WhatsApp API", "CRM"],
-  },
-  {
-    id: "digital-marketing",
-    num: "07",
-    category: "growth",
-    categoryLabel: "Business Growth Solution",
-    icon: TrendingUp,
-    title: "Digital Marketing",
-    description: "Performance-focused digital campaigns across Google, Meta, and relevant discovery networks built to maximize ROI, reduce customer acquisition cost, and accelerate market share.",
-    capabilities: [
-      "Targeted Google Search & Display ad campaigns",
-      "Meta (Instagram & Facebook) precision targeting",
-      "Server-side attribution & conversion tracking",
-      "Continuous A/B testing of ad creatives & messaging",
-    ],
-    tags: ["Google Ads", "Meta Ads", "Performance Marketing", "Analytics"],
-  },
-  {
-    id: "social-media",
-    num: "08",
-    category: "growth",
-    categoryLabel: "Business Growth Solution",
     icon: Share2,
-    title: "Social Media Marketing",
-    description: "Consistent, authoritative brand positioning and visual storytelling across major channels that establishes corporate credibility and engages your target audience.",
-    capabilities: [
-      "Strategic content calendars & industry thought leadership",
-      "High-impact visual assets, graphics, and video shorts",
-      "Community engagement & reputation monitoring",
-      "B2B LinkedIn & B2C Instagram brand building",
-    ],
-    tags: ["Brand Narrative", "Visual Design", "Content Strategy", "LinkedIn"],
+    title: "Social Media Management",
+    desc: "Consistent, professional content creation and publishing that keeps your business top of mind and reinforces credibility with prospective clients.",
+    tags: ["Content Calendar", "Creative Design", "Brand Voice", "Consistency"],
   },
   {
-    id: "digital-growth",
-    num: "09",
-    category: "growth",
-    categoryLabel: "Business Growth Solution",
-    icon: Rocket,
-    title: "Digital Growth Solutions",
-    description: "Full-funnel digital strategy connecting your technology assets with customer acquisition, conversion rate optimization (CRO), analytics, and long-term retention loops.",
-    capabilities: [
-      "Comprehensive digital audit & bottleneck diagnosis",
-      "Conversion Rate Optimization (CRO) UX audits",
-      "Google Analytics 4 & behavioral event mapping",
-      "Post-launch scale advisory & technology alignment",
-    ],
-    tags: ["Full-Funnel Analytics", "GA4", "CRO", "Retention Systems"],
+    num: "06",
+    icon: ShieldCheck,
+    title: "Reputation Management",
+    desc: "Systematic review gathering and online profile auditing so prospective customers see proof of your quality before they even contact you.",
+    tags: ["Review Generation", "Customer Trust", "Feedback Audits", "Brand Credibility"],
+  },
+  {
+    num: "07",
+    icon: Smartphone,
+    title: "Cross-Platform Mobile Apps",
+    desc: "Clean, responsive mobile applications for iOS and Android built to streamline customer interactions, bookings, or internal operations.",
+    tags: ["iOS & Android", "Smooth UX", "Data Sync", "Business Workflows"],
   },
 ];
 
 export default function Services() {
-  const [filter, setFilter] = useState<ServiceCategory>("all");
-
-  const filteredServices = SERVICES_DATA.filter((item) => {
-    if (filter === "all") return true;
-    return item.category === filter;
-  });
-
   return (
-    <section id="services" className="relative py-24 md:py-32 bg-[#080C14] text-white overflow-hidden">
-      {/* Background Subtle Ambient Glow */}
-      <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-indigo-600/5 rounded-full blur-[160px] pointer-events-none -z-10" />
-      <div className="absolute bottom-10 right-0 w-[500px] h-[500px] bg-cyan-600/5 rounded-full blur-[160px] pointer-events-none -z-10" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-24 md:py-32 bg-white relative overflow-hidden">
+      <div className="max-w-[1240px] mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-4">
-              <Layers className="w-3.5 h-3.5" />
-              <span>Core Capabilities</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Solutions Built Around{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">
-                Your Business.
-              </span>
-            </h2>
-            <p className="mt-4 text-slate-300 text-base sm:text-lg leading-relaxed">
-              We present our services as an integrated set of capabilities—bringing together dependable technology and commercial growth solutions under one accountable team.
-            </p>
+        <div className="max-w-3xl mb-16 sm:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-indigo" />
+            <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-700">
+              Core Capabilities
+            </span>
           </div>
 
-          {/* Interactive Filter Pills */}
-          <div className="flex items-center gap-2 p-1 bg-white/[0.04] border border-white/10 rounded-xl backdrop-blur-md self-start md:self-end">
-            <button
-              onClick={() => setFilter("all")}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                filter === "all"
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              All Services ({SERVICES_DATA.length})
-            </button>
-            <button
-              onClick={() => setFilter("tech")}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                filter === "tech"
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              Technology (5)
-            </button>
-            <button
-              onClick={() => setFilter("growth")}
-              className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                filter === "growth"
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              Business Growth (4)
-            </button>
-          </div>
+          <h2 className="font-heading font-extrabold text-3xl sm:text-5xl text-slate-900 tracking-tight leading-[1.1] mb-5">
+            Everything you need to build your digital presence.
+          </h2>
+
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+            From your first website to ongoing growth, we help businesses build, improve and manage their digital presence with transparent delivery and dedicated support.
+          </p>
         </div>
 
-        {/* Dual Pillar Overview Banners */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          {/* Pillar 1: Technology */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-indigo-950/40 via-slate-900/60 to-slate-950/80 border border-indigo-500/20 backdrop-blur-xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <Code2 className="w-24 h-24 text-indigo-400" />
-            </div>
-            <span className="text-xs font-mono font-semibold uppercase tracking-wider text-indigo-400 block mb-2">
-              Pillar 01 • Engineering &amp; Systems
-            </span>
-            <h3 className="text-2xl font-bold text-white mb-2">Technology Solutions</h3>
-            <p className="text-slate-300 text-sm leading-relaxed mb-4 max-w-lg">
-              Build the dependable digital foundations, web platforms, mobile ecosystems, and AI integrations your business needs to operate with velocity.
-            </p>
-            <div className="flex flex-wrap gap-2 text-xs font-mono text-indigo-300">
-              <span className="px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20">Web Development</span>
-              <span className="px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20">Web Applications</span>
-              <span className="px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20">Mobile Apps</span>
-              <span className="px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20">Custom Software</span>
-              <span className="px-2.5 py-1 rounded-md bg-indigo-500/10 border border-indigo-500/20">AI Integrations</span>
-            </div>
-          </div>
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {SERVICES.map((svc, idx) => {
+            const Icon = svc.icon;
+            const isFeatured = idx === 6; // 7th service spans or highlights cleanly
 
-          {/* Pillar 2: Business Growth */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-cyan-950/40 via-slate-900/60 to-slate-950/80 border border-cyan-500/20 backdrop-blur-xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-              <TrendingUp className="w-24 h-24 text-cyan-400" />
-            </div>
-            <span className="text-xs font-mono font-semibold uppercase tracking-wider text-cyan-400 block mb-2">
-              Pillar 02 • Acquisition &amp; Visibility
-            </span>
-            <h3 className="text-2xl font-bold text-white mb-2">Business Growth Solutions</h3>
-            <p className="text-slate-300 text-sm leading-relaxed mb-4 max-w-lg">
-              Create stronger routes to high-value customers, capture commercial intent, and build compounding momentum through data-driven growth.
-            </p>
-            <div className="flex flex-wrap gap-2 text-xs font-mono text-cyan-300">
-              <span className="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/20">Lead Generation</span>
-              <span className="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/20">Digital Marketing</span>
-              <span className="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/20">Social Media</span>
-              <span className="px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/20">Growth Strategy</span>
-            </div>
-          </div>
-        </div>
+            return (
+              <motion.div
+                key={svc.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.4, delay: idx * 0.05 }}
+                className={`group relative p-7 sm:p-8 rounded-2xl glass-card border border-slate-200/80 flex flex-col justify-between ${
+                  isFeatured ? "md:col-span-2 lg:col-span-1" : ""
+                }`}
+              >
+                {/* Accent line indicator on top of card */}
+                <div className="absolute top-0 left-8 right-8 h-[2px] bg-brand-indigo scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
 
-        {/* Detailed Service Grid */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence>
-            {filteredServices.map((service) => {
-              const Icon = service.icon;
-              const isTech = service.category === "tech";
+                <div>
+                  {/* Top Row: Number & Icon */}
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="font-mono text-xs font-bold text-brand-indigo tracking-wider bg-brand-indigo/5 px-2.5 py-1 rounded-md border border-brand-indigo/10 shadow-subtle">
+                      {svc.num}
+                    </span>
+                    <div className="w-10 h-10 rounded-xl bg-slate-50/80 border border-slate-200/80 flex items-center justify-center text-slate-700 group-hover:text-brand-indigo group-hover:scale-105 transition-all duration-200 shadow-subtle">
+                      <Icon className="w-5 h-5" />
+                    </div>
+                  </div>
 
-              return (
-                <motion.div
-                  layout
-                  key={service.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
-                  className="rounded-2xl p-6 sm:p-7 bg-[#0E1424]/90 border border-white/10 hover:border-indigo-500/40 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 shadow-lg hover:shadow-indigo-500/10"
-                >
-                  <div>
-                    {/* Card Top: Number & Category Tag */}
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="flex items-center gap-3">
-                        <div
-                          className={`w-11 h-11 rounded-xl flex items-center justify-center border transition-all ${
-                            isTech
-                              ? "bg-indigo-500/10 border-indigo-500/20 text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white"
-                              : "bg-cyan-500/10 border-cyan-500/20 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white"
-                          }`}
-                        >
-                          <Icon className="w-5 h-5" />
-                        </div>
-                        <span
-                          className={`text-[11px] font-mono px-2 py-0.5 rounded border ${
-                            isTech
-                              ? "bg-indigo-500/5 text-indigo-300 border-indigo-500/20"
-                              : "bg-cyan-500/5 text-cyan-300 border-cyan-500/20"
-                          }`}
-                        >
-                          {service.categoryLabel}
-                        </span>
-                      </div>
-                      <span className="font-mono text-sm font-bold text-slate-500">
-                        {service.num}
+                  {/* Title & Description */}
+                  <h3 className="font-heading font-bold text-xl text-slate-900 mb-3 group-hover:text-brand-indigo transition-colors">
+                    {svc.title}
+                  </h3>
+
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                    {svc.desc}
+                  </p>
+
+                  {/* Capability Tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-8">
+                    {svc.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[11px] font-medium text-slate-600 bg-slate-50 border border-slate-200/60 rounded-md px-2 py-0.5"
+                      >
+                        {tag}
                       </span>
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-xl font-bold text-white mb-2.5 group-hover:text-indigo-300 transition-colors">
-                      {service.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-slate-300 text-sm leading-relaxed mb-6 font-normal">
-                      {service.description}
-                    </p>
-
-                    {/* Concrete Capabilities */}
-                    <div className="space-y-2 mb-6 pt-4 border-t border-white/5">
-                      {service.capabilities.map((cap, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-xs text-slate-300">
-                          <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                          <span>{cap}</span>
-                        </div>
-                      ))}
-                    </div>
+                    ))}
                   </div>
+                </div>
 
-                  <div>
-                    {/* Tech / Tool Tags */}
-                    <div className="flex flex-wrap gap-1.5 mb-6">
-                      {service.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-0.5 rounded text-[10px] font-mono bg-white/[0.04] text-slate-400 border border-white/[0.06]"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Action Link to Contact with pre-selected service */}
-                    <a
-                      href={`#contact`}
-                      className="w-full inline-flex items-center justify-between px-4 py-2.5 rounded-xl bg-white/[0.03] hover:bg-indigo-600/20 border border-white/[0.08] hover:border-indigo-500/40 text-xs font-semibold text-slate-200 hover:text-white transition-all group-hover:border-indigo-500/30"
-                    >
-                      <span>Discuss this requirement</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-indigo-400 group-hover:translate-x-1 transition-transform" />
-                    </a>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </motion.div>
+                {/* Bottom CTA Link */}
+                <a
+                  href="#contact"
+                  className="pt-4 border-t border-slate-200/60 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-700 group-hover:text-brand-indigo transition-colors"
+                >
+                  <span>Discuss Requirement</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
+                </a>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
