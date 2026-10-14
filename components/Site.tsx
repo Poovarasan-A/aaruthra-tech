@@ -17,63 +17,78 @@ import {
   Phone,
   Search,
   Share2,
+  ShieldCheck,
   Sparkles,
   X,
+  Layers,
+  TrendingUp,
+  CheckCircle2,
 } from "lucide-react";
 
 const services = [
-  [
-    "Website Development",
-    "High-performing websites that make a strong first impression and turn interest into action.",
-    Globe2,
-  ],
-  [
-    "Web Applications",
-    "Purpose-built web platforms that make digital operations more useful and efficient.",
-    Code2,
-  ],
-  [
-    "Mobile Applications",
-    "Focused mobile experiences for the customers, teams, and workflows that matter.",
-    MapPin,
-  ],
-  [
-    "Lead Generation",
-    "Digital foundations and campaigns designed to create relevant business opportunities.",
-    ArrowRight,
-  ],
-  [
-    "Digital Marketing",
-    "Clear marketing systems that connect your business with the right audiences.",
-    Share2,
-  ],
-  [
-    "AI Solutions & Integrations",
-    "Practical automation and AI integrations that support the way your business works.",
-    Sparkles,
-  ],
+  {
+    title: "Website Development",
+    desc: "High-performing websites that make a strong first impression, load instantly, and turn interest into qualified customer enquiries.",
+    Icon: Globe2,
+    tags: [
+      "Next.js",
+      "Headless CMS",
+      "SEO Architecture",
+      "Core Web Vitals 99+",
+    ],
+  },
+  {
+    title: "Web Applications",
+    desc: "Purpose-built web platforms, client portals, and internal tools that streamline business operations and team workflows.",
+    Icon: Code2,
+    tags: ["Custom Portals", "REST & GraphQL", "Database Architecture"],
+  },
+  {
+    title: "Mobile Applications",
+    desc: "Focused mobile experiences for the customers, field teams, and critical workflows that matter to your daily revenue.",
+    Icon: MapPin,
+    tags: ["iOS & Android", "Cross-Platform", "Offline Support"],
+  },
+  {
+    title: "Lead Generation",
+    desc: "Digital foundations and targeted acquisition campaigns engineered to attract and capture relevant commercial opportunities.",
+    Icon: ArrowRight,
+    tags: ["High-Intent Inbound", "Conversion Funnels", "CRM Sync"],
+  },
+  {
+    title: "Digital Marketing",
+    desc: "Clear, systematic marketing systems that connect your brand with high-value audiences across search and social channels.",
+    Icon: Share2,
+    tags: ["Google Search Ads", "Meta Campaigns", "Local Maps Ranking"],
+  },
+  {
+    title: "AI Solutions & Integrations",
+    desc: "Practical workflow automation, AI assistants, and intelligent integrations tailored to enhance productivity without bloat.",
+    Icon: Sparkles,
+    tags: ["LLM Workflows", "Smart Automation", "Process Optimization"],
+  },
 ] as const;
 
 const faqs = [
   [
     "Is this suitable for small and medium-sized businesses?",
-    "Yes. Our work is deliberately practical for businesses that need a strong digital foundation without unnecessary complexity.",
+    "Yes. Our work is deliberately practical for businesses that need a strong, dependable digital foundation without unnecessary technical bloat or overhead.",
   ],
   [
     "Do I need all my content ready before we start?",
-    "No. We help shape the structure, priorities, and content needed to make your website useful and clear.",
+    "No. We actively help structure, prioritize, and articulate the content needed to make your website commercially useful, clear, and persuasive.",
   ],
   [
     "Which service should I start with?",
-    "We begin with your current situation and goals. A new or outdated website often comes first; visibility support can build on that foundation.",
+    "We begin with your current situation and strategic goals. A modern, high-converting website usually comes first; targeted visibility and marketing campaigns build directly on that foundation.",
   ],
   [
     "How involved will I be during the project?",
-    "You will be involved at the important decisions and reviews while we handle the technical and design work.",
+    "You will be involved at the key milestone decisions, architecture alignment, and weekly reviews while our team handles all technical execution, design, and infrastructure.",
   ],
   [
     "Is ongoing website support available?",
-    "Yes. Ongoing updates and practical digital support can be agreed after launch based on what your business needs.",
+    "Yes. Dedicated ongoing updates, security maintenance, performance audits, and continuous digital support can be agreed after launch based on your business requirements.",
   ],
 ];
 
@@ -89,9 +104,12 @@ const links = [
   ["Insights", "#insights"],
 ];
 
-const Mark = () => <span className="mark">A</span>;
+const Mark = () => (
+  <span className="mark" aria-hidden="true">
+    A
+  </span>
+);
 
-// Smooth cubic-bezier easing for editorial transitions
 const smoothEase = [0.16, 1, 0.3, 1] as const;
 
 export default function Site() {
@@ -109,8 +127,7 @@ export default function Site() {
     requirement: "",
   });
 
-  // Scroll Progress indicator
-  const { scrollYProgress, scrollY } = useScroll();
+  const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 120,
     damping: 30,
@@ -128,9 +145,15 @@ export default function Site() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Section observer for active nav highlighting
   useEffect(() => {
-    const sectionIds = ["home", "services", "solutions", "work", "about", "insights"];
+    const sectionIds = [
+      "home",
+      "services",
+      "solutions",
+      "work",
+      "about",
+      "insights",
+    ];
     const elements = sectionIds
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
@@ -139,7 +162,9 @@ export default function Site() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const currentLink = links.find(([, href]) => href === `#${entry.target.id}`);
+            const currentLink = links.find(
+              ([, href]) => href === `#${entry.target.id}`,
+            );
             if (currentLink) {
               setActiveSection(currentLink[0]);
             }
@@ -149,7 +174,7 @@ export default function Site() {
       {
         rootMargin: "-20% 0px -60% 0px",
         threshold: 0.1,
-      }
+      },
     );
 
     elements.forEach((el) => observer.observe(el));
@@ -169,18 +194,15 @@ export default function Site() {
     const msg = `Hello Aarudhra Web Solutions!\n\nName: ${form.name}\nPhone: ${form.phone}\nService: ${form.service}\nRequirement: ${form.requirement || "I'd like to discuss a project."}`;
     window.open(
       `https://wa.me/919944100940?text=${encodeURIComponent(msg)}`,
-      "_blank"
+      "_blank",
     );
     setNotice("Your project brief is ready in WhatsApp.");
   };
 
   return (
     <main>
-      {/* Smooth reading progress bar */}
-      <motion.div
-        className="scroll-progress-bar"
-        style={{ scaleX }}
-      />
+      {/* Top Reading Progress Bar */}
+      <motion.div className="scroll-progress-bar" style={{ scaleX }} />
 
       {/* Floating Back to Top Button */}
       <AnimatePresence>
@@ -200,7 +222,7 @@ export default function Site() {
         )}
       </AnimatePresence>
 
-      {/* Sticky Header */}
+      {/* Header */}
       <header className={`site-header ${isScrolled ? "is-scrolled" : ""}`}>
         <a href="#home" className="brand">
           <Mark />
@@ -211,11 +233,7 @@ export default function Site() {
 
         <nav>
           {links.map(([n, h]) => (
-            <a
-              key={n}
-              href={h}
-              className={activeSection === n ? "active" : ""}
-            >
+            <a key={n} href={h} className={activeSection === n ? "active" : ""}>
               {n}
             </a>
           ))}
@@ -233,7 +251,7 @@ export default function Site() {
           {menu ? <X size={22} /> : <Menu size={22} />}
         </button>
 
-        {/* Mobile Navigation Drawer with AnimatePresence */}
+        {/* Mobile Navigation Drawer */}
         <AnimatePresence>
           {menu && (
             <motion.div
@@ -264,27 +282,34 @@ export default function Site() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: smoothEase }}
         >
-          <p className="eyebrow">
-            <i />
-            Technology &amp; digital solutions
-          </p>
+          <div className="eyebrow">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Digital Partner for Growing Businesses</span>
+          </div>
+
           <h1>
-            Building digital solutions that <em>move businesses forward.</em>
+            Building digital solutions that{" "}
+            <em className="hero-em">move businesses forward.</em>
           </h1>
+
           <p className="intro">
-            We help businesses build, grow and evolve through technology, digital
-            solutions and modern business strategies.
+            We help ambitious businesses build, scale, and evolve through modern
+            technology foundations, revenue-focused web platforms, and practical
+            AI automations.
           </p>
+
           <div className="actions">
             <a className="button" href="#contact">
               Start a project <ArrowRight size={18} />
             </a>
             <a className="text-link" href="#services">
-              Explore our services <ArrowRight size={17} />
+              Explore our capabilities <ArrowRight size={17} />
             </a>
           </div>
+
           <p className="hero-foot">
-            Technology solutions · Business growth · Digital operations · Innovation
+            Website Development · Custom Software · Digital Growth · AI
+            Automations
           </p>
         </motion.div>
 
@@ -293,11 +318,11 @@ export default function Site() {
           className="hero-media ecosystem"
           aria-label="Connected digital ecosystem visual"
         >
-          {/* Subtle ambient lighting orb */}
+          {/* Ambient Lighting Orb */}
           <motion.div
             animate={{
               opacity: [0.35, 0.65, 0.35],
-              scale: [1, 1.06, 1],
+              scale: [1, 1.08, 1],
             }}
             transition={{
               duration: 7,
@@ -306,21 +331,22 @@ export default function Site() {
             }}
             style={{
               position: "absolute",
-              top: "15%",
-              right: "20%",
-              width: "280px",
-              height: "280px",
+              top: "10%",
+              right: "15%",
+              width: "320px",
+              height: "320px",
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(79,125,255,0.22) 0%, transparent 70%)",
+              background:
+                "radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, transparent 70%)",
               pointerEvents: "none",
             }}
           />
 
-          {/* Browser Mockup with gentle floating oscillation */}
+          {/* Browser Mockup */}
           <motion.div
             className="eco-browser"
             animate={{
-              y: [0, -7, 0],
+              y: [0, -8, 0],
             }}
             transition={{
               duration: 6,
@@ -332,21 +358,73 @@ export default function Site() {
               <b />
               <b />
               <b />
-              <span>digital presence</span>
+              <span>aarudhra.tech/platform</span>
             </div>
             <div className="eco-screen">
-              <small>YOUR BUSINESS, ONLINE</small>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <small>YOUR BUSINESS, ONLINE</small>
+                <span
+                  className="tag-chip"
+                  style={{ fontSize: "9px", padding: "2px 6px" }}
+                >
+                  <span
+                    className="eco-pulse-dot"
+                    style={{ width: "6px", height: "6px" }}
+                  />
+                  Live Platform
+                </span>
+              </div>
               <strong>A clearer way to connect with customers.</strong>
-              <i />
+
+              {/* Simulated mini dashboard analytics */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "flex-end",
+                  gap: "6px",
+                  height: "28px",
+                  background: "#f1f5f9",
+                  padding: "6px 10px",
+                  borderRadius: "6px",
+                  marginTop: "4px",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "10px",
+                    fontWeight: "700",
+                    color: "#2563eb",
+                    marginRight: "auto",
+                  }}
+                >
+                  +148% Digital Enquiries
+                </span>
+                <span className="eco-chart-bar" style={{ height: "40%" }} />
+                <span className="eco-chart-bar" style={{ height: "65%" }} />
+                <span className="eco-chart-bar" style={{ height: "50%" }} />
+                <span className="eco-chart-bar" style={{ height: "85%" }} />
+                <span
+                  className="eco-chart-bar"
+                  style={{ height: "100%", background: "#10b981" }}
+                />
+              </div>
+
+              <i style={{ width: "88%" }} />
               <i />
             </div>
           </motion.div>
 
-          {/* Phone Mockup with counter-phased oscillation */}
+          {/* Phone Mockup with Lead Alert */}
           <motion.div
             className="eco-phone"
             animate={{
-              y: [0, 8, 0],
+              y: [0, 9, 0],
               rotate: [-1, 1, -1],
             }}
             transition={{
@@ -357,7 +435,43 @@ export default function Site() {
             }}
           >
             <div />
-            <span>Mobile experience</span>
+            {/* Live WhatsApp Lead notification bubble */}
+            <div
+              style={{
+                background: "rgba(255, 255, 255, 0.08)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
+                padding: "8px 10px",
+                borderRadius: "10px",
+                marginBottom: "6px",
+                display: "grid",
+                gap: "2px",
+              }}
+            >
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "5px" }}
+              >
+                <span
+                  className="eco-pulse-dot"
+                  style={{ width: "5px", height: "5px" }}
+                />
+                <span
+                  style={{
+                    fontSize: "8.5px",
+                    color: "#38bdf8",
+                    fontWeight: 700,
+                  }}
+                >
+                  NEW PROJECT BRIEF
+                </span>
+              </div>
+              <p style={{ fontSize: "11px", color: "#fff", fontWeight: 600 }}>
+                Enterprise Portal Project
+              </p>
+              <span style={{ fontSize: "9px", color: "#94a3b8" }}>
+                WhatsApp Enquiry • Just now
+              </span>
+            </div>
+            <span>Mobile Experience</span>
             <b>Built around people</b>
           </motion.div>
 
@@ -381,11 +495,11 @@ export default function Site() {
             <span>Growth</span>
           </motion.div>
 
-          {/* Connected note */}
+          {/* Connected Note */}
           <motion.div
             className="media-note"
             animate={{
-              y: [0, 3, 0],
+              y: [0, 4, 0],
             }}
             transition={{
               duration: 5.6,
@@ -395,7 +509,12 @@ export default function Site() {
             }}
           >
             <span>Connected by design</span>
-            <strong>One ecosystem. Clear outcomes.</strong>
+            <strong
+              style={{ display: "flex", alignItems: "center", gap: "6px" }}
+            >
+              <ShieldCheck size={16} color="#2563eb" />
+              One ecosystem. Clear outcomes.
+            </strong>
           </motion.div>
         </div>
       </section>
@@ -409,39 +528,75 @@ export default function Site() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: smoothEase }}
         >
-          <p className="eyebrow dark">
+          <div className="eyebrow dark">
             <i />
-            Our capabilities
-          </p>
+            <span>Our capabilities</span>
+          </div>
           <h2>Solutions built around your business.</h2>
           <p>
-            Technology, marketing, and growth support brought together to help your
-            business make real progress.
+            Technology, marketing, and growth support brought together to help
+            your business make real progress without technical guesswork.
           </p>
         </motion.div>
 
-        {/* 6 Services Grid with staggered reveal */}
+        {/* 6 Services Grid with Next-Level Visual Polish */}
         <div className="service-grid">
-          {services.map(([title, desc, Icon], i) => (
-            <motion.article
-              className="service"
-              key={title}
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: smoothEase }}
-            >
-              <div className="service-top">
-                <span>0{i + 1}</span>
-                <Icon size={24} />
-              </div>
-              <h3>{title}</h3>
-              <p>{desc}</p>
-              <a href="#contact">
-                Talk about this service <ArrowRight size={16} />
-              </a>
-            </motion.article>
-          ))}
+          {services.map((svc, i) => {
+            const IconComponent = svc.Icon;
+            const isFirst = i === 0;
+
+            return (
+              <motion.article
+                className={`service ${isFirst ? "service-featured" : ""}`}
+                key={svc.title}
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{
+                  duration: 0.5,
+                  delay: i * 0.08,
+                  ease: smoothEase,
+                }}
+              >
+                <div className="service-top">
+                  <span>0{i + 1}</span>
+                  <div
+                    style={{
+                      width: "38px",
+                      height: "38px",
+                      borderRadius: "10px",
+                      background: isFirst
+                        ? "rgba(255, 255, 255, 0.1)"
+                        : "rgba(37, 99, 235, 0.08)",
+                      display: "grid",
+                      placeItems: "center",
+                    }}
+                  >
+                    <IconComponent size={20} />
+                  </div>
+                </div>
+
+                <h3>{svc.title}</h3>
+                <p>{svc.desc}</p>
+
+                {/* Modern Tech & Deliverable Tag Chips */}
+                <div className="service-tags">
+                  {svc.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className={`tag-chip ${isFirst ? "dark" : ""}`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <a href="#contact">
+                  Talk about this service <ArrowRight size={16} />
+                </a>
+              </motion.article>
+            );
+          })}
         </div>
 
         {/* Dual Pillar Summary Groups */}
@@ -453,22 +608,26 @@ export default function Site() {
           transition={{ duration: 0.6, ease: smoothEase }}
         >
           <article>
-            <p className="eyebrow dark">
+            <div className="eyebrow dark">
               <i />
-              Technology solutions
-            </p>
-            <h3>Build the digital foundations and systems your business needs.</h3>
+              <span>Technology solutions</span>
+            </div>
+            <h3>
+              Build the digital foundations and systems your business needs.
+            </h3>
             <p>
               Website development, web applications, mobile applications, custom
               software, and AI solutions &amp; integrations.
             </p>
           </article>
           <article>
-            <p className="eyebrow dark">
+            <div className="eyebrow dark">
               <i />
-              Business growth solutions
-            </p>
-            <h3>Create better routes to customers and stronger digital momentum.</h3>
+              <span>Business growth solutions</span>
+            </div>
+            <h3>
+              Create better routes to customers and stronger digital momentum.
+            </h3>
             <p>
               Lead generation, digital marketing, social media marketing, and
               digital growth solutions.
@@ -491,10 +650,25 @@ export default function Site() {
               <b />
               <b />
               <b />
-              <span>your-business.com</span>
+              <span>your-business.com/platform</span>
             </div>
             <div className="demo">
-              <p>Useful technology, clearly presented.</p>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <p>Useful technology, clearly presented.</p>
+                <span className="tag-chip" style={{ fontSize: "9px" }}>
+                  <span
+                    className="eco-pulse-dot"
+                    style={{ width: "5px", height: "5px" }}
+                  />
+                  Active System
+                </span>
+              </div>
               <h3>Digital products with a clear job to do.</h3>
               <div />
               <div />
@@ -503,7 +677,7 @@ export default function Site() {
           </div>
           <p className="image-caption">
             The right solution should make a meaningful difference to people and
-            operations.
+            daily business operations.
           </p>
         </motion.div>
 
@@ -514,15 +688,15 @@ export default function Site() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.65, ease: smoothEase }}
         >
-          <p className="eyebrow light">
+          <div className="eyebrow light">
             <i />
-            Technology with business purpose
-          </p>
+            <span>Technology with business purpose</span>
+          </div>
           <h2>Build what your business needs next.</h2>
           <p>
             From a clear digital presence to custom software and automation, we
-            shape technology around real requirements—not a one-size-fits-all
-            package.
+            shape technology around real business requirements—not a
+            one-size-fits-all package.
           </p>
           <ul>
             <motion.li
@@ -531,7 +705,7 @@ export default function Site() {
               viewport={{ once: true }}
               transition={{ delay: 0.1, duration: 0.4 }}
             >
-              <Check />
+              <CheckCircle2 size={18} color="#34d399" />
               Digital experiences built for customers
             </motion.li>
             <motion.li
@@ -540,7 +714,7 @@ export default function Site() {
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.4 }}
             >
-              <Check />
+              <CheckCircle2 size={18} color="#34d399" />
               Useful systems for evolving operations
             </motion.li>
             <motion.li
@@ -549,14 +723,15 @@ export default function Site() {
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.4 }}
             >
-              <Check />A scalable foundation for future ideas
+              <CheckCircle2 size={18} color="#34d399" />A scalable foundation
+              for future ideas
             </motion.li>
           </ul>
           <div className="redesign">
             <b>Integrated capabilities</b>
             <span>
-              Technology, marketing, and growth support working together under one
-              partner.
+              Technology, marketing, and growth support working together under
+              one accountable partner.
             </span>
           </div>
           <a className="button pale" href="#contact">
@@ -574,13 +749,14 @@ export default function Site() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: smoothEase }}
         >
-          <p className="eyebrow">
-            <i />A connected journey
-          </p>
+          <div className="eyebrow">
+            <i />
+            <span>A connected journey</span>
+          </div>
           <h2>One partner for every stage of your digital journey.</h2>
           <p>
             Build a strong digital foundation, reach more customers, streamline
-            operations, and adopt new technology as your business evolves.
+            operations, and adopt new technology as your business expands.
           </p>
           <a className="text-link" href="#contact">
             Explore the right next step <ArrowRight size={17} />
@@ -590,29 +766,34 @@ export default function Site() {
         <ol className="journey">
           {[
             {
+              step: "01",
               Icon: Globe2,
               title: "Digital presence",
-              desc: "Establish a clear, capable foundation.",
+              desc: "Establish a clear, capable, high-converting foundation.",
             },
             {
+              step: "02",
               Icon: Search,
               title: "Business growth",
-              desc: "Reach relevant customers and opportunities.",
+              desc: "Reach relevant customers and consistent business opportunities.",
             },
             {
+              step: "03",
               Icon: Code2,
               title: "Digital operations",
-              desc: "Improve how systems and teams work together.",
+              desc: "Improve how systems, teams, and data work together smoothly.",
             },
             {
+              step: "04",
               Icon: ArrowRight,
               title: "Automation",
-              desc: "Reduce repetitive work with useful workflows.",
+              desc: "Reduce repetitive manual work with dependable digital workflows.",
             },
             {
+              step: "05",
               Icon: Sparkles,
               title: "AI & emerging technology",
-              desc: "Adopt new capabilities when they create value.",
+              desc: "Adopt new intelligent capabilities when they create tangible value.",
             },
           ].map((item, idx) => {
             const ItemIcon = item.Icon;
@@ -622,11 +803,29 @@ export default function Site() {
                 initial={{ opacity: 0, x: -16 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.45, delay: idx * 0.08, ease: smoothEase }}
+                transition={{
+                  duration: 0.45,
+                  delay: idx * 0.08,
+                  ease: smoothEase,
+                }}
               >
                 <ItemIcon />
                 <span>
-                  <b>{item.title}</b>
+                  <b
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                  >
+                    <span
+                      className="tag-chip dark"
+                      style={{ padding: "1px 6px", fontSize: "9px" }}
+                    >
+                      {item.step}
+                    </span>
+                    {item.title}
+                  </b>
                   {item.desc}
                 </span>
               </motion.li>
@@ -644,16 +843,16 @@ export default function Site() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: smoothEase }}
         >
-          <p className="eyebrow dark">
+          <div className="eyebrow dark">
             <i />
-            Solution examples
-          </p>
+            <span>Solution examples</span>
+          </div>
           <h2>Digital solutions shaped around real business challenges.</h2>
           <p>
-            Verified case studies will be added as project permissions and approved
-            materials become available. Until then, this demonstrates the way
-            Aarudhra frames a solution—without representing illustrative work as
-            client work.
+            Verified case studies will be added as project permissions and
+            approved materials become available. Until then, this demonstrates
+            the way Aarudhra frames a solution—without representing illustrative
+            work as client work.
           </p>
         </motion.div>
 
@@ -666,21 +865,30 @@ export default function Site() {
         >
           <span>How we frame a solution</span>
           <div>
-            <b>Business context</b>
+            <b style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Search size={18} color="#93c5fd" />
+              Business context
+            </b>
             <p>
               Understand the customers, operations, and friction worth solving
               before choosing technology.
             </p>
           </div>
           <div>
-            <b>Connected delivery</b>
+            <b style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <Layers size={18} color="#93c5fd" />
+              Connected delivery
+            </b>
             <p>
               Bring together the right product experience, system, and growth
               support for the brief.
             </p>
           </div>
           <div>
-            <b>Useful progress</b>
+            <b style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <TrendingUp size={18} color="#93c5fd" />
+              Useful progress
+            </b>
             <p>
               Deliver a maintainable solution with a clear purpose, ready to
               evolve with the business.
@@ -703,7 +911,21 @@ export default function Site() {
             alt="Aarudhra Web Solutions leadership"
             fill
             sizes="(max-width: 760px) 100vw, 40vw"
+            priority
           />
+          {/* Next-level leadership verified card */}
+          <div className="founder-badge">
+            <div>
+              <b>Sharan</b>
+              <p style={{ fontSize: "11px", color: "#cbd5e1" }}>
+                Founder &amp; Engineering Lead
+              </p>
+            </div>
+            <span>
+              <CheckCircle2 size={14} color="#38bdf8" />
+              Aarudhra Web Solutions
+            </span>
+          </div>
         </motion.div>
 
         <motion.div
@@ -712,32 +934,33 @@ export default function Site() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.65, ease: smoothEase }}
         >
-          <p className="eyebrow dark">
+          <div className="eyebrow dark">
             <i />
-            The team behind the solutions
-          </p>
+            <span>The team behind the solutions</span>
+          </div>
           <h2>Technology thinking with a practical business perspective.</h2>
           <p className="about-lead">
             Aarudhra brings together the digital, technology, and growth
-            capabilities businesses need to move from an idea to a useful outcome.
+            capabilities businesses need to move from an idea to a useful
+            commercial outcome.
           </p>
           <div className="principles">
             {[
               [
                 "Business understanding",
-                "Solutions aligned with real requirements.",
+                "Solutions aligned with real revenue requirements.",
               ],
               [
                 "Integrated capabilities",
-                "Technology and growth working together.",
+                "Engineering, design, and growth working together under one roof.",
               ],
               [
                 "Practical technology",
-                "Usefulness before unnecessary complexity.",
+                "Proven speed and maintainability before unnecessary complexity.",
               ],
               [
                 "Future-ready thinking",
-                "Ready to explore what comes next.",
+                "Architected to scale seamlessly as your business expands.",
               ],
             ].map(([title, desc], i) => (
               <motion.span
@@ -745,7 +968,11 @@ export default function Site() {
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.07, ease: smoothEase }}
+                transition={{
+                  duration: 0.4,
+                  delay: i * 0.07,
+                  ease: smoothEase,
+                }}
               >
                 <b>{title}</b>
                 {desc}
@@ -764,9 +991,10 @@ export default function Site() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: smoothEase }}
         >
-          <p className="eyebrow dark">
-            <i />A straightforward process
-          </p>
+          <div className="eyebrow dark">
+            <i />
+            <span>A straightforward process</span>
+          </div>
           <h2>Discover. Strategize. Build. Launch. Grow.</h2>
         </motion.div>
 
@@ -785,14 +1013,18 @@ export default function Site() {
             [
               "03",
               "Build",
-              "Design and implement the agreed digital solution.",
+              "Design and implement the agreed digital solution with clean code.",
             ],
             [
               "04",
               "Launch",
-              "Prepare for a confident, considered introduction.",
+              "Prepare for a confident, thoroughly audited, and considered introduction.",
             ],
-            ["05", "Grow", "Review, refine, and support what comes next."],
+            [
+              "05",
+              "Grow",
+              "Review performance, refine systems, and support continuous progress.",
+            ],
           ].map(([n, t, d], i) => (
             <motion.article
               key={n}
@@ -801,6 +1033,7 @@ export default function Site() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: i * 0.08, ease: smoothEase }}
             >
+              <span className="step-watermark">{n}</span>
               <span>{n}</span>
               <h3>{t}</h3>
               <p>{d}</p>
@@ -818,14 +1051,15 @@ export default function Site() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: smoothEase }}
         >
-          <p className="eyebrow dark">
+          <div className="eyebrow dark">
             <i />
-            Technology &amp; innovation
-          </p>
+            <span>Technology &amp; innovation</span>
+          </div>
           <h2>Technology that evolves with your business.</h2>
           <p>
-            Explore practical ways to connect systems, automate repetitive work, and
-            introduce intelligent capabilities where they create meaningful value.
+            Explore practical ways to connect systems, automate repetitive work,
+            and introduce intelligent capabilities where they create meaningful
+            value.
           </p>
         </motion.div>
 
@@ -834,17 +1068,20 @@ export default function Site() {
             {
               Icon: Sparkles,
               title: "AI integrations",
-              desc: "Practical ways to bring intelligence into everyday customer and team experiences.",
+              desc: "Practical ways to bring intelligence and automated responses into everyday customer and team experiences.",
+              tag: "LLMs & Intelligent Workflows",
             },
             {
               Icon: Code2,
               title: "Business automation",
-              desc: "Workflows that reduce repetitive effort and help operations move with more clarity.",
+              desc: "Structured workflows and integrations that eliminate manual data entry and help operations move smoothly.",
+              tag: "Operational Efficiency",
             },
             {
               Icon: Globe2,
               title: "Future digital products",
-              desc: "Modern platforms and services that give businesses new ways to serve their market.",
+              desc: "Modern, scalable web platforms and services that open up new ways to serve your market and customers.",
+              tag: "Next-Gen Software",
             },
           ].map((item, i) => {
             const ItemIcon = item.Icon;
@@ -856,7 +1093,18 @@ export default function Site() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: i * 0.1, ease: smoothEase }}
               >
-                <ItemIcon />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <ItemIcon />
+                  <span className="tag-chip dark" style={{ fontSize: "9.5px" }}>
+                    {item.tag}
+                  </span>
+                </div>
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
               </motion.article>
@@ -874,10 +1122,10 @@ export default function Site() {
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.6, ease: smoothEase }}
       >
-        <p className="eyebrow dark">
+        <div className="eyebrow dark">
           <i />
-          Insights
-        </p>
+          <span>Insights</span>
+        </div>
         <h2>Ideas for building what comes next.</h2>
         <p>
           Future articles on technology, AI and automation, digital growth,
@@ -887,7 +1135,7 @@ export default function Site() {
         </p>
       </motion.section>
 
-      {/* FAQs Section with Buttery-Smooth Accordion */}
+      {/* FAQs Section */}
       <section id="faqs" className="faq section">
         <motion.div
           className="section-head"
@@ -896,11 +1144,15 @@ export default function Site() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6, ease: smoothEase }}
         >
-          <p className="eyebrow dark">
+          <div className="eyebrow dark">
             <i />
-            FAQs
-          </p>
+            <span>FAQs</span>
+          </div>
           <h2>Good questions make better projects.</h2>
+          <p>
+            Straightforward answers to the most common questions businesses ask
+            before partnering with us.
+          </p>
         </motion.div>
 
         <div className="faq-list">
@@ -917,7 +1169,8 @@ export default function Site() {
                     className={isOpen ? "flip" : ""}
                     style={{
                       transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-                      transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+                      transition:
+                        "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
                     }}
                   />
                 </button>
@@ -950,27 +1203,51 @@ export default function Site() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.65, ease: smoothEase }}
         >
-          <p className="eyebrow light">
+          <div className="eyebrow light">
             <i />
-            Start a conversation
-          </p>
-          <h2>Have a business challenge or idea? Let&apos;s build the solution.</h2>
+            <span>Start a conversation</span>
+          </div>
+          <h2>
+            Have a business challenge or idea? Let&apos;s build the solution.
+          </h2>
           <p>
-            Tell us what you&apos;re working toward. We&apos;ll help you explore the
-            right digital and technology solutions for your business.
+            Tell us what you&apos;re working toward. We&apos;ll help you explore
+            the right digital and technology solutions for your business with
+            clear timelines and transparent pricing.
           </p>
           <div className="contact-lines">
             <a href="tel:+919944100940">
               <Phone />
-              +91 99441 00940
+              <div>
+                <b style={{ display: "block", fontSize: "14px" }}>
+                  +91 99441 00940
+                </b>
+                <span style={{ fontSize: "11px", color: "#94a3b8" }}>
+                  Direct Engineering Line
+                </span>
+              </div>
             </a>
             <a href="mailto:aarudhrawebsolutions@gmail.com">
               <Mail />
-              aarudhrawebsolutions@gmail.com
+              <div>
+                <b style={{ display: "block", fontSize: "14px" }}>
+                  aarudhrawebsolutions@gmail.com
+                </b>
+                <span style={{ fontSize: "11px", color: "#94a3b8" }}>
+                  Project Inquiries &amp; RFPs
+                </span>
+              </div>
             </a>
             <a href={whatsapp} target="_blank" rel="noopener noreferrer">
               <MessageCircle />
-              Message us on WhatsApp
+              <div>
+                <b style={{ display: "block", fontSize: "14px" }}>
+                  Message us on WhatsApp
+                </b>
+                <span style={{ fontSize: "11px", color: "#94a3b8" }}>
+                  Fastest response (under 30 mins)
+                </span>
+              </div>
             </a>
           </div>
         </motion.div>
@@ -1007,8 +1284,8 @@ export default function Site() {
               value={form.service}
               onChange={(e) => setForm({ ...form, service: e.target.value })}
             >
-              {services.map(([t]) => (
-                <option key={t}>{t}</option>
+              {services.map((s) => (
+                <option key={s.title}>{s.title}</option>
               ))}
             </select>
           </label>
@@ -1016,9 +1293,11 @@ export default function Site() {
             Brief project requirement
             <textarea
               value={form.requirement}
-              onChange={(e) => setForm({ ...form, requirement: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, requirement: e.target.value })
+              }
               rows={3}
-              placeholder="Tell us what you want to build or achieve..."
+              placeholder="Tell us what you want to build, modernize, or achieve..."
             />
           </label>
 
@@ -1057,7 +1336,8 @@ export default function Site() {
               </span>
             </a>
             <p>
-              Digital solutions and growth support for businesses across Tamil Nadu.
+              High-performance digital solutions, web applications, and
+              technology growth support for businesses across Tamil Nadu.
             </p>
           </div>
           <div>
@@ -1070,9 +1350,9 @@ export default function Site() {
           </div>
           <div>
             <b>Services</b>
-            {services.map(([t]) => (
-              <a key={t} href="#services">
-                {t}
+            {services.map((s) => (
+              <a key={s.title} href="#services">
+                {s.title}
               </a>
             ))}
           </div>
@@ -1092,9 +1372,12 @@ export default function Site() {
           </div>
         </div>
         <div className="footer-bottom">
-          © {new Date().getFullYear()} Aarudhra Web Solutions{" "}
+          <span>
+            © {new Date().getFullYear()} Aarudhra Web Solutions. All rights
+            reserved.
+          </span>
           <a href={whatsapp} target="_blank" rel="noopener noreferrer">
-            WhatsApp
+            WhatsApp Direct Chat
           </a>
         </div>
       </footer>

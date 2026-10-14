@@ -411,6 +411,120 @@ textarea:focus-visible {
   }
 }
 
+/* Tag chips for modern tech aesthetics */
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: rgba(37, 99, 235, 0.06);
+  color: var(--blue);
+  border: 1px solid rgba(37, 99, 235, 0.14);
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+}
+.tag-chip:hover {
+  background: rgba(37, 99, 235, 0.12);
+  border-color: rgba(37, 99, 235, 0.28);
+}
+.tag-chip.dark {
+  background: rgba(255, 255, 255, 0.08);
+  color: #93c5fd;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.tag-chip.dark:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+/* Hero text gradient helper */
+.hero-em {
+  font-style: normal;
+  background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 50%, #4ade80 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Dashboard chart & pulse indicators */
+.eco-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  display: inline-block;
+}
+.eco-chart-bar {
+  display: inline-block;
+  width: 5px;
+  border-radius: 3px 3px 0 0;
+  background: var(--blue);
+}
+
+/* Step watermark number */
+.steps article {
+  position: relative;
+  overflow: hidden;
+}
+.steps article .step-watermark {
+  position: absolute;
+  right: 14px;
+  bottom: 8px;
+  font-family: var(--font-heading);
+  font-size: 64px;
+  font-weight: 800;
+  color: rgba(15, 23, 42, 0.035);
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Founder portrait badge */
+.founder-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: rgba(13, 21, 36, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #fff;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+.founder-badge b {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.founder-badge span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #93c5fd;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
