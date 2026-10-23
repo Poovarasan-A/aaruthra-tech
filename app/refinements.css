@@ -1,46 +1,325 @@
 /* ============================================================
-   Aarudhra Web Solutions — Animation & Smoothness Refinements
+   Aarudhra Technologies — Fluent Commerce Theme & Animations
    ============================================================ */
 
 /* Custom smooth scrollbar */
 ::-webkit-scrollbar {
-  width: 9px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f5f3ee;
+  background: #f2f1ed;
 }
 ::-webkit-scrollbar-thumb {
-  background: #c7cbd3;
+  background: #c4c4c4;
   border-radius: 6px;
-  border: 2px solid #f5f3ee;
+  border: 2px solid #f2f1ed;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3276e8;
+  background: #793dff;
 }
 
-/* Scroll progress indicator */
+/* Scroll reading progress bar - Fluent Violet */
 .scroll-progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #3276e8 0%, #49c5b6 50%, #91baff 100%);
+  background: linear-gradient(90deg, #793dff 0%, #9747ff 50%, #8b5cf6 100%);
   transform-origin: 0%;
   z-index: 100;
-  box-shadow: 0 0 10px rgba(50, 118, 232, 0.4);
+  box-shadow: 0 0 12px rgba(121, 61, 255, 0.45);
 }
 
-/* Scrolled header state with refined glassmorphism */
-.site-header {
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+/* ============================================================
+   Fluent Commerce UI System & Token Utilities
+   ============================================================ */
+
+/* Inline Marks & Highlights */
+.fc-mark {
+  color: #793dff;
+  background: #efeafe;
+  padding: 0.12em 0.4em;
+  border-radius: 4px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
-.site-header.is-scrolled {
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 8px 30px rgba(16, 27, 45, 0.08);
-  border-bottom-color: rgba(217, 216, 210, 0.85);
+
+.fc-mark--fill {
+  color: #ffffff;
+  background: #793dff;
+  padding: 0.12em 0.45em;
+  border-radius: 6px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.fc-mark--dark {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.14);
+  padding: 0.12em 0.4em;
+  border-radius: 4px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Fluent Pill Buttons */
+.fc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 10.46px;
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.18s cubic-bezier(0.2, 0, 0, 1),
+              color 0.18s cubic-bezier(0.2, 0, 0, 1),
+              border-color 0.18s cubic-bezier(0.2, 0, 0, 1),
+              transform 0.18s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.fc-btn:hover .fc-btn__arrow {
+  transform: translateX(4px);
+}
+
+.fc-btn__arrow {
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+  flex-shrink: 0;
+}
+
+.fc-btn--fill {
+  background: #ffffff;
+  color: #121212;
+  border: 1px solid #ffffff;
+}
+
+.fc-btn--fill:hover {
+  background: #793dff;
+  border-color: #793dff;
+  color: #ffffff;
+}
+
+.fc-btn--dark {
+  background: transparent;
+  color: #121212;
+  border: 1px solid #121212;
+}
+
+.fc-btn--dark:hover {
+  background: #121212;
+  color: #f2f1ed;
+}
+
+.fc-btn--light {
+  background: transparent;
+  color: #f2f1ed;
+  border: 1px solid rgba(242, 241, 237, 0.35);
+}
+
+.fc-btn--light:hover {
+  background: #f2f1ed;
+  border-color: #f2f1ed;
+  color: #121212;
+}
+
+.fc-btn--violet {
+  background: #793dff;
+  color: #ffffff;
+  border: 1px solid #793dff;
+}
+
+.fc-btn--violet:hover {
+  background: #121212;
+  border-color: #121212;
+  color: #ffffff;
+}
+
+/* Nav CTA Pill */
+.fc-navcta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 42px;
+  padding: 0 18px;
+  border: 1px solid rgba(242, 241, 237, 0.4);
+  border-radius: 10px;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #f2f1ed;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.fc-navcta:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #121212;
+}
+
+.fc-navcta:hover .fc-navcta__arrow {
+  transform: translateX(3px);
+}
+
+.fc-navcta__arrow {
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Infinite Marquee Ticker Band */
+.fc-marquee-band {
+  display: flex;
+  align-items: center;
+  height: 58px;
+  overflow: hidden;
+  background: #121212;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  user-select: none;
+}
+
+.fc-marquee-track {
+  display: flex;
+  align-items: center;
+  flex: none;
+  width: max-content;
+  gap: 56px;
+  animation: fcMarqueeAnim 38s linear infinite;
+}
+
+@keyframes fcMarqueeAnim {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+.fc-marquee-band:hover .fc-marquee-track {
+  animation-play-state: paused;
+}
+
+/* Dotted Grid Canvases */
+.fc-dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(18, 18, 18, 0.14) 1px, transparent 0);
+  background-size: 16px 16px;
+}
+
+.fc-dot-grid-dark {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.1) 1px, transparent 0);
+  background-size: 16px 16px;
+}
+
+/* Capability Hover List (Editorial Sleeve style) */
+.fc-caplist {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-top: 1px solid rgba(18, 18, 18, 0.15);
+}
+
+.fc-caprow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 84px;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(18, 18, 18, 0.15);
+  color: #121212;
+  transition: background 0.22s cubic-bezier(0.2, 0, 0, 1), padding 0.22s cubic-bezier(0.2, 0, 0, 1);
+  cursor: pointer;
+}
+
+.fc-caprow:hover {
+  z-index: 5;
+  padding: 16px 48px;
+  background: #ffffff;
+}
+
+.fc-caprow:hover .fc-caprow__index {
+  color: #793dff;
+}
+
+.fc-caprow__index {
+  font-family: var(--font-quote);
+  font-size: 24px;
+  font-weight: 600;
+  color: rgba(18, 18, 18, 0.4);
+  transition: color 0.2s ease;
+}
+
+.fc-caprow__sleeve {
+  position: absolute;
+  left: 54%;
+  top: 50%;
+  transform: translateY(-50%) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.2, 0, 0, 1), transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+  z-index: 10;
+  width: 290px;
+}
+
+.fc-caprow:hover .fc-caprow__sleeve {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+@media (max-width: 860px) {
+  .fc-caprow__sleeve {
+    display: none !important;
+  }
+  .fc-caprow:hover {
+    padding: 16px 24px;
+  }
+}
+
+/* Sticky Rail for "Why Us" */
+.fc-whyrail__link {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding: 14px 0 14px 20px;
+  border-left: 2px solid rgba(18, 18, 18, 0.15);
+  color: rgba(18, 18, 18, 0.5);
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.fc-whyrail__link:hover {
+  color: #793dff;
+}
+
+.fc-whyrail__link.is-active {
+  border-left-color: #793dff;
+  color: #121212;
+}
+
+.fc-whyrail__link.is-active .fc-whyrail__index {
+  color: #793dff;
+}
+
+.fc-whyrail__index {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: rgba(18, 18, 18, 0.4);
+  transition: color 0.2s ease;
+}
+
+/* Circuit Line Animated Dashes */
+@keyframes fcCircuitPulse {
+  0% { stroke-dashoffset: 400; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.fc-circuit-wire {
+  stroke-dasharray: 400;
+  animation: fcCircuitPulse 6s linear infinite;
 }
 
 /* Nav links active & hover underline transitions */

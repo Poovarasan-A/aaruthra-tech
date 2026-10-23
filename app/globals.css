@@ -1,30 +1,59 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --navy: #0d1524;
-  --navy-surface: #131d31;
-  --navy-card: #18243c;
-  --ink: #0f172a;
-  --ink-secondary: #475569;
-  --ink-muted: #64748b;
-  --ivory: #f8f9fc;
-  --ivory-surface: #ffffff;
-  --blue: #2563eb;
-  --blue-hover: #1d4ed8;
-  --blue-light: #eff6ff;
-  --cyan: #06b6d4;
-  --teal: #0d9488;
-  --emerald: #10b981;
-  --line: #e2e8f0;
-  --line-dark: #26354f;
+  /* Fluent Commerce Design System Tokens */
+  --fc-black: #000000;
+  --fc-ink-10: #0a0a0a;
+  --fc-ink-12: #121212;
+  --fc-ink-17: #171717;
+  --fc-bone: #f2f1ed;
+  --fc-bone-dark: #e5e3dc;
+  --fc-white: #ffffff;
+  --fc-off-white: #f5f5f5;
+  --fc-warm-grey: #e9e5df;
+  --fc-grey-70: #707070;
+  --fc-violet: #793dff;
+  --fc-violet-light: #8b5cf6;
+  --fc-violet-bright: #9747ff;
+  --fc-violet-wash: #efeafe;
+  --fc-lilac-pale: #e0daeb;
+  --fc-gold: #ffd000;
+  --fc-green: #36b53f;
 
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  /* Surfaces & Text */
+  --surface-dark: var(--fc-ink-12);
+  --surface-light: var(--fc-bone);
+  --surface-lightest: var(--fc-white);
+  --text-on-dark: var(--fc-bone);
+  --text-on-light: var(--fc-ink-12);
+  --text-muted: var(--fc-grey-70);
+  --border-light: rgba(18, 18, 18, 0.12);
+  --border-dark: rgba(242, 241, 237, 0.16);
+
+  /* Fonts */
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-sans: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Instrument Serif", Georgia, serif;
+  --font-quote: "Fraunces", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Legacy aliases for backward compatibility */
+  --navy: #121212;
+  --navy-surface: #171717;
+  --navy-card: #1f1f24;
+  --ink: #121212;
+  --ink-secondary: #444444;
+  --ink-muted: #707070;
+  --ivory: #f2f1ed;
+  --ivory-surface: #ffffff;
+  --blue: #793dff;
+  --blue-hover: #6b2ae8;
+  --line: rgba(18, 18, 18, 0.12);
+  --line-dark: rgba(242, 241, 237, 0.16);
 }
 
 * {
@@ -39,23 +68,15 @@ html {
 
 body {
   margin: 0;
-  background: var(--ivory);
-  color: var(--ink);
+  background: var(--surface-light);
+  color: var(--text-on-light);
   font-family: var(--font-sans);
   overflow-x: hidden;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-button, input, select, textarea {
-  font-family: inherit;
-}
-
-button {
-  cursor: pointer;
+::selection {
+  background: var(--fc-violet);
+  color: #ffffff;
 }
 
 h1, h2, h3, h4, h5, h6 {
