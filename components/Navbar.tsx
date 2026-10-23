@@ -5,22 +5,55 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, Globe2, Code2, Smartphone, Sparkles, TrendingUp, ShieldCheck } from "lucide-react";
 
-const navLinks = [
-  { name: "Home", href: "/#home", sectionId: "home" },
-  { name: "About", href: "/about", sectionId: "about" },
-  { name: "Services", href: "/#services", sectionId: "services" },
-  { name: "Work", href: "/#work", sectionId: "work" },
-  { name: "Why Us", href: "/#why-us", sectionId: "why-us" },
-  { name: "FAQ", href: "/#faq", sectionId: "faq" },
-  { name: "Contact", href: "/#contact", sectionId: "contact" },
+const capabilitiesDropdown = [
+  {
+    title: "Website Development",
+    desc: "High-performing, ultra-fast websites engineered to convert.",
+    icon: Globe2,
+    href: "/#services",
+  },
+  {
+    title: "Custom Web Applications",
+    desc: "Enterprise client portals, internal tools & workflows.",
+    icon: Code2,
+    href: "/#services",
+  },
+  {
+    title: "Mobile App Development",
+    desc: "Cross-platform iOS & Android mobile product experiences.",
+    icon: Smartphone,
+    href: "/#services",
+  },
+  {
+    title: "AI Workflows & Automations",
+    desc: "LLM agents, smart automations & seamless data pipelines.",
+    icon: Sparkles,
+    href: "/#services",
+  },
+  {
+    title: "Growth & Lead Generation",
+    desc: "Conversion-optimized visibility across search & channels.",
+    icon: TrendingUp,
+    href: "/#services",
+  },
+];
+
+const mainNavLinks = [
+  { name: "Capabilities", href: "/#services", hasDropdown: true },
+  { name: "Why Us", href: "/#why-us" },
+  { name: "Solutions", href: "/#solutions" },
+  { name: "Work", href: "/#work" },
+  { name: "About", href: "/about" },
+  { name: "FAQs", href: "/#faqs" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCapabilitiesOpen, setIsCapabilitiesOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [active, setActive] = useState<string>("Home");
+  const [active, setActive] = useState<string>("Capabilities");
   const pathname = usePathname();
 
   useEffect(() => {
@@ -34,160 +67,166 @@ export default function Navbar() {
   useEffect(() => {
     if (pathname === "/about") {
       setActive("About");
-      return;
-    }
-
-    if (pathname === "/") {
-      // Check initial hash on mount
-      if (typeof window !== "undefined") {
-        const hash = window.location.hash.replace("#", "");
-        if (hash) {
-          const match = navLinks.find((l) => l.sectionId === hash);
-          if (match) setActive(match.name);
-        } else if (window.scrollY < 250) {
-          setActive("Home");
-        }
-      }
-
-      // Observe section intersections for automatic scroll highlighting
-      const sectionIds = [
-        "home",
-        "services",
-        "work",
-        "why-us",
-        "faq",
-        "contact",
-      ];
-      const elements = sectionIds
-        .map((id) => document.getElementById(id))
-        .filter((el): el is HTMLElement => el !== null);
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const match = navLinks.find(
-                (l) => l.sectionId === entry.target.id,
-              );
-              if (match) {
-                setActive(match.name);
-              }
-            }
-          });
-        },
-        {
-          rootMargin: "-25% 0px -55% 0px",
-          threshold: 0.1,
-        },
-      );
-
-      elements.forEach((el) => observer.observe(el));
-
-      const handleHashChange = () => {
-        const hash = window.location.hash.replace("#", "");
-        if (hash) {
-          const match = navLinks.find((l) => l.sectionId === hash);
-          if (match) setActive(match.name);
-        } else if (window.scrollY < 200) {
-          setActive("Home");
-        }
-      };
-
-      window.addEventListener("hashchange", handleHashChange);
-
-      return () => {
-        elements.forEach((el) => observer.unobserve(el));
-        window.removeEventListener("hashchange", handleHashChange);
-      };
     }
   }, [pathname]);
 
-  const handleNavClick = (link: (typeof navLinks)[0]) => {
-    setActive(link.name);
-    setIsOpen(false);
-  };
-
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "py-3" : "py-5"
-      }`}
-    >
-      <div className="mx-auto max-w-[1240px] px-4 sm:px-6">
-        <div
-          className={`flex items-center justify-between px-5 py-2.5 rounded-2xl border transition-all duration-300 ${
-            isScrolled
-              ? "bg-white/80 backdrop-blur-xl border-slate-200/80 shadow-[0_8px_30px_rgba(15,23,42,0.06)]"
-              : "bg-white/65 backdrop-blur-md border-slate-200/60 shadow-[0_2px_12px_rgba(15,23,42,0.02)]"
-          }`}
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#121212]/95 backdrop-blur-md border-b border-white/10 transition-all duration-200">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 h-[76px] flex items-center justify-between">
+        {/* Brand Logo */}
+        <Link
+          href="/#home"
+          className="flex items-center gap-3 group flex-shrink-0"
+          onClick={() => setIsOpen(false)}
         >
-          {/* Brand Logo */}
-          <Link
-            href="/#home"
-            onClick={() => setActive("Home")}
-            className="flex items-center gap-3 group flex-shrink-0"
+          <div className="w-8 h-8 rounded-lg bg-[#1a1a1f] border border-white/15 flex items-center justify-center overflow-hidden transition-transform duration-200 group-hover:scale-105">
+            <Image
+              src="/techLogo3.png"
+              alt="Aarudhra Logo"
+              width={22}
+              height={22}
+              className="w-5 h-5 object-contain"
+              priority
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="font-sans font-semibold text-white tracking-tight text-[16px]">
+              Aarudhra
+            </span>
+            <span className="font-mono text-[10px] tracking-widest text-[#793dff] uppercase px-1.5 py-0.5 rounded bg-[#793dff]/15 font-bold">
+              TECH
+            </span>
+          </div>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-8 h-full">
+          {/* Capabilities with Mega Dropdown */}
+          <div
+            className="relative h-full flex items-center"
+            onMouseEnter={() => setIsCapabilitiesOpen(true)}
+            onMouseLeave={() => setIsCapabilitiesOpen(false)}
           >
-            <div className="relative w-9 h-9 rounded-xl bg-slate-900 flex items-center justify-center overflow-hidden shadow-sm group-hover:scale-105 transition-transform duration-200">
-              <Image
-                src="/techLogo3.png"
-                alt="Aarudhra Logo"
-                width={28}
-                height={28}
-                className="w-7 h-7 object-contain"
-                priority
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-heading font-bold text-slate-900 text-sm tracking-tight leading-tight">
-                Aarudhra
-              </span>
-              <span className="text-[10px] font-medium text-slate-500 tracking-wider uppercase leading-none">
-                Web Solutions
-              </span>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-1.5">
-            {navLinks.map((link) => {
-              const isActive = active === link.name;
-
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => handleNavClick(link)}
-                  className={`relative text-[13px] px-3.5 py-1.5 rounded-xl transition-all duration-200 font-medium ${
-                    isActive
-                      ? "text-brand-indigo font-bold bg-brand-indigo/10 border border-brand-indigo/20 shadow-xs"
-                      : "text-slate-600 hover:text-slate-950 hover:bg-slate-100/70 border border-transparent"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Right Action / CTA */}
-          <div className="hidden md:flex items-center gap-3">
-            <a
-              href="/#contact"
-              onClick={() => setActive("Contact")}
-              className="inline-flex items-center gap-1.5 bg-brand-indigo hover:bg-brand-indigoDark text-white text-[13px] font-semibold px-6 py-2 rounded-xl shadow-sm transition-all duration-200 hover:shadow-md shimmer-sweep"
+            <Link
+              href="/#services"
+              className="text-[14px] font-sans font-medium text-[#f2f1ed]/80 hover:text-white transition-colors flex items-center gap-1.5 py-2"
             >
-              Let&apos;s Talk
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
+              <span>Capabilities</span>
+              <ChevronDown
+                size={14}
+                className={`transition-transform duration-200 ${
+                  isCapabilitiesOpen ? "rotate-180 text-[#793dff]" : "text-white/40"
+                }`}
+              />
+            </Link>
+
+            {/* Dropdown Panel */}
+            <AnimatePresence>
+              {isCapabilitiesOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  className="absolute top-[70px] left-0 w-[420px] bg-[#121212] border border-white/10 rounded-xl shadow-2xl p-3 grid gap-1 z-50"
+                >
+                  <div className="px-3 py-2 text-[11px] font-mono font-medium uppercase tracking-wider text-white/40 border-b border-white/10 mb-1 flex items-center justify-between">
+                    <span>Engineering Disciplines</span>
+                    <span className="text-[#793dff]">All In-House</span>
+                  </div>
+                  {capabilitiesDropdown.map((item) => {
+                    const ItemIcon = item.icon;
+                    return (
+                      <Link
+                        key={item.title}
+                        href={item.href}
+                        onClick={() => setIsCapabilitiesOpen(false)}
+                        className="group flex items-start gap-3 p-2.5 rounded-lg hover:bg-white/[0.06] transition-colors"
+                      >
+                        <div className="w-8 h-8 rounded-md bg-white/[0.05] border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:border-[#793dff]/50 transition-colors">
+                          <ItemIcon size={16} className="text-[#793dff]" />
+                        </div>
+                        <div>
+                          <div className="text-[13.5px] font-medium text-white group-hover:text-[#8b5cf6] transition-colors">
+                            {item.title}
+                          </div>
+                          <p className="text-[12px] text-white/50 leading-snug">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
-          {/* Mobile Hamburger Toggle */}
+          <Link
+            href="/#why-us"
+            className="text-[14px] font-sans font-medium text-[#f2f1ed]/80 hover:text-white transition-colors"
+          >
+            Why Us
+          </Link>
+          <Link
+            href="/#solutions"
+            className="text-[14px] font-sans font-medium text-[#f2f1ed]/80 hover:text-white transition-colors"
+          >
+            Solutions
+          </Link>
+          <Link
+            href="/#work"
+            className="text-[14px] font-sans font-medium text-[#f2f1ed]/80 hover:text-white transition-colors"
+          >
+            Work
+          </Link>
+          <Link
+            href="/about"
+            className={`text-[14px] font-sans font-medium transition-colors ${
+              pathname === "/about"
+                ? "text-white font-semibold"
+                : "text-[#f2f1ed]/80 hover:text-white"
+            }`}
+          >
+            About
+          </Link>
+          <Link
+            href="/#faqs"
+            className="text-[14px] font-sans font-medium text-[#f2f1ed]/80 hover:text-white transition-colors"
+          >
+            FAQs
+          </Link>
+        </nav>
+
+        {/* Right CTA */}
+        <div className="flex items-center gap-4">
+          <a href="#contact" className="fc-navcta">
+            <span>Start a project</span>
+            <svg
+              className="fc-navcta__arrow"
+              width="22"
+              height="14"
+              viewBox="0 0 22 14"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M0 7 H19 M14 2 L19 7 L14 12"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </a>
+
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors"
-            aria-label="Toggle navigation menu"
+            className="lg:hidden p-2 text-white/80 hover:text-white transition-colors"
+            aria-label="Toggle menu"
           >
-            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
@@ -196,41 +235,78 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden mx-auto max-w-[1240px] px-4 pt-2"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+            className="lg:hidden border-t border-white/10 bg-[#121212] px-6 py-6 overflow-hidden"
           >
-            <div className="bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 shadow-xl flex flex-col gap-1">
-              {navLinks.map((link) => {
-                const isActive = active === link.name;
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => handleNavClick(link)}
-                    className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                      isActive
-                        ? "text-brand-indigo font-bold bg-brand-indigo/10 border border-brand-indigo/20"
-                        : "text-slate-700 hover:text-brand-indigo hover:bg-slate-50"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
-              <div className="pt-2 mt-1 border-t border-slate-100">
+            <div className="flex flex-col gap-4">
+              <Link
+                href="/#services"
+                onClick={() => setIsOpen(false)}
+                className="text-lg font-sans font-medium text-white/90 hover:text-[#793dff] py-1"
+              >
+                Capabilities
+              </Link>
+              <Link
+                href="/#why-us"
+                onClick={() => setIsOpen(false)}
+                className="text-lg font-sans font-medium text-white/90 hover:text-[#793dff] py-1"
+              >
+                Why Us
+              </Link>
+              <Link
+                href="/#solutions"
+                onClick={() => setIsOpen(false)}
+                className="text-lg font-sans font-medium text-white/90 hover:text-[#793dff] py-1"
+              >
+                Solutions
+              </Link>
+              <Link
+                href="/#work"
+                onClick={() => setIsOpen(false)}
+                className="text-lg font-sans font-medium text-white/90 hover:text-[#793dff] py-1"
+              >
+                Work
+              </Link>
+              <Link
+                href="/about"
+                onClick={() => setIsOpen(false)}
+                className="text-lg font-sans font-medium text-white/90 hover:text-[#793dff] py-1"
+              >
+                About
+              </Link>
+              <Link
+                href="/#faqs"
+                onClick={() => setIsOpen(false)}
+                className="text-lg font-sans font-medium text-white/90 hover:text-[#793dff] py-1"
+              >
+                FAQs
+              </Link>
+
+              <div className="pt-4 border-t border-white/10 mt-2">
                 <a
-                  href="/#contact"
-                  onClick={() => {
-                    setActive("Contact");
-                    setIsOpen(false);
-                  }}
-                  className="flex items-center justify-center gap-2 w-full bg-brand-indigo text-white text-sm font-semibold py-3 px-4 rounded-xl shadow-sm text-center"
+                  href="#contact"
+                  onClick={() => setIsOpen(false)}
+                  className="fc-btn fc-btn--violet w-full justify-center"
                 >
-                  Let&apos;s Talk
-                  <ArrowUpRight className="w-4 h-4" />
+                  Start a project
+                  <svg
+                    className="fc-btn__arrow"
+                    width="22"
+                    height="14"
+                    viewBox="0 0 22 14"
+                    fill="none"
+                  >
+                    <path
+                      d="M0 7 H19 M14 2 L19 7 L14 12"
+                      stroke="currentColor"
+                      strokeWidth="1.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </a>
               </div>
             </div>

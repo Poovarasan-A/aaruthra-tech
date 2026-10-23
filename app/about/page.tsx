@@ -10,8 +10,6 @@ import {
   Code2,
   Users,
   Sparkles,
-  ArrowRight,
-  CheckCircle2,
   MapPin,
   ShieldCheck,
 } from "lucide-react";
@@ -39,57 +37,60 @@ const COMPANY_PILLARS = [
   },
 ];
 
+const smoothEase = [0.2, 0, 0, 1] as const;
+
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-[#F8F7F4] text-[#0F172A] relative overflow-hidden selection:bg-brand-indigo selection:text-white">
+    <main className="min-h-screen bg-[#f2f1ed] text-[#121212] relative overflow-x-clip selection:bg-[#793dff] selection:text-white font-sans">
       <Navbar />
 
       {/* Hero Header */}
-      <section className="pt-36 pb-16 md:pt-44 md:pb-20 px-4 sm:px-6 max-w-[1240px] mx-auto text-center relative">
+      <section className="pt-36 pb-20 md:pt-44 md:pb-28 px-4 sm:px-8 lg:px-12 max-w-[1440px] mx-auto text-center relative">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 shadow-subtle mb-6"
+          transition={{ duration: 0.5, ease: smoothEase }}
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[rgba(18,18,18,0.12)] shadow-sm mb-6"
         >
-          <span className="w-2 h-2 rounded-full bg-brand-indigo" />
-          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-700">
-            About Aarudhra Web Solutions
+          <span className="w-2 h-2 rounded-full bg-[#793dff]" />
+          <span className="text-xs font-mono font-medium uppercase tracking-wider text-[#121212]/70">
+            About Aarudhra Technologies
           </span>
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-heading font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight text-slate-900 mb-6 leading-[1.1]"
+          transition={{ duration: 0.65, delay: 0.1, ease: smoothEase }}
+          className="font-display font-normal text-4xl sm:text-6xl md:text-7xl text-[#121212] tracking-tight leading-[1.05] max-w-4xl mx-auto mb-6"
         >
-          Technology that works for{" "}
-          <span className="text-brand-indigo">your business.</span>
+          Technology that actually harmonizes with{" "}
+          <span className="fc-mark--fill">your business.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-slate-600 text-base sm:text-xl max-w-3xl mx-auto leading-relaxed"
+          transition={{ duration: 0.6, delay: 0.2, ease: smoothEase }}
+          className="font-sans text-base sm:text-xl text-[#121212]/75 max-w-2xl mx-auto leading-relaxed"
         >
-          We partner with small and mid-sized businesses across Tamil Nadu that want a reliable, high-performing digital presence to generate enquiries, build customer trust, and support steady long-term growth.
+          We partner with ambitious businesses across Tamil Nadu and internationally that want a reliable,
+          high-performing digital foundation to generate enquiries, build customer trust, and support steady long-term growth.
         </motion.p>
       </section>
 
       {/* Principles Section */}
-      <section className="py-16 md:py-24 px-4 sm:px-6 max-w-[1240px] mx-auto">
+      <section className="py-20 md:py-28 px-4 sm:px-8 lg:px-12 max-w-[1440px] mx-auto border-t border-[rgba(18,18,18,0.12)]">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-500 block mb-2">
+          <span className="text-xs font-mono font-semibold uppercase tracking-widest text-[#793dff] block mb-2">
             Our Foundations
           </span>
-          <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+          <h2 className="font-display font-normal text-3xl sm:text-5xl text-[#121212] tracking-tight leading-[1.1]">
             How We Approach Every Project
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1000px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {COMPANY_PILLARS.map((p, idx) => {
             const Icon = p.icon;
             return (
@@ -98,16 +99,16 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="rounded-2xl p-7 sm:p-8 bg-white border border-slate-200/80 shadow-subtle hover:border-brand-indigo/30 hover:shadow-card transition-all duration-300 flex flex-col justify-start"
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: smoothEase }}
+                className="rounded-2xl p-8 bg-white border border-[rgba(18,18,18,0.12)] shadow-sm hover:border-[#793dff] hover:shadow-xl transition-all duration-300 flex flex-col justify-start group"
               >
-                <div className="w-12 h-12 rounded-xl bg-brand-indigo/5 border border-brand-indigo/15 flex items-center justify-center text-brand-indigo mb-6">
+                <div className="w-12 h-12 rounded-xl bg-[#793dff]/10 border border-[#793dff]/20 flex items-center justify-center text-[#793dff] mb-6 group-hover:bg-[#793dff] group-hover:text-white transition-colors">
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-slate-900 font-heading font-bold text-xl mb-2.5">
+                <h3 className="text-[#121212] font-sans font-semibold text-xl mb-3">
                   {p.title}
                 </h3>
-                <p className="text-slate-600 text-sm leading-relaxed">
+                <p className="text-[#121212]/70 text-[15px] leading-relaxed">
                   {p.desc}
                 </p>
               </motion.div>
@@ -117,13 +118,13 @@ export default function AboutPage() {
       </section>
 
       {/* Founder Section */}
-      <section className="py-20 md:py-28 px-4 sm:px-6 bg-white border-y border-slate-200/80">
-        <div className="max-w-[1240px] mx-auto">
+      <section className="py-20 md:py-28 px-4 sm:px-8 lg:px-12 bg-white border-y border-[rgba(18,18,18,0.12)]">
+        <div className="max-w-[1440px] mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-500 block mb-2">
+            <span className="text-xs font-mono font-semibold uppercase tracking-widest text-[#793dff] block mb-2">
               Leadership &amp; Direction
             </span>
-            <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
+            <h2 className="font-display font-normal text-3xl sm:text-5xl text-[#121212] tracking-tight">
               Founder &amp; Engineering Lead
             </h2>
           </div>
@@ -132,55 +133,55 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="rounded-3xl p-8 sm:p-12 bg-[#F8F7F4] max-w-4xl mx-auto border border-slate-200/80 shadow-card"
+            transition={{ duration: 0.6, ease: smoothEase }}
+            className="rounded-3xl p-8 sm:p-12 bg-[#f2f1ed] max-w-4xl mx-auto border border-[rgba(18,18,18,0.12)] shadow-lg"
           >
             <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
               {/* Founder Avatar */}
               <div className="flex flex-col items-center flex-shrink-0">
-                <div className="relative w-44 h-44 rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-white">
+                <div className="relative w-48 h-48 rounded-2xl overflow-hidden border border-[rgba(18,18,18,0.15)] shadow-md bg-[#121212]">
                   <Image
                     src="/founder.jpeg"
                     alt="Sharan - Founder"
                     fill
-                    sizes="176px"
+                    sizes="192px"
                     className="object-cover"
                   />
                 </div>
-                <h4 className="text-slate-900 font-heading font-bold text-lg mt-4 text-center">
+                <h4 className="text-[#121212] font-sans font-bold text-lg mt-4 text-center">
                   Sharan
                 </h4>
-                <p className="text-brand-indigo font-semibold text-xs uppercase tracking-wider mt-0.5 text-center font-mono">
+                <p className="text-[#793dff] font-semibold text-xs uppercase tracking-wider mt-0.5 text-center font-mono">
                   Founder &amp; Technical Lead
                 </p>
-                <div className="flex items-center gap-1.5 text-xs text-slate-500 mt-2">
-                  <MapPin className="w-3.5 h-3.5 text-brand-indigo" />
+                <div className="flex items-center gap-1.5 text-xs text-[#121212]/60 mt-2">
+                  <MapPin className="w-3.5 h-3.5 text-[#793dff]" />
                   <span>Tamil Nadu, India</span>
                 </div>
               </div>
 
               {/* Bio Details */}
               <div className="flex-1 space-y-4">
-                <div className="inline-flex items-center gap-1.5 text-slate-400 text-xs font-mono">
-                  <ShieldCheck className="w-4 h-4 text-brand-indigo" />
-                  <span>DIRECT CONSULTATION &amp; ACCOUNTABILITY</span>
+                <div className="inline-flex items-center gap-1.5 text-[#121212]/50 text-xs font-mono">
+                  <ShieldCheck className="w-4 h-4 text-[#793dff]" />
+                  <span>DIRECT CONSULTATION &amp; ARCHITECTURAL ACCOUNTABILITY</span>
                 </div>
 
-                <h3 className="font-heading font-bold text-2xl text-slate-900 leading-tight">
+                <h3 className="font-display font-normal text-2xl sm:text-3xl text-[#121212] leading-tight">
                   Bridging Technical Execution With Real Business Growth
                 </h3>
 
-                <p className="text-slate-600 text-sm leading-relaxed">
-                  Sharan founded Aarudhra Web Solutions to solve a widespread problem: small and mid-sized businesses frequently invest in websites that look elaborate on paper, but load slowly, confuse customers, and fail to generate practical business leads.
+                <p className="text-[#121212]/75 text-sm sm:text-base leading-relaxed">
+                  Sharan founded Aarudhra to solve a widespread problem: businesses frequently invest in websites that look elaborate on paper, but load slowly, confuse customers, and fail to generate practical business inquiries.
                 </p>
 
-                <p className="text-slate-600 text-sm leading-relaxed">
-                  With a background in modern web engineering, performant frontend architectures, and local digital visibility, he works directly with business owners to ensure that every website, redesign, and campaign is built on solid foundations, delivered on time, and supported with continuous care.
+                <p className="text-[#121212]/75 text-sm sm:text-base leading-relaxed">
+                  With a background in modern web engineering, performant frontend architectures, and local digital visibility, he works directly with business owners to ensure that every platform, redesign, and campaign is built on solid foundations, delivered on time, and supported with continuous care.
                 </p>
 
-                <div className="mt-6 border-l-4 border-brand-indigo pl-5 py-2 bg-white rounded-r-xl border border-l-0 border-slate-200/70 shadow-subtle">
-                  <p className="text-slate-800 italic text-sm leading-relaxed font-medium">
-                    &ldquo;We don&apos;t just build web pages. We build dependable digital assets that help established and growing businesses establish credibility and capture more customers.&rdquo;
+                <div className="mt-6 border-l-4 border-[#793dff] pl-5 py-3 bg-white rounded-r-xl border border-l-0 border-[rgba(18,18,18,0.12)]">
+                  <p className="font-quote text-[#121212] italic text-base leading-relaxed">
+                    &ldquo;We don&apos;t just build web pages. We build dependable digital assets that help established and growing businesses establish authority and capture more customers.&rdquo;
                   </p>
                 </div>
               </div>
@@ -190,26 +191,37 @@ export default function AboutPage() {
       </section>
 
       {/* Regional Focus Strip */}
-      <section className="py-16 px-4 sm:px-6 max-w-[1240px] mx-auto text-center">
-        <h3 className="font-heading font-bold text-2xl text-slate-900 mb-3">
-          Serving Businesses Across Tamil Nadu
+      <section className="py-20 px-4 sm:px-8 max-w-[1440px] mx-auto text-center">
+        <h3 className="font-display text-3xl sm:text-4xl text-[#121212] mb-3">
+          Serving Businesses Across Tamil Nadu &amp; Beyond
         </h3>
-        <p className="text-slate-600 text-sm max-w-xl mx-auto mb-8">
-          Chennai • Coimbatore • Madurai • Trichy • Salem • Dindigul • Across Tamil Nadu
+        <p className="font-sans text-[#121212]/60 text-sm sm:text-base max-w-xl mx-auto mb-8">
+          Chennai • Coimbatore • Madurai • Trichy • Salem • Dindigul • International
         </p>
-        <div className="flex justify-center gap-4">
-          <Link
-            href="/#contact"
-            className="inline-flex items-center gap-2 bg-brand-indigo hover:bg-brand-indigoDark text-white text-sm font-semibold px-6 py-3.5 rounded-xl shadow-md transition-all shimmer-sweep"
-          >
-            Start a Conversation
-            <ArrowRight className="w-4 h-4" />
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link href="/#contact" className="fc-btn fc-btn--violet">
+            <span>Start a conversation</span>
+            <svg className="fc-btn__arrow" width="22" height="14" viewBox="0 0 22 14" fill="none">
+              <path
+                d="M0 7 H19 M14 2 L19 7 L14 12"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </Link>
-          <Link
-            href="/#services"
-            className="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-800 text-sm font-semibold px-6 py-3.5 rounded-xl border border-slate-200 shadow-subtle transition-all"
-          >
-            Explore Services
+          <Link href="/#services" className="fc-btn fc-btn--dark">
+            <span>Explore capabilities</span>
+            <svg className="fc-btn__arrow" width="22" height="14" viewBox="0 0 22 14" fill="none">
+              <path
+                d="M0 7 H19 M14 2 L19 7 L14 12"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </Link>
         </div>
       </section>
