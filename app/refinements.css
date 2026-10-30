@@ -297,22 +297,110 @@
   transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hero Ecosystem Visual & Floating Elements */
+/* GPU-Accelerated Hardware Oscillations for Hero Ecosystem */
+@keyframes eco-float-browser {
+  0%, 100% {
+    transform: rotate(-2deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-2deg) translateY(-8px);
+  }
+}
+
+@keyframes eco-float-phone {
+  0%, 100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(1deg);
+  }
+}
+
+@keyframes eco-float-flow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes eco-float-note {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes eco-pulse-orb {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.06);
+  }
+}
+
+.eco-orb {
+  position: absolute;
+  top: 15%;
+  right: 20%;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(79, 125, 255, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+  animation: eco-pulse-orb 7s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
 .eco-browser {
-  transition: box-shadow 0.35s ease, transform 0.35s ease;
+  animation: eco-float-browser 6s ease-in-out infinite;
+  will-change: transform;
+  transition: box-shadow 0.35s ease;
 }
+
 .eco-phone {
-  transition: box-shadow 0.35s ease, transform 0.35s ease;
+  animation: eco-float-phone 5.4s ease-in-out infinite;
+  animation-delay: 0.5s;
+  will-change: transform;
+  transition: box-shadow 0.35s ease;
 }
+
 .eco-flow {
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  animation: eco-float-flow 4.8s ease-in-out infinite;
+  animation-delay: 1.1s;
+  will-change: transform;
+  transition: box-shadow 0.3s ease;
 }
+
 .media-note {
+  animation: eco-float-note 5.6s ease-in-out infinite;
+  animation-delay: 1.6s;
+  will-change: transform;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .media-note:hover {
   transform: translateY(-2px);
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Off-screen section rendering optimization for fast initial load & low TBT */
+.web-feature,
+.journey-section,
+.work,
+.about,
+.process,
+.insights,
+.faq,
+.contact,
+footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }
 
 /* Form input focus polish */

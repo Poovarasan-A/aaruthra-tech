@@ -1,25 +1,22 @@
-"use client";
-
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 import {
   ArrowRight,
-  ArrowUp,
   Check,
-  ChevronDown,
   Code2,
   Globe2,
   Mail,
   MapPin,
-  Menu,
   MessageCircle,
   Phone,
   Search,
   Share2,
   Sparkles,
-  X,
 } from "lucide-react";
+import SiteHeader from "@/components/site/SiteHeader";
+import ScrollProgress from "@/components/site/ScrollProgress";
+import BackToTop from "@/components/site/BackToTop";
+import FaqAccordion from "@/components/site/FaqAccordion";
+import ContactForm from "@/components/site/ContactForm";
 
 const services = [
   [
@@ -54,29 +51,6 @@ const services = [
   ],
 ] as const;
 
-const faqs = [
-  [
-    "Is this suitable for small and medium-sized businesses?",
-    "Yes. Our work is deliberately practical for businesses that need a strong digital foundation without unnecessary complexity.",
-  ],
-  [
-    "Do I need all my content ready before we start?",
-    "No. We help shape the structure, priorities, and content needed to make your website useful and clear.",
-  ],
-  [
-    "Which service should I start with?",
-    "We begin with your current situation and goals. A new or outdated website often comes first; visibility support can build on that foundation.",
-  ],
-  [
-    "How involved will I be during the project?",
-    "You will be involved at the important decisions and reviews while we handle the technical and design work.",
-  ],
-  [
-    "Is ongoing website support available?",
-    "Yes. Ongoing updates and practical digital support can be agreed after launch based on what your business needs.",
-  ],
-];
-
 const whatsapp =
   "https://wa.me/919944100940?text=Hello%20Aarudhra%20Web%20Solutions%2C%20I%27d%20like%20to%20discuss%20a%20project.";
 
@@ -91,179 +65,21 @@ const links = [
 
 const Mark = () => <span className="mark">A</span>;
 
-// Smooth cubic-bezier easing for editorial transitions
-const smoothEase = [0.16, 1, 0.3, 1] as const;
-
 export default function Site() {
-  const [open, setOpen] = useState<number | null>(0);
-  const [menu, setMenu] = useState(false);
-  const [notice, setNotice] = useState("");
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("Home");
-  const [showBackToTop, setShowBackToTop] = useState(false);
-
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    service: "Website Development",
-    requirement: "",
-  });
-
-  // Scroll Progress indicator
-  const { scrollYProgress, scrollY } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY;
-      setIsScrolled(y > 25);
-      setShowBackToTop(y > 380);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Section observer for active nav highlighting
-  useEffect(() => {
-    const sectionIds = ["home", "services", "solutions", "work", "about", "insights"];
-    const elements = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const currentLink = links.find(([, href]) => href === `#${entry.target.id}`);
-            if (currentLink) {
-              setActiveSection(currentLink[0]);
-            }
-          }
-        });
-      },
-      {
-        rootMargin: "-20% 0px -60% 0px",
-        threshold: 0.1,
-      }
-    );
-
-    elements.forEach((el) => observer.observe(el));
-    return () => elements.forEach((el) => observer.unobserve(el));
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.phone.trim()) {
-      setNotice("Please add your name and phone number.");
-      return;
-    }
-    const msg = `Hello Aarudhra Web Solutions!\n\nName: ${form.name}\nPhone: ${form.phone}\nService: ${form.service}\nRequirement: ${form.requirement || "I'd like to discuss a project."}`;
-    window.open(
-      `https://wa.me/919944100940?text=${encodeURIComponent(msg)}`,
-      "_blank"
-    );
-    setNotice("Your project brief is ready in WhatsApp.");
-  };
-
   return (
     <main>
       {/* Smooth reading progress bar */}
-      <motion.div
-        className="scroll-progress-bar"
-        style={{ scaleX }}
-      />
+      <ScrollProgress />
 
       {/* Floating Back to Top Button */}
-      <AnimatePresence>
-        {showBackToTop && (
-          <motion.button
-            key="back-to-top"
-            initial={{ opacity: 0, scale: 0.8, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 15 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            onClick={scrollToTop}
-            className="back-to-top"
-            aria-label="Back to top"
-          >
-            <ArrowUp size={18} />
-          </motion.button>
-        )}
-      </AnimatePresence>
+      <BackToTop />
 
-      {/* Sticky Header */}
-      <header className={`site-header ${isScrolled ? "is-scrolled" : ""}`}>
-        <a href="#home" className="brand">
-          <Mark />
-          <span>
-            Aarudhra <small>WEB SOLUTIONS</small>
-          </span>
-        </a>
-
-        <nav>
-          {links.map(([n, h]) => (
-            <a
-              key={n}
-              href={h}
-              className={activeSection === n ? "active" : ""}
-            >
-              {n}
-            </a>
-          ))}
-        </nav>
-
-        <a className="header-cta" href="#contact">
-          Let&apos;s talk <ArrowRight size={15} />
-        </a>
-
-        <button
-          className="menu"
-          onClick={() => setMenu(!menu)}
-          aria-label="Toggle menu"
-        >
-          {menu ? <X size={22} /> : <Menu size={22} />}
-        </button>
-
-        {/* Mobile Navigation Drawer with AnimatePresence */}
-        <AnimatePresence>
-          {menu && (
-            <motion.div
-              initial={{ opacity: 0, y: -12, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.98 }}
-              transition={{ duration: 0.24, ease: smoothEase }}
-              className="mobile-nav"
-            >
-              {links.map(([n, h]) => (
-                <a key={n} href={h} onClick={() => setMenu(false)}>
-                  {n}
-                </a>
-              ))}
-              <a href="#contact" onClick={() => setMenu(false)}>
-                Start a project
-              </a>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
+      {/* Sticky Header with navigation & mobile drawer */}
+      <SiteHeader />
 
       {/* Hero Section */}
       <section id="home" className="hero">
-        <motion.div
-          className="hero-copy"
-          initial={{ opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: smoothEase }}
-        >
+        <div className="hero-copy">
           <p className="eyebrow">
             <i />
             Technology &amp; digital solutions
@@ -286,48 +102,18 @@ export default function Site() {
           <p className="hero-foot">
             Technology solutions · Business growth · Digital operations · Innovation
           </p>
-        </motion.div>
+        </div>
 
-        {/* Hero Media: Living Connected Digital Ecosystem */}
+        {/* Hero Media: Living Connected Digital Ecosystem with GPU CSS Animation */}
         <div
           className="hero-media ecosystem"
           aria-label="Connected digital ecosystem visual"
         >
           {/* Subtle ambient lighting orb */}
-          <motion.div
-            animate={{
-              opacity: [0.35, 0.65, 0.35],
-              scale: [1, 1.06, 1],
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            style={{
-              position: "absolute",
-              top: "15%",
-              right: "20%",
-              width: "280px",
-              height: "280px",
-              borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(79,125,255,0.22) 0%, transparent 70%)",
-              pointerEvents: "none",
-            }}
-          />
+          <div className="eco-orb" />
 
           {/* Browser Mockup with gentle floating oscillation */}
-          <motion.div
-            className="eco-browser"
-            animate={{
-              y: [0, -7, 0],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
+          <div className="eco-browser">
             <div className="eco-top">
               <b />
               <b />
@@ -340,75 +126,35 @@ export default function Site() {
               <i />
               <i />
             </div>
-          </motion.div>
+          </div>
 
           {/* Phone Mockup with counter-phased oscillation */}
-          <motion.div
-            className="eco-phone"
-            animate={{
-              y: [0, 8, 0],
-              rotate: [-1, 1, -1],
-            }}
-            transition={{
-              duration: 5.4,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.5,
-            }}
-          >
+          <div className="eco-phone">
             <div />
             <span>Mobile experience</span>
             <b>Built around people</b>
-          </motion.div>
+          </div>
 
           {/* Flow Connector Badge */}
-          <motion.div
-            className="eco-flow"
-            animate={{
-              y: [0, -5, 0],
-            }}
-            transition={{
-              duration: 4.8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1.1,
-            }}
-          >
+          <div className="eco-flow">
             <span>Operations</span>
             <i />
             <span>Automation</span>
             <i />
             <span>Growth</span>
-          </motion.div>
+          </div>
 
           {/* Connected note */}
-          <motion.div
-            className="media-note"
-            animate={{
-              y: [0, 3, 0],
-            }}
-            transition={{
-              duration: 5.6,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1.6,
-            }}
-          >
+          <div className="media-note">
             <span>Connected by design</span>
             <strong>One ecosystem. Clear outcomes.</strong>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Capabilities / Services Section */}
       <section id="services" className="services section">
-        <motion.div
-          className="section-head"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, ease: smoothEase }}
-        >
+        <div className="section-head">
           <p className="eyebrow dark">
             <i />
             Our capabilities
@@ -418,19 +164,12 @@ export default function Site() {
             Technology, marketing, and growth support brought together to help your
             business make real progress.
           </p>
-        </motion.div>
+        </div>
 
-        {/* 6 Services Grid with staggered reveal */}
+        {/* 6 Services Grid */}
         <div className="service-grid">
           {services.map(([title, desc, Icon], i) => (
-            <motion.article
-              className="service"
-              key={title}
-              initial={{ opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, delay: i * 0.08, ease: smoothEase }}
-            >
+            <article className="service" key={title}>
               <div className="service-top">
                 <span>0{i + 1}</span>
                 <Icon size={24} />
@@ -440,18 +179,12 @@ export default function Site() {
               <a href="#contact">
                 Talk about this service <ArrowRight size={16} />
               </a>
-            </motion.article>
+            </article>
           ))}
         </div>
 
         {/* Dual Pillar Summary Groups */}
-        <motion.div
-          className="service-groups"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.6, ease: smoothEase }}
-        >
+        <div className="service-groups">
           <article>
             <p className="eyebrow dark">
               <i />
@@ -474,18 +207,12 @@ export default function Site() {
               digital growth solutions.
             </p>
           </article>
-        </motion.div>
+        </div>
       </section>
 
       {/* Solutions / Feature Section */}
       <section id="solutions" className="web-feature">
-        <motion.div
-          className="feature-image"
-          initial={{ opacity: 0, x: -24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.65, ease: smoothEase }}
-        >
+        <div className="feature-image">
           <div className="browser">
             <div className="browser-top">
               <b />
@@ -505,15 +232,9 @@ export default function Site() {
             The right solution should make a meaningful difference to people and
             operations.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="feature-copy"
-          initial={{ opacity: 0, x: 24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.65, ease: smoothEase }}
-        >
+        <div className="feature-copy">
           <p className="eyebrow light">
             <i />
             Technology with business purpose
@@ -525,32 +246,17 @@ export default function Site() {
             package.
           </p>
           <ul>
-            <motion.li
-              initial={{ opacity: 0, x: 12 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1, duration: 0.4 }}
-            >
+            <li>
               <Check />
               Digital experiences built for customers
-            </motion.li>
-            <motion.li
-              initial={{ opacity: 0, x: 12 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.4 }}
-            >
+            </li>
+            <li>
               <Check />
               Useful systems for evolving operations
-            </motion.li>
-            <motion.li
-              initial={{ opacity: 0, x: 12 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.4 }}
-            >
+            </li>
+            <li>
               <Check />A scalable foundation for future ideas
-            </motion.li>
+            </li>
           </ul>
           <div className="redesign">
             <b>Integrated capabilities</b>
@@ -562,18 +268,12 @@ export default function Site() {
           <a className="button pale" href="#contact">
             Discuss your idea <ArrowRight size={18} />
           </a>
-        </motion.div>
+        </div>
       </section>
 
       {/* Connected Journey Section */}
       <section className="marketing journey-section section">
-        <motion.div
-          className="marketing-copy"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, ease: smoothEase }}
-        >
+        <div className="marketing-copy">
           <p className="eyebrow">
             <i />A connected journey
           </p>
@@ -585,7 +285,7 @@ export default function Site() {
           <a className="text-link" href="#contact">
             Explore the right next step <ArrowRight size={17} />
           </a>
-        </motion.div>
+        </div>
 
         <ol className="journey">
           {[
@@ -614,22 +314,16 @@ export default function Site() {
               title: "AI & emerging technology",
               desc: "Adopt new capabilities when they create value.",
             },
-          ].map((item, idx) => {
+          ].map((item) => {
             const ItemIcon = item.Icon;
             return (
-              <motion.li
-                key={item.title}
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.45, delay: idx * 0.08, ease: smoothEase }}
-              >
+              <li key={item.title}>
                 <ItemIcon />
                 <span>
                   <b>{item.title}</b>
                   {item.desc}
                 </span>
-              </motion.li>
+              </li>
             );
           })}
         </ol>
@@ -637,13 +331,7 @@ export default function Site() {
 
       {/* Work / Solution Examples Section */}
       <section id="work" className="work section">
-        <motion.div
-          className="section-head"
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, ease: smoothEase }}
-        >
+        <div className="section-head">
           <p className="eyebrow dark">
             <i />
             Solution examples
@@ -655,15 +343,9 @@ export default function Site() {
             Aarudhra frames a solution—without representing illustrative work as
             client work.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="work-frame"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.65, ease: smoothEase }}
-        >
+        <div className="work-frame">
           <span>How we frame a solution</span>
           <div>
             <b>Business context</b>
@@ -686,32 +368,23 @@ export default function Site() {
               evolve with the business.
             </p>
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* About Section */}
       <section id="about" className="about section">
-        <motion.div
-          className="about-portrait"
-          initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, ease: smoothEase }}
-        >
+        <div className="about-portrait">
           <Image
             src="/founder.jpeg"
             alt="Aarudhra Web Solutions leadership"
             fill
             sizes="(max-width: 760px) 100vw, 40vw"
+            loading="lazy"
+            decoding="async"
           />
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.65, ease: smoothEase }}
-        >
+        <div>
           <p className="eyebrow dark">
             <i />
             The team behind the solutions
@@ -739,36 +412,24 @@ export default function Site() {
                 "Future-ready thinking",
                 "Ready to explore what comes next.",
               ],
-            ].map(([title, desc], i) => (
-              <motion.span
-                key={title}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.07, ease: smoothEase }}
-              >
+            ].map(([title, desc]) => (
+              <span key={title}>
                 <b>{title}</b>
                 {desc}
-              </motion.span>
+              </span>
             ))}
           </div>
-        </motion.div>
+        </div>
       </section>
 
       {/* Process Section */}
       <section className="process section">
-        <motion.div
-          className="section-head"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, ease: smoothEase }}
-        >
+        <div className="section-head">
           <p className="eyebrow dark">
             <i />A straightforward process
           </p>
           <h2>Discover. Strategize. Build. Launch. Grow.</h2>
-        </motion.div>
+        </div>
 
         <div className="steps five">
           {[
@@ -793,31 +454,19 @@ export default function Site() {
               "Prepare for a confident, considered introduction.",
             ],
             ["05", "Grow", "Review, refine, and support what comes next."],
-          ].map(([n, t, d], i) => (
-            <motion.article
-              key={n}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.45, delay: i * 0.08, ease: smoothEase }}
-            >
+          ].map(([n, t, d]) => (
+            <article key={n}>
               <span>{n}</span>
               <h3>{t}</h3>
               <p>{d}</p>
-            </motion.article>
+            </article>
           ))}
         </div>
       </section>
 
       {/* Technology & Innovation Section */}
       <section id="innovation" className="insights section">
-        <motion.div
-          className="section-head"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, ease: smoothEase }}
-        >
+        <div className="section-head">
           <p className="eyebrow dark">
             <i />
             Technology &amp; innovation
@@ -827,7 +476,7 @@ export default function Site() {
             Explore practical ways to connect systems, automate repetitive work, and
             introduce intelligent capabilities where they create meaningful value.
           </p>
-        </motion.div>
+        </div>
 
         <div className="insight-grid">
           {[
@@ -846,34 +495,21 @@ export default function Site() {
               title: "Future digital products",
               desc: "Modern platforms and services that give businesses new ways to serve their market.",
             },
-          ].map((item, i) => {
+          ].map((item) => {
             const ItemIcon = item.Icon;
             return (
-              <motion.article
-                key={item.title}
-                initial={{ opacity: 0, y: 22 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.1, ease: smoothEase }}
-              >
+              <article key={item.title}>
                 <ItemIcon />
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
-              </motion.article>
+              </article>
             );
           })}
         </div>
       </section>
 
       {/* Insights Intro Section */}
-      <motion.section
-        id="insights"
-        className="insight-intro section"
-        initial={{ opacity: 0, y: 22 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.6, ease: smoothEase }}
-      >
+      <section id="insights" className="insight-intro section">
         <p className="eyebrow dark">
           <i />
           Insights
@@ -885,71 +521,24 @@ export default function Site() {
           intentionally ready for real editorial content rather than placeholder
           articles.
         </p>
-      </motion.section>
+      </section>
 
-      {/* FAQs Section with Buttery-Smooth Accordion */}
+      {/* FAQs Section with Optimized Accordion */}
       <section id="faqs" className="faq section">
-        <motion.div
-          className="section-head"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, ease: smoothEase }}
-        >
+        <div className="section-head">
           <p className="eyebrow dark">
             <i />
             FAQs
           </p>
           <h2>Good questions make better projects.</h2>
-        </motion.div>
-
-        <div className="faq-list">
-          {faqs.map(([q, a], i) => {
-            const isOpen = open === i;
-            return (
-              <article key={q}>
-                <button
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  aria-expanded={isOpen}
-                >
-                  {q}
-                  <ChevronDown
-                    className={isOpen ? "flip" : ""}
-                    style={{
-                      transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
-                      transition: "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
-                    }}
-                  />
-                </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: smoothEase }}
-                      style={{ overflow: "hidden" }}
-                    >
-                      <p>{a}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </article>
-            );
-          })}
         </div>
+
+        <FaqAccordion />
       </section>
 
       {/* Contact Section with Interactive WhatsApp Planner */}
       <section id="contact" className="contact">
-        <motion.div
-          className="contact-copy"
-          initial={{ opacity: 0, x: -24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.65, ease: smoothEase }}
-        >
+        <div className="contact-copy">
           <p className="eyebrow light">
             <i />
             Start a conversation
@@ -973,77 +562,9 @@ export default function Site() {
               Message us on WhatsApp
             </a>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.form
-          onSubmit={submit}
-          initial={{ opacity: 0, x: 24 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.65, ease: smoothEase }}
-        >
-          <label>
-            Full name
-            <input
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              required
-              placeholder="e.g. Anand Kumar"
-            />
-          </label>
-          <label>
-            Phone number
-            <input
-              type="tel"
-              value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
-              required
-              placeholder="e.g. +91 98765 43210"
-            />
-          </label>
-          <label>
-            Service of interest
-            <select
-              value={form.service}
-              onChange={(e) => setForm({ ...form, service: e.target.value })}
-            >
-              {services.map(([t]) => (
-                <option key={t}>{t}</option>
-              ))}
-            </select>
-          </label>
-          <label>
-            Brief project requirement
-            <textarea
-              value={form.requirement}
-              onChange={(e) => setForm({ ...form, requirement: e.target.value })}
-              rows={3}
-              placeholder="Tell us what you want to build or achieve..."
-            />
-          </label>
-
-          <AnimatePresence>
-            {notice && (
-              <motion.p
-                initial={{ opacity: 0, y: -6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                className="notice"
-              >
-                {notice}
-              </motion.p>
-            )}
-          </AnimatePresence>
-
-          <motion.button
-            className="button"
-            type="submit"
-            whileTap={{ scale: 0.98 }}
-            whileHover={{ translateY: -1 }}
-          >
-            Start a conversation <ArrowRight size={18} />
-          </motion.button>
-        </motion.form>
+        <ContactForm />
       </section>
 
       {/* Footer */}

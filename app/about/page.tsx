@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {
@@ -11,7 +8,6 @@ import {
   Users,
   Sparkles,
   ArrowRight,
-  CheckCircle2,
   MapPin,
   ShieldCheck,
 } from "lucide-react";
@@ -46,36 +42,21 @@ export default function AboutPage() {
 
       {/* Hero Header */}
       <section className="pt-36 pb-16 md:pt-44 md:pb-20 px-4 sm:px-6 max-w-[1240px] mx-auto text-center relative">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 shadow-subtle mb-6"
-        >
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 shadow-subtle mb-6">
           <span className="w-2 h-2 rounded-full bg-brand-indigo" />
           <span className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-700">
             About Aarudhra Web Solutions
           </span>
-        </motion.div>
+        </div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-heading font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight text-slate-900 mb-6 leading-[1.1]"
-        >
+        <h1 className="font-heading font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight text-slate-900 mb-6 leading-[1.1]">
           Technology that works for{" "}
           <span className="text-brand-indigo">your business.</span>
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-slate-600 text-base sm:text-xl max-w-3xl mx-auto leading-relaxed"
-        >
+        <p className="text-slate-600 text-base sm:text-xl max-w-3xl mx-auto leading-relaxed">
           We partner with small and mid-sized businesses across Tamil Nadu that want a reliable, high-performing digital presence to generate enquiries, build customer trust, and support steady long-term growth.
-        </motion.p>
+        </p>
       </section>
 
       {/* Principles Section */}
@@ -90,15 +71,11 @@ export default function AboutPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1000px] mx-auto">
-          {COMPANY_PILLARS.map((p, idx) => {
+          {COMPANY_PILLARS.map((p) => {
             const Icon = p.icon;
             return (
-              <motion.div
+              <div
                 key={p.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="rounded-2xl p-7 sm:p-8 bg-white border border-slate-200/80 shadow-subtle hover:border-brand-indigo/30 hover:shadow-card transition-all duration-300 flex flex-col justify-start"
               >
                 <div className="w-12 h-12 rounded-xl bg-brand-indigo/5 border border-brand-indigo/15 flex items-center justify-center text-brand-indigo mb-6">
@@ -110,7 +87,7 @@ export default function AboutPage() {
                 <p className="text-slate-600 text-sm leading-relaxed">
                   {p.desc}
                 </p>
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -128,13 +105,7 @@ export default function AboutPage() {
             </h2>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="rounded-3xl p-8 sm:p-12 bg-[#F8F7F4] max-w-4xl mx-auto border border-slate-200/80 shadow-card"
-          >
+          <div className="rounded-3xl p-8 sm:p-12 bg-[#F8F7F4] max-w-4xl mx-auto border border-slate-200/80 shadow-card">
             <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
               {/* Founder Avatar */}
               <div className="flex flex-col items-center flex-shrink-0">
@@ -145,6 +116,8 @@ export default function AboutPage() {
                     fill
                     sizes="176px"
                     className="object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <h4 className="text-slate-900 font-heading font-bold text-lg mt-4 text-center">
@@ -185,7 +158,7 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 

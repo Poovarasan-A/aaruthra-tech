@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
@@ -24,8 +23,15 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -38,7 +44,6 @@ export default function Navbar() {
     }
 
     if (pathname === "/") {
-      // Check initial hash on mount
       if (typeof window !== "undefined") {
         const hash = window.location.hash.replace("#", "");
         if (hash) {
@@ -49,7 +54,6 @@ export default function Navbar() {
         }
       }
 
-      // Observe section intersections for automatic scroll highlighting
       const sectionIds = [
         "home",
         "services",
@@ -61,6 +65,8 @@ export default function Navbar() {
       const elements = sectionIds
         .map((id) => document.getElementById(id))
         .filter((el): el is HTMLElement => el !== null);
+
+      if (elements.length === 0) return;
 
       const observer = new IntersectionObserver(
         (entries) => {
@@ -186,6 +192,7 @@ export default function Navbar() {
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition-colors"
             aria-label="Toggle navigation menu"
+            aria-expanded={isOpen}
           >
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -193,50 +200,42 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Drawer */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden mx-auto max-w-[1240px] px-4 pt-2"
-          >
-            <div className="bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 shadow-xl flex flex-col gap-1">
-              {navLinks.map((link) => {
-                const isActive = active === link.name;
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => handleNavClick(link)}
-                    className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                      isActive
-                        ? "text-brand-indigo font-bold bg-brand-indigo/10 border border-brand-indigo/20"
-                        : "text-slate-700 hover:text-brand-indigo hover:bg-slate-50"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
-              <div className="pt-2 mt-1 border-t border-slate-100">
-                <a
-                  href="/#contact"
-                  onClick={() => {
-                    setActive("Contact");
-                    setIsOpen(false);
-                  }}
-                  className="flex items-center justify-center gap-2 w-full bg-brand-indigo text-white text-sm font-semibold py-3 px-4 rounded-xl shadow-sm text-center"
+      {isOpen && (
+        <div className="md:hidden mx-auto max-w-[1240px] px-4 pt-2">
+          <div className="bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-2xl p-4 shadow-xl flex flex-col gap-1">
+            {navLinks.map((link) => {
+              const isActive = active === link.name;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => handleNavClick(link)}
+                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                    isActive
+                      ? "text-brand-indigo font-bold bg-brand-indigo/10 border border-brand-indigo/20"
+                      : "text-slate-700 hover:text-brand-indigo hover:bg-slate-50"
+                  }`}
                 >
-                  Let&apos;s Talk
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-              </div>
+                  {link.name}
+                </Link>
+              );
+            })}
+            <div className="pt-2 mt-1 border-t border-slate-100">
+              <a
+                href="/#contact"
+                onClick={() => {
+                  setActive("Contact");
+                  setIsOpen(false);
+                }}
+                className="flex items-center justify-center gap-2 w-full bg-brand-indigo text-white text-sm font-semibold py-3 px-4 rounded-xl shadow-sm text-center"
+              >
+                Let&apos;s Talk
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
